@@ -1,3 +1,7 @@
+<input
+  type="checkbox"
+  [(ngModel)]="task.completed"
+  (change)="toggleCompleted()"
+/> 
 {{ task.name }}
-<!-- <input id="taskId" name="taskId" type="hidden" value="{{task.id}}" [(ngModel)]="task.id"> -->
 <button (click)="removeTask()">Remove</button>

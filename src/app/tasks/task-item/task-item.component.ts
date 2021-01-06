@@ -33,4 +33,17 @@ export class TaskItemComponent implements OnInit {
       );
   }
 
+  toggleCompleted(): void {
+    console.log(this.task.completed);
+    this.taskService.update(this.task.id, this.task)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
 }

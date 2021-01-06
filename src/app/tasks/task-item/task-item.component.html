@@ -3,5 +3,5 @@
   [(ngModel)]="task.completed"
   (change)="toggleCompleted()"
 /> 
-{{ task.name }}
+<label>{{ task.name }}</label>
 <button (click)="removeTask()">Remove</button>

@@ -12,7 +12,10 @@ import { TaskService } from '../../services/task.service';
 export class TaskListComponent implements OnInit, OnDestroy {
 
   tasks : any;
+  taskCount: Number;
   private repollSubscription: Subscription;
+  nameSearch: String;
+  showCompleted: Boolean;
 
   constructor(
     private taskService: TaskService,
@@ -20,8 +23,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.showCompleted = false;
+    this.nameSearch = null;
     this.getTasks();
-    this.repollSubscription = this.repollNotifierService.obs.subscribe(() => this.getTasks())
+    this.repollSubscription = this.repollNotifierService.obs.subscribe(data => {
+      this.nameSearch = data?.name;
+      this.getTasks();
+    });
   }
 
   ngOnDestroy() {
@@ -29,16 +37,20 @@ export class TaskListComponent implements OnInit, OnDestroy {
 }
 
   getTasks() {
-    this.taskService.getAll()
-    .subscribe(
-      data => {
-        this.tasks = data;
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.taskService.find(
+      this.nameSearch, 
+      this.showCompleted ? null : false
+    )
+      .subscribe(
+        data => {
+          this.tasks = data;
+          this.taskCount = Object.keys(this.tasks).length;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 }

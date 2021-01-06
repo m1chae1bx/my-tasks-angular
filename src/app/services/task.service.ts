@@ -18,9 +18,9 @@ export class TaskService {
   //   return of(TASKS);
   // }
 
-  getAll(): Observable<any> {
-    return this.http.get(baseUrl);
-  }
+  // getAll(): Observable<any> {
+  //   return this.http.get(baseUrl);
+  // }
 
   get(id: String): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
@@ -42,7 +42,18 @@ export class TaskService {
     return this.http.delete(baseUrl);
   }
 
-  findByName(name: String): Observable<any> {
-    return this.http.get(`${baseUrl}?name=${name}`);
+  find(name: String, completed: Boolean): Observable<any> {
+    var request = `${baseUrl}`;
+    var prefix = '?';
+    if (name) {
+      request = request + prefix + `name=${name}`;
+      prefix = '&';
+    };
+    if (completed != null) {
+      request = request + prefix + `completed=${completed}`;
+      prefix = '&';
+    }
+    console.log('request', request);
+    return this.http.get(request);
   }
 }

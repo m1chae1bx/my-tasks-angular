@@ -3,5 +3,7 @@
     id="task-input" 
     name="task-input"
     [(ngModel)]="task.name"
+    [placeholder]="'Search or Add a Task'"
+    (input)="searchTasks()"
 />
-<button (click)="addTask()">Add a task</button>
+<button (click)="addTask()">Add</button>

@@ -39,6 +39,8 @@ export class TaskItemComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          // @todo: Add delay and fade before refreshing list
+          this.repollNotifierService.notify(null);
         },
         error => {
           console.log(error);

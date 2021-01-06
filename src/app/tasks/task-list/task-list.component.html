@@ -1,7 +1,25 @@
-<ul class="no-bullets">
-    <li *ngFor="let task of tasks">
-        <app-task-item
-            [task]=task
-        ></app-task-item>
-    </li>
-</ul>
+<div>
+    <h4>Filters</h4>
+    <input
+    type="checkbox"
+    id="include-checkbox"
+    name="include-checkbox"
+    [(ngModel)]="showCompleted"
+    (change)="getTasks()"
+    />
+    <label for="include-checkbox">Show completed tasks</label>
+    <h2>Tasks</h2>
+    <div *ngIf="nameSearch">
+        <i>
+            <p>Showing {{ this.taskCount }} result(s) for <b>{{ this.nameSearch }}</b></p>
+        </i>
+    </div>
+    <ul class="no-bullets">
+        <li *ngFor="let task of tasks">
+            <app-task-item
+                [task]=task
+            ></app-task-item>
+        </li>
+    </ul>
+</div>
+

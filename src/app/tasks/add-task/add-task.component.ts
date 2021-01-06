@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
+import { RepollNotifierService } from '../../services/repoll-notifier.service'
 
 @Component({
   selector: 'app-add-task',
@@ -12,7 +13,10 @@ export class AddTaskComponent implements OnInit {
     name: ''
   };
 
-  constructor(private taskService: TaskService) { }
+  constructor(
+    private taskService: TaskService,
+    private repollNotifierService: RepollNotifierService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +30,7 @@ export class AddTaskComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          this.repollNotifierService.notify(null);
           this.resetTask();
         },
         error => {

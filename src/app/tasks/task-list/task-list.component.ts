@@ -16,6 +16,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   private repollSubscription: Subscription;
   nameSearch: String;
   showCompleted: Boolean;
+  dueDateFilter: any;
 
   constructor(
     private taskService: TaskService,
@@ -25,6 +26,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.showCompleted = false;
     this.nameSearch = null;
+    this.dueDateFilter = "default";
     this.getTasks();
     this.repollSubscription = this.repollNotifierService.obs.subscribe(data => {
       this.nameSearch = data?.name;
@@ -39,7 +41,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
   getTasks() {
     this.taskService.find(
       this.nameSearch, 
-      this.showCompleted ? null : false
+      this.showCompleted ? null : false,
+      this.dueDateFilter === 'default' ? null : this.dueDateFilter
     )
       .subscribe(
         data => {
@@ -51,6 +54,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       );
+  }
+
+  onDueDateFilterChange(code: any): void {
+    this.dueDateFilter = code;
+    this.getTasks();
   }
 
 }

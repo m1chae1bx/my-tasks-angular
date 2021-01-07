@@ -8,6 +8,62 @@
     (change)="getTasks()"
     />
     <label for="include-checkbox">Show completed tasks</label>
+    <div>
+        <input 
+            type="radio" 
+            id="default" 
+            name="dueDateFilter" 
+            value="default"
+            [checked]="dueDateFilter === 'default'"
+            (change)="onDueDateFilterChange('default')"
+        >
+        <label for="default">Any Date</label><br>
+        <input 
+            type="radio" 
+            id="unplanned" 
+            name="dueDateFilter" 
+            value="unplanned"
+            [checked]="dueDateFilter === 'unplanned'"
+            (change)="onDueDateFilterChange('unplanned')"
+        >
+        <label for="unplanned">Unplanned</label><br>
+        <input 
+            type="radio" 
+            id="today" 
+            name="dueDateFilter" 
+            value="today"
+            [checked]="dueDateFilter === 'today'"
+            (change)="onDueDateFilterChange('today')"
+        >
+        <label for="today">Due Today</label><br>
+        <input 
+            type="radio" 
+            id="tomorrow" 
+            name="dueDateFilter" 
+            value="tomorrow"
+            [checked]="dueDateFilter === 'tomorrow'"
+            (change)="onDueDateFilterChange('tomorrow')"
+        >
+        <label for="tomorrow">Due Tomorrow</label><br>
+        <input 
+            type="radio" 
+            id="upcoming" 
+            name="dueDateFilter" 
+            value="upcoming"
+            [checked]="dueDateFilter === 'upcoming'"
+            (change)="onDueDateFilterChange('upcoming')"
+        >
+        <label for="upcoming">Upcoming</label><br>
+        <input 
+            type="radio" 
+            id="overdue" 
+            name="dueDateFilter" 
+            value="overdue"
+            [checked]="dueDateFilter === 'overdue'"
+            (change)="onDueDateFilterChange('overdue')"
+        >
+        <label for="overdue">Overdue</label>
+    </div>
     <h2>Tasks</h2>
     <div *ngIf="nameSearch">
         <i>

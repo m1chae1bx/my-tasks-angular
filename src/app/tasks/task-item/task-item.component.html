@@ -4,4 +4,5 @@
   (change)="toggleCompleted()"
 /> 
 <label>{{ task.name }}</label>
-<button (click)="removeTask()">Remove</button>
+<app-task-detail [task]=task></app-task-detail>
+<button (click)="removeTask()">Remove Task</button>

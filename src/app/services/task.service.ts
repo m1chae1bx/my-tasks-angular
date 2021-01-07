@@ -42,7 +42,11 @@ export class TaskService {
     return this.http.delete(baseUrl);
   }
 
-  find(name: String, completed: Boolean): Observable<any> {
+  find(
+    name: String,
+    completed: Boolean,
+    dueDate: String
+  ): Observable<any> {
     var request = `${baseUrl}`;
     var prefix = '?';
     if (name) {
@@ -51,6 +55,14 @@ export class TaskService {
     };
     if (completed != null) {
       request = request + prefix + `completed=${completed}`;
+      prefix = '&';
+    }
+    if (dueDate) {
+      var today = new Date();
+      // today.setHours(0,0,0,0);
+      today.setUTCHours(0,0,0,0);
+      console.log(today.toISOString());
+      request = request + prefix + `dueDate=${dueDate}&today=${today.toISOString()}`;
       prefix = '&';
     }
     console.log('request', request);

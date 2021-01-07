@@ -6,13 +6,15 @@ import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 
 @NgModule({
   declarations: [
     TasksComponent,
     AddTaskComponent,
     TaskItemComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskDetailComponent
   ],
   imports: [
     CommonModule,

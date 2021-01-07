@@ -1,0 +1,8 @@
+<input 
+    type="date" 
+    id="dueDate-input" 
+    name="dueDate-input"
+    [ngModel]="dueDate | date:'yyyy-MM-dd'"
+    (ngModelChange)="dueDate = $event"
+/>
+<button (click)="setDueDate()">Set Due Date</button>

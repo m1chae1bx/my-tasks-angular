@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color:rgb(235, 233, 233);
+}
+
+.primary-color {
+    color:#3f51b5;
+}
+
+
+.accent-color {
+    color: #ff4081;
+}
+
+.search-div {
+    .mat-form-field-outline {
+        background-color: #ebe9e9;
+        border-radius: 6px;
+        color: rgb(225, 225, 225);
+    }
+
+    .mat-form-field-outline-thick {
+        color: rgba(0,0,0,.87);
+    }
+
+    .mat-form-field-wrapper {
+        padding-bottom: 12px;
+    }
+
+    .mat-form-field-label {
+        color:rgb(77, 77, 77);     
+    }
+}
+
+.task-list .mat-list-item {
+    height: auto;
+  }

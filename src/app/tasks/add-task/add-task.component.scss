@@ -1,0 +1,13 @@
+.search-field {
+    width: 100%;
+}
+
+.add-task-details {
+    display: flex;
+    padding: 0px 12px;
+    justify-content: space-between;
+
+    .desc-input {
+        flex: 1 1 auto;
+    }
+}

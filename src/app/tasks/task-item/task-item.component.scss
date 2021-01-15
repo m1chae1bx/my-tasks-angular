@@ -1,0 +1,84 @@
+.task-item-card {
+    z-index: 1;
+}
+
+.task-item-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.checkbox-and-info {
+    display: flex;
+    align-items: center;
+}
+
+.task-info {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0px;
+    margin-left: 12px;
+
+    .task-name {
+        border: none;
+        font-size: 1.1em;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: rgb(100, 100, 100);
+    }
+
+    .task-name:focus {
+        outline: none;
+    }
+
+    .task-desc {
+        font-size: 1em;
+        font-style: italic;
+        color: rgb(110, 110, 110);
+    }
+    
+    .due-date {
+        //margin-top: -.5em;
+        font-size: small;
+        color: rgb(110, 110, 110);
+    }
+
+    .overdue, .due-today{
+        color: red;
+    }
+}
+
+.item-selected {
+    margin: -4px -12px -4px;
+    z-index: 2;
+
+    .task-info {
+         
+        .task-name {
+            font-size: 1.2em;
+        }
+
+        .due-date {
+            font-size: 1em;
+        }
+    }
+}
+
+.delete-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.divider {
+    margin-top: 8px;
+}
+
+.close-edit {
+    align-self: start;
+    margin-top: -8px;
+    margin-right: -8px;
+}

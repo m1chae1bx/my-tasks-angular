@@ -1,8 +1,82 @@
-<input
-  type="checkbox"
-  [(ngModel)]="task.completed"
-  (change)="toggleCompleted()"
-/> 
-<label>{{ task.name }}</label>
-<app-task-detail [task]=task></app-task-detail>
-<button (click)="removeTask()">Remove Task</button>
+<mat-card 
+  class="task-item-card"
+  [ngClass]="{
+    'item-selected': itemSelected,
+    'mat-elevation-z0': !itemSelected,
+    'mat-elevation-z4': itemSelected
+  }"
+>
+  <div class="task-item-div">
+    <div class="checkbox-and-info">
+      <mat-checkbox 
+        [(ngModel)]="task.completed"
+        (change)="toggleCompleted()"
+        >
+      </mat-checkbox>
+      <div class="task-info">
+        <input
+          #taskName
+          class="task-name primary-color"
+          [ngClass]="{'completed': task.completed}" 
+          [readOnly]="!itemSelected"
+          [(ngModel)]="task.name"
+          maxlength=100
+        >
+        <span *ngIf="task.desc" class="task-desc">{{ task.desc }}</span>
+        <span 
+          *ngIf="task.dueDate" 
+          class="due-date"
+          [ngClass]="{'due-today': this.dueDateStr === 'Today'}"
+        >{{ dueDateStr || (task.dueDate | date) }} 
+          <span *ngIf="overdue && !task.completed" class="overdue"> - Overdue</span>
+        </span>
+      </div>
+    </div>
+    <button
+        *ngIf="!itemSelected"
+        mat-icon-button
+        color="accent" 
+        aria-label="Edit button"
+        (click)="editTaskToggle()"    
+    >
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button
+        *ngIf="itemSelected"
+        mat-icon-button
+        class="close-edit"
+        color="accent" 
+        aria-label="Edit button"
+        (click)="editTaskToggle()"    
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="itemSelected" class="task-details">
+    <app-task-detail
+      [task]="task"
+      (dateChanged)="onDateChange()"
+    ></app-task-detail>
+  </div>
+  <div *ngIf="itemSelected" class="divider">
+    <mat-divider></mat-divider>
+  </div>
+  <mat-card-actions *ngIf="itemSelected" class="delete-div"> 
+    <button
+      mat-icon-button
+      color="accent" 
+      aria-label="Delete task"
+      (click)="remove()"    
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      mat-stroked-button
+      color="accent" 
+      aria-label="Edit button"
+      (click)="save()"    
+    >
+      Save
+    </button>
+  </mat-card-actions>
+</mat-card>

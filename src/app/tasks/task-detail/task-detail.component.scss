@@ -1,0 +1,9 @@
+.task-details {
+    display: flex;
+    padding-top: 12px;
+    justify-content: space-between;
+
+    .desc-input {
+        flex: 1 1 auto;
+    }
+}

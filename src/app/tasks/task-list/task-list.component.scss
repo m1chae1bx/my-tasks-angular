@@ -1,5 +1,39 @@
-ul.no-bullets {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
+.filters-panel-title {
+    display: flex;
+    align-items: center;
+}
+
+.filters-panel-desc {
+    display: flex;
+    align-items: center;
+}
+
+.due-date-chips {
+    margin-bottom: 8px; 
+}
+
+.task-list-card {
+    margin-top: 12px;
+    padding-top: 8px;
+}
+
+.results-caption {
+    margin-top: 12px;
+    margin-bottom: -8px;
+    margin-left: 12px;
+}
+
+.task-item {
+    margin-top: 2px;
+    width: 100%;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-list :first-child{
+    margin-top: 12px;
 }

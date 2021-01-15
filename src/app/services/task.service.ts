@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from } from 'rxjs';
 import { Task } from '../tasks/task';
-import { TASKS } from '../mock-tasks';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,10 +12,6 @@ const baseUrl = 'http://localhost:8080/api/tasks'
 export class TaskService {
 
   constructor(private http: HttpClient) { }
-
-  // getTasks(): Observable<Task[]> {
-  //   return of(TASKS);
-  // }
 
   // getAll(): Observable<any> {
   //   return this.http.get(baseUrl);
@@ -59,8 +54,7 @@ export class TaskService {
     }
     if (dueDate) {
       var today = new Date();
-      // today.setHours(0,0,0,0);
-      today.setUTCHours(0,0,0,0);
+      today.setHours(0,0,0,0);
       console.log(today.toISOString());
       request = request + prefix + `dueDate=${dueDate}&today=${today.toISOString()}`;
       prefix = '&';

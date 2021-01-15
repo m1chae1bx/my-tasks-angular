@@ -1,8 +1,22 @@
-<input 
-    type="date" 
-    id="dueDate-input" 
-    name="dueDate-input"
-    [ngModel]="dueDate | date:'yyyy-MM-dd'"
-    (ngModelChange)="dueDate = $event"
-/>
-<button (click)="setDueDate()">Set Due Date</button>
+<div class="task-details">
+    <mat-form-field class="desc-input" appearance="outline">
+        <mat-label>Add a Description</mat-label>
+        <input 
+            matInput type="text" 
+            [(ngModel)]="task.desc"
+            maxlength=100
+        >
+    </mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+    <mat-form-field appearance="outline">
+        <mat-label>Set Due Date</mat-label>
+        <input 
+            matInput 
+            [matDatepicker]="picker"
+            [(ngModel)]="task.dueDate"
+            (dateChange)="onChangeUpdate()"
+        >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+</div>

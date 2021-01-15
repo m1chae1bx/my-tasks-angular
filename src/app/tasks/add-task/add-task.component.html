@@ -1,9 +1,62 @@
-<input 
-    type="text" 
-    id="task-input" 
-    name="task-input"
-    [(ngModel)]="task.name"
-    [placeholder]="'Search or Add a Task'"
-    (input)="searchTasks()"
-/>
-<button (click)="addTask()">Add</button>
+<div class="search-div">
+    <mat-form-field
+        #searchField 
+        class="search-field" 
+        appearance="outline"
+        color="primary"
+    >
+        <mat-label>Search or Add a Task</mat-label>
+        <span matPrefix><mat-icon aria-hidden="true">search</mat-icon></span>
+        <input 
+            matInput
+            placeholder="E.g. Read the Bible"
+            type="text" 
+            id="task-input" 
+            name="task-input"
+            autocomplete="off"
+            maxlength=100
+            [(ngModel)]="task.name"
+            (input)="searchTasks()"
+            
+        >
+        <button
+            matSuffix
+            mat-icon-button
+            color="accent" 
+            aria-label="Example icon button with a plus one icon"
+            [disabled]="addDisabled"
+            (click)="addTask()"    
+        >
+            <mat-icon>add</mat-icon>
+        </button>
+        
+    </mat-form-field>
+</div>
+<div
+    *ngIf="!addDisabled"
+    class="add-task-details"
+>
+    <mat-form-field class="desc-input">
+        <mat-label>Add a Description</mat-label>
+        <input 
+            matInput 
+            type="text" 
+            maxlength=100
+            [(ngModel)]="task.description"
+        >
+    </mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+    <mat-form-field>
+        <mat-label>Set Due Date</mat-label>
+        <input 
+            matInput 
+            [matDatepicker]="picker"
+            [(ngModel)]="task.dueDate"
+        >
+        <mat-datepicker-toggle 
+            matSuffix 
+            [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+</div>

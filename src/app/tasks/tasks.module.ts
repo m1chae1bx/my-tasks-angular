@@ -18,6 +18,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { TaskFiltersComponent } from './task-filters/task-filters.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TaskDetailComponent } from './task-detail/task-detail.component';
     TaskItemComponent,
     TaskListComponent,
     TaskDetailComponent,
+    TaskFiltersComponent,
   ],
   imports: [
     CommonModule,

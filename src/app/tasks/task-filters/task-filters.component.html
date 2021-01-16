@@ -1,0 +1,41 @@
+<mat-card class="mat-elevation-z0">
+    <mat-chip-list class="due-date-chips">            
+        <mat-chip
+            color="accent"
+            [selected]="filters.dueDate === 'default'"
+            (click)="changeDueDate('default')"
+        >Any Date</mat-chip>
+        <mat-chip
+            color="accent"
+            [selected]="filters.dueDate === 'unplanned'"
+            (click)="changeDueDate('unplanned')"
+        >Unplanned</mat-chip>
+        <mat-chip
+            color="accent"
+            [selected]="filters.dueDate === 'today'"
+            (click)="changeDueDate('today')"
+        >Today</mat-chip>
+        <mat-chip
+            color="accent"
+            [selected]="filters.dueDate === 'tomorrow'"
+            (click)="changeDueDate('tomorrow')"
+        >Tomorrow</mat-chip>
+        <mat-chip
+            color="accent"
+            [selected]="filters.dueDate === 'upcoming'"
+            (click)="changeDueDate('upcoming')"
+        >Upcoming</mat-chip>
+        <mat-chip
+            color="accent"
+            [selected]="filters.dueDate === 'overdue'"
+            (click)="changeDueDate('overdue')"
+        >Overdue</mat-chip>
+    </mat-chip-list>
+    <br>
+    <mat-slide-toggle
+        [checked]="this.filters.showCompleted"
+        (toggleChange)="toggleCompleted()"
+    >
+        Show Completed Tasks
+    </mat-slide-toggle>
+</mat-card>

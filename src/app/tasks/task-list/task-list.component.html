@@ -1,45 +1,7 @@
-<mat-card class="filters-card mat-elevation-z0">
-    <mat-chip-list 
-        class="due-date-chips"
-    >            
-        <mat-chip
-            color="accent"
-            [selected]="dueDateFilter === 'default'"
-            (click)="changeDueDateFilter('default')"
-        >Any Date</mat-chip>
-        <mat-chip
-            color="accent"
-            [selected]="dueDateFilter === 'unplanned'"
-            (click)="changeDueDateFilter('unplanned')"
-        >Unplanned</mat-chip>
-        <mat-chip
-            color="accent"
-            [selected]="dueDateFilter === 'today'"
-            (click)="changeDueDateFilter('today')"
-        >Today</mat-chip>
-        <mat-chip
-            color="accent"
-            [selected]="dueDateFilter === 'tomorrow'"
-            (click)="changeDueDateFilter('tomorrow')"
-        >Tomorrow</mat-chip>
-        <mat-chip
-            color="accent"
-            [selected]="dueDateFilter === 'upcoming'"
-            (click)="changeDueDateFilter('upcoming')"
-        >Upcoming</mat-chip>
-        <mat-chip
-            color="accent"
-            [selected]="dueDateFilter === 'overdue'"
-            (click)="changeDueDateFilter('overdue')"
-        >Overdue</mat-chip>
-    </mat-chip-list>
-    <br>
-    <mat-slide-toggle
-        [checked]="showCompleted"
-        (toggleChange)="toggleCompleted()">
-        Show Completed Tasks
-    </mat-slide-toggle>
-</mat-card>
+<app-task-filters
+    [(filters)]="filters"
+    (filtersChange)="getTasks()"
+></app-task-filters>
 <div *ngIf="nameSearch" class="results-caption">
     <i>
         <p>Showing {{ this.taskCount }} {{ this.processCount('result', this.taskCount)}} for <b>{{ this.nameSearch }}</b></p>

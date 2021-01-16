@@ -5,6 +5,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 import { Language } from 'src/app/utilities/language';
 import { RepollNotifierService } from '../../services/repoll-notifier.service'
 import { TaskService } from '../../services/task.service';
+import { Filters } from '../filters';
 import { Task } from '../task';
 
 
@@ -19,13 +20,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
   taskCount: Number;
   private repollSubscription: Subscription;
   nameSearch: String;
-  showCompleted: Boolean;
-  dueDateFilter: any;
+  filters: Filters;
   currentDate: Date;
   tomorrowDate: Date;
   todayStr: String;
   tomorrowStr: String;
-  filterPanelShadows: Boolean;
   processCount = Language.processCount;
 
   constructor(
@@ -34,10 +33,12 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.showCompleted = false;
+    this.filters = {
+      dueDate: 'default',
+      showCompleted: false
+    }
     this.nameSearch = null;
-    this.dueDateFilter = "default";
-    this.filterPanelShadows = false;
+
     this.currentDate = new Date();
     this.currentDate.setHours(0,0,0,0);
     this.todayStr = this.currentDate.toISOString();
@@ -59,16 +60,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.repollSubscription.unsubscribe();
   }
 
-  toggleCompleted() {
-    this.showCompleted = !this.showCompleted;
-    this.getTasks();
-  }
-
   getTasks() {
     this.taskService.find(
       this.nameSearch, 
-      this.showCompleted ? null : false,
-      this.dueDateFilter === 'default' ? null : this.dueDateFilter
+      this.filters.showCompleted ? null : false,
+      this.filters.dueDate === 'default' ? null : this.filters.dueDate
     )
       .subscribe(
         data => {
@@ -89,13 +85,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       );
-  }
-
-  changeDueDateFilter(code: any): void {
-    if (this.dueDateFilter != code) {
-      this.dueDateFilter = code;
-      this.getTasks();
-    }
   }
 
 }

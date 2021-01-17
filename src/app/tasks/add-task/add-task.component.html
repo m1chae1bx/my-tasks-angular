@@ -1,39 +1,40 @@
 <div class="search-div">
-    <mat-form-field
-        #searchField 
-        class="search-field" 
-        appearance="outline"
-        color="primary"
-    >
-        <mat-label>Search or Add a Task</mat-label>
-        <span matPrefix><mat-icon aria-hidden="true">search</mat-icon></span>
-        <input 
-            matInput
-            placeholder="E.g. Read the Bible"
-            type="text" 
-            id="task-input" 
-            name="task-input"
-            autocomplete="off"
-            maxlength=100
-            [(ngModel)]="task.name"
-            (input)="searchTasks()"
-            
+    <form (ngSubmit)="addTask()">
+        <mat-form-field
+            #searchField 
+            class="search-field" 
+            appearance="outline"
+            color="primary"
         >
-        <button
-            matSuffix
-            mat-icon-button
-            color="accent" 
-            aria-label="Example icon button with a plus one icon"
-            [disabled]="addDisabled"
-            (click)="addTask()"    
-        >
-            <mat-icon>add</mat-icon>
-        </button>
-        
-    </mat-form-field>
+            <mat-label>Search or Add a Task</mat-label>
+            <span matPrefix><mat-icon aria-hidden="true">search</mat-icon></span>
+            <input 
+                matInput
+                placeholder="E.g. Read the Bible"
+                type="text" 
+                id="task-input" 
+                name="task-input"
+                autocomplete="off"
+                maxlength=100
+                [(ngModel)]="task.name"
+                (input)="searchTasks()"
+                
+            >
+            <button
+                matSuffix
+                mat-icon-button
+                color="accent" 
+                aria-label="Example icon button with a plus one icon"
+                [disabled]="addDisabled"
+                (click)="addTask()"    
+            >
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
 </div>
 <div
-    *ngIf="!addDisabled"
+    [hidden]="!addDisabled"
     class="add-task-details"
 >
     <mat-form-field class="desc-input">

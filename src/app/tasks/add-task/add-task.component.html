@@ -34,7 +34,7 @@
     </form>
 </div>
 <div
-    [hidden]="!addDisabled"
+    *ngIf="!addDisabled"
     class="add-task-details"
 >
     <mat-form-field class="desc-input">

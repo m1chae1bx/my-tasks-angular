@@ -4,7 +4,10 @@
 ></app-task-filters>
 <div *ngIf="nameSearch" class="results-caption">
     <i>
-        <p>Showing {{ this.taskCount }} {{ this.processCount('result', this.taskCount)}} for <b>{{ this.nameSearch }}</b></p>
+        <p>
+            Showing {{ this.taskCount }} {{ this.processCount('result', this.taskCount)}} for 
+            <b>{{ this.nameSearch }}</b>
+        </p>
     </i>
 </div>
 <div class="task-list">

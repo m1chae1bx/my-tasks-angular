@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { RepollNotifierService } from '../../services/repoll-notifier.service'
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators'
 
 @Component({
   selector: 'app-add-task',
@@ -17,15 +18,23 @@ export class AddTaskComponent implements OnInit {
   };
   filtered: Boolean;
   addDisabled: Boolean;
+  searchSubject = new Subject();
+  exactPhraseOn: boolean;
 
   constructor(
     private taskService: TaskService,
     private repollNotifierService: RepollNotifierService
-  ) { }
+  ) {
+    this.searchSubject.
+      pipe(
+        debounceTime(300),
+      ).subscribe(() => this.searchTasks());
+  }
 
   ngOnInit(): void {
     this.filtered = false;
     this.addDisabled = true;
+    this.exactPhraseOn = true;
   }
 
   addTask(): void {
@@ -61,7 +70,9 @@ export class AddTaskComponent implements OnInit {
   searchTasks(): void {
     if (this.task.name.length > 0) {
       this.addDisabled = false;
-      this.repollNotifierService.notify({name: this.task.name});
+      this.repollNotifierService.notify({
+        name: this.exactPhraseOn ? '\"' + this.task.name + '\"' : this.task.name
+      });
       this.filtered = true;
     } else {
       this.addDisabled = true;
@@ -70,5 +81,9 @@ export class AddTaskComponent implements OnInit {
     }
   }
   
+  toggleExactPhrase() {
+    this.exactPhraseOn = !this.exactPhraseOn;
+    this.searchTasks();
+  }
 
 }

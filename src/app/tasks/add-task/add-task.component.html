@@ -17,19 +17,27 @@
                 autocomplete="off"
                 maxlength=100
                 [(ngModel)]="task.name"
-                (input)="searchTasks()"
+                (keyup)="searchSubject.next()"
                 
             >
-            <button
-                matSuffix
-                mat-icon-button
-                color="accent" 
-                aria-label="Example icon button with a plus one icon"
-                [disabled]="addDisabled"
-                (click)="addTask()"    
-            >
-                <mat-icon>add</mat-icon>
-            </button>
+            <div matSuffix>
+                <div class="suffix">
+                    <button
+                        type="button"
+                        mat-icon-button
+                        [matTooltip]="exactPhraseOn ? 'Search exact phrase on' : 'Search exact phrase off'"
+                        aria-label="Search with Exact Phrase"
+                        (click)="toggleExactPhrase()"    
+                    >
+                        <mat-icon
+                            [ngClass]="{
+                                'setting-on': exactPhraseOn,
+                                'setting-off': !exactPhraseOn 
+                            }"
+                        >format_quote</mat-icon>
+                </button>                
+                </div>
+            </div>
         </mat-form-field>
     </form>
 </div>
@@ -60,4 +68,16 @@
         ></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker></mat-datepicker>
     </mat-form-field>
+    &nbsp;&nbsp;&nbsp;
+    <button
+        type="submit"
+        mat-icon-button
+        matTooltip="Add Task"
+        color="accent" 
+        aria-label="Add Task"
+        [disabled]="addDisabled"
+        (click)="addTask()"    
+    >
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

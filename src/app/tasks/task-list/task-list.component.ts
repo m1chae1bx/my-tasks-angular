@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatChipSelectionChange } from '@angular/material/chips';
 import { Subscription } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Language } from 'src/app/utilities/language';
 import { RepollNotifierService } from '../../services/repoll-notifier.service'
 import { TaskService } from '../../services/task.service';
 import { Filters } from '../filters';
 import { Task } from '../task';
-
 
 @Component({
   selector: 'app-task-list',

@@ -1,15 +1,22 @@
-.search-field {
-    width: 100%;
+.search-div {
+    .search-field {
+        width: 100%;
+    }
 }
 
 .add-task-details {
     display: flex;
-    padding: 0px 12px;
-    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-direction: column;
+}
 
-    .desc-input {
-        flex: 1 1 auto;
-    }
+.app-task-detail-div {
+    margin-bottom: 12px;
+}
+
+.add-task-card-actions {
+    display: flex;
+    justify-content: center;
 }
 
 .suffix {

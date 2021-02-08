@@ -14,8 +14,6 @@
     <div *ngFor="let task of tasks" class="task-item">
         <app-task-item
             [task]=task
-            [today]="currentDate"
-            [tomorrow]="tomorrowDate"
         ></app-task-item>
     </div>
 </div>

@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
@@ -20,7 +21,6 @@ import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TaskFiltersComponent } from './task-filters/task-filters.component';
-
 @NgModule({
   declarations: [
     TasksComponent,
@@ -45,7 +45,8 @@ import { TaskFiltersComponent } from './task-filters/task-filters.component';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule
   ],
   exports: [
     TasksComponent

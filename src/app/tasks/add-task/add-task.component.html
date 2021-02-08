@@ -44,40 +44,28 @@
 <div
     *ngIf="!addDisabled"
     class="add-task-details"
->
-    <mat-form-field class="desc-input">
-        <mat-label>Add a Description</mat-label>
-        <input 
-            matInput 
-            type="text" 
-            maxlength=100
-            [(ngModel)]="task.description"
-        >
-    </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
-    <mat-form-field>
-        <mat-label>Set Due Date</mat-label>
-        <input 
-            matInput 
-            [matDatepicker]="picker"
-            [(ngModel)]="task.dueDate"
-        >
-        <mat-datepicker-toggle 
-            matSuffix 
-            [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker touchUi #picker></mat-datepicker>
-    </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
-    <button
-        type="submit"
-        mat-icon-button
-        matTooltip="Add Task"
-        color="accent" 
-        aria-label="Add Task"
-        [disabled]="addDisabled"
-        (click)="addTask()"    
-    >
-        <mat-icon>add</mat-icon>
-    </button>
+>   
+    <mat-card class="mat-elevation-z1">
+        <div class="app-task-detail-div">
+            <app-task-detail
+                [task]="task"
+                appearance="outline"
+                hideDescription="true"
+            ></app-task-detail>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-card-actions class="add-task-card-actions">
+            <button
+                type="submit"
+                mat-button
+                color="accent" 
+                aria-label="Add Task"
+                [disabled]="addDisabled"
+                (click)="addTask()"    
+            >
+                Add Task
+            </button>
+        </mat-card-actions>
+    </mat-card>
 </div>
+

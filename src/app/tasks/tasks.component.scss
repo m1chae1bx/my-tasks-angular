@@ -9,24 +9,63 @@
     overflow-x: hidden; 
     overflow-y: auto; 
     height: 100px;
-    padding-bottom: 15%;
 
     .content {
-        padding-top: 20px;
-        width: 600px;
         margin: auto;
     }
 }
 
 .sub-toolbar {
     background-color: white;
-    box-shadow:0px 4px 4px -1px rgba(0, 0, 0, 0.2),
+    box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.1),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14);
     z-index: 3;
 
     .content {
-        width: 600px;
         height: 100%;
         margin: auto;
+
+        .app-add-task-div {
+            margin-bottom: 12px;
+        }
+    }
+}
+
+@media only screen and (min-width: 613px) {
+    .page {
+        padding: 0px 0px 15%;
+
+        .content {
+            width: 600px;
+            padding-top: 20px;
+        }
+    }
+
+    .sub-toolbar {
+        padding: 0px;
+
+        .content {
+            width: 600px;
+        }
+    }
+}
+
+@media only screen and (max-width: 612px) {
+    .page {
+        padding: 0px 12px 60%;
+
+        .content {
+            width: 100%;
+            padding-top: 16px;
+        }
+        
+    }
+
+    .sub-toolbar {
+        padding: 0px 12px;
+        
+        .content {
+            width: 100%;
+        }
     }
 }

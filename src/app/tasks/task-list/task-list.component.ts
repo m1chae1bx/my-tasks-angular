@@ -18,10 +18,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   private repollSubscription: Subscription;
   nameSearch: String;
   filters: Filters;
-  currentDate: Date;
-  tomorrowDate: Date;
-  todayStr: String;
-  tomorrowStr: String;
   processCount = Language.processCount;
 
   constructor(
@@ -34,18 +30,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
       dueDate: 'default',
       showCompleted: false
     }
-    this.nameSearch = null;
-
-    this.currentDate = new Date();
-    this.currentDate.setHours(0,0,0,0);
-    this.todayStr = this.currentDate.toISOString();
-    this.tomorrowDate = new Date();
-    this.tomorrowDate.setUTCHours(0,0,0,0);
-    this.tomorrowDate.setMinutes(this.tomorrowDate.getMinutes() + this.tomorrowDate.getTimezoneOffset())
-    this.tomorrowDate.setDate(this.tomorrowDate.getDate() + 1);
-    
-    this.tomorrowStr = this.tomorrowDate.toISOString();
-    console.log(this.tomorrowStr);
+    this.nameSearch = null;    
     this.getTasks();
     this.repollSubscription = this.repollNotifierService.obs.subscribe(data => {
       this.nameSearch = data?.name;

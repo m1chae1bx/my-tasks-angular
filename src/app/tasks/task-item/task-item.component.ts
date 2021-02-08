@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Task } from '../task'
+import { Task } from '../task';
 import { TaskService } from '../../services/task.service';
-import { RepollNotifierService } from '../../services/repoll-notifier.service'
+import { RepollNotifierService } from '../../services/repoll-notifier.service';
+import { DateUtil } from '../../utilities/date-util';
 
 @Component({
   selector: 'app-task-item',
@@ -17,9 +18,8 @@ export class TaskItemComponent implements OnInit {
   overdue: boolean;
 
   @Input() task: Task;
-  @Input() today: Date;
-  @Input() tomorrow: Date;
   @ViewChild('taskName') taskName: ElementRef;
+  @ViewChild('taskItemDiv') taskItemDiv: ElementRef;
 
   constructor(
     private taskService: TaskService,
@@ -36,13 +36,16 @@ export class TaskItemComponent implements OnInit {
 
     if (this.itemSelected) {
       this.originalTask = {... this.task};
+      setTimeout(()=>{ // this will make the execution after the above boolean has changed
+        this.taskName.nativeElement.focus();
+        this.taskItemDiv.nativeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      },0);  
     } else {
       this.task = this.originalTask;
     }
-
-    setTimeout(()=>{ // this will make the execution after the above boolean has changed
-      this.taskName.nativeElement.focus();
-    },0);  
   }
 
   update(): void {
@@ -84,14 +87,14 @@ export class TaskItemComponent implements OnInit {
   }
 
   updateDisplayDate(): void {
-    if (this.today.toISOString() === this.task.dueDate?.toISOString()) {
+    if (DateUtil.today.toISOString() === this.task.dueDate?.toISOString()) {
       this.dueDateStr = 'Today'
-    } else if (this.tomorrow.toISOString() === this.task.dueDate?.toISOString()) {
+    } else if (DateUtil.tomorrow.toISOString() === this.task.dueDate?.toISOString()) {
       this.dueDateStr = 'Tomorrow'
     } else {
       this.dueDateStr = null;
     }
-    if (this.task.dueDate?.getTime() < this.today.getTime()) {
+    if (this.task.dueDate?.getTime() < DateUtil.today.getTime()) {
       this.overdue = true;  
     } else {
       this.overdue = false;

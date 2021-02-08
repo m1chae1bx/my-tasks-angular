@@ -1,9 +1,17 @@
 .task-details {
-    display: flex;
-    padding-top: 12px;
-    justify-content: space-between;
+    .chip-icon{
+        font-size: medium;
+        display: flex;
+        align-items: center;
+    }
 
-    .desc-input {
-        flex: 1 1 auto;
+    .desc-div {
+        margin-top: 12px;
+        margin-bottom: -12px;
+        display: flex;
+
+        .desc-input {
+            flex: 1 1 auto;
+        }
     }
 }

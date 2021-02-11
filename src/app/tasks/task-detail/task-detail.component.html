@@ -10,7 +10,7 @@
         <mat-chip 
             *ngIf="task.dueDate"
             [selected]="task.dueDate"
-            color="primary"
+            color="accent"
             [matMenuTriggerFor]="menu"
             [removable]="true"
             (removed)="clearDueDate()"

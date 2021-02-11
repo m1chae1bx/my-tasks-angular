@@ -1,0 +1,37 @@
+<div class="due-date-header">
+    <h3><b>Due Date</b></h3>
+</div>
+<br>
+<mat-chip-list class="due-date-chips">            
+    <mat-chip
+        color="accent"
+        [selected]="data.dueDate === 'default'"
+        (click)="changeDueDate('default', 'Any Date')"
+    >Any Date</mat-chip>
+    <mat-chip
+        color="accent"
+        [selected]="data.dueDate === 'unplanned'"
+        (click)="changeDueDate('unplanned', 'Unplanned')"
+    >Unplanned</mat-chip>
+    <mat-chip
+        color="accent"
+        [selected]="data.dueDate === 'today'"
+        (click)="changeDueDate('today', 'Today')"
+    >Today</mat-chip>
+    <mat-chip
+        color="accent"
+        [selected]="data.dueDate === 'tomorrow'"
+        (click)="changeDueDate('tomorrow', 'Tomorrow')"
+    >Tomorrow</mat-chip>
+    <mat-chip
+        color="accent"
+        [selected]="data.dueDate === 'upcoming'"
+        (click)="changeDueDate('upcoming', 'Upcoming')"
+    >Upcoming</mat-chip>
+    <mat-chip
+        color="accent"
+        [selected]="data.dueDate === 'overdue'"
+        (click)="changeDueDate('overdue', 'Overdue')"
+    >Overdue</mat-chip>
+</mat-chip-list>
+<br>

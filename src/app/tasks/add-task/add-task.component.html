@@ -45,27 +45,13 @@
     *ngIf="!addDisabled"
     class="add-task-details"
 >   
-    <mat-card class="mat-elevation-z1">
-        <div class="app-task-detail-div">
-            <app-task-detail
-                [task]="task"
-                appearance="outline"
-                hideDescription="true"
-            ></app-task-detail>
-        </div>
-        <mat-divider></mat-divider>
-        <mat-card-actions class="add-task-card-actions">
-            <button
-                type="submit"
-                mat-button
-                color="accent" 
-                aria-label="Add Task"
-                [disabled]="addDisabled"
-                (click)="addTask()"    
-            >
-                Add Task
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="app-task-detail-div">
+        <app-task-detail
+            [task]="task"
+            appearance="outline"
+            hideDescription="true"
+        ></app-task-detail>
+    </div>
+       
 </div>
 

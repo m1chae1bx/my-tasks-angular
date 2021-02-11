@@ -28,12 +28,19 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.filters = {
       dueDate: 'default',
+      dueDateDisplay: 'Any Date',
       showCompleted: false
     }
     this.nameSearch = null;    
-    this.getTasks();
     this.repollSubscription = this.repollNotifierService.obs.subscribe(data => {
-      this.nameSearch = data?.name;
+      console.log('repoll', data);
+      if (data?.name || data?.name === '') {
+        this.nameSearch = data.name; 
+      }
+      if (data?.filters) {
+        this.filters = data.filters;
+      }
+      
       this.getTasks();
     });
   }

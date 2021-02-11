@@ -48,7 +48,7 @@ export class AddTaskComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.repollNotifierService.notify(null);
+          this.repollNotifierService.notify();
           this.resetTask();
         },
         error => {
@@ -76,7 +76,7 @@ export class AddTaskComponent implements OnInit {
       this.filtered = true;
     } else {
       this.addDisabled = true;
-      this.repollNotifierService.notify(null);
+      this.repollNotifierService.notify({ name: '' });
       this.filtered = false;
     }
   }

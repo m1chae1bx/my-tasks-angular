@@ -52,7 +52,7 @@ export class TaskItemComponent implements OnInit {
     this.taskService.update(this.task.id, this.task)
       .subscribe(
         response => {
-          setTimeout(()=>{ this.repollNotifierService.notify(null) }, 500); // @todo: change to emit, updating of list should be done in task-list component
+          setTimeout(()=>{ this.repollNotifierService.notify() }, 500); // @todo: change to emit, updating of list should be done in task-list component
           console.log(response);
         },
         error => {
@@ -74,7 +74,7 @@ export class TaskItemComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.repollNotifierService.notify(null);
+          this.repollNotifierService.notify();
         },
         error => {
           console.log(error);

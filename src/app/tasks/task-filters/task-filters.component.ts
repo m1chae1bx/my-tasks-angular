@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Filters } from '../filters';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { RepollNotifierService } from '../../services/repoll-notifier.service'
 
 @Component({
   selector: 'app-task-filters',
@@ -8,24 +11,49 @@ import { Filters } from '../filters';
 })
 export class TaskFiltersComponent implements OnInit {
 
-  @Input() filters: Filters; // @todo change type from any to string
-  @Output() filtersChange = new EventEmitter<Filters>();
+  filters: Filters;
 
-  constructor() { }
+  constructor(
+    private bottomSheet: MatBottomSheet,
+    private repollNotifierService: RepollNotifierService
+  ) { }
 
   ngOnInit(): void {
-  }
-
-  changeDueDate(code: any): void {
-    if (this.filters.dueDate != code) {
-      this.filters.dueDate = code;
-      this.filtersChange.emit(this.filters);
+    this.filters = {
+      dueDate: 'default',
+      dueDateDisplay: 'Any Date',
+      showCompleted: false
     }
+    this.repollNotifierService.notify({ filters: this.filters});
   }
 
+  openDueDateSheet(): void {
+    const bottomSheetRef = this.bottomSheet.open(DueDateFilterSheet, { data: this.filters});
+  }
   toggleCompleted() {
     this.filters.showCompleted = !this.filters.showCompleted;
-    this.filtersChange.emit(this.filters);
+    this.repollNotifierService.notify();
   }
+}
 
+@Component({
+  selector: 'due-date-filter-sheet',
+  templateUrl: 'due-date-filter-sheet.html',
+  styleUrls: ['./task-filters.component.scss']
+})
+export class DueDateFilterSheet {
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: Filters,
+    private bottomSheetRef: MatBottomSheetRef<DueDateFilterSheet>,
+    private repollNotifierService: RepollNotifierService
+  ) {}
+
+  changeDueDate(code: string, displayText: string): void {
+    if (this.data.dueDate != code) {
+      this.data.dueDate = code;
+      this.data.dueDateDisplay = displayText;
+      this.bottomSheetRef.dismiss();
+      this.repollNotifierService.notify();
+    }
+  }
 }

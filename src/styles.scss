@@ -39,4 +39,16 @@ body {
 
 .task-list .mat-list-item {
     height: auto;
-  }
+}
+
+.content-x {
+    .mat-chip-list-wrapper {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        
+        .mat-chip {      
+                flex: 0 0 auto;       
+        }
+    }
+}

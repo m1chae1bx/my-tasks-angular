@@ -14,13 +14,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
-import { TaskFiltersComponent } from './task-filters/task-filters.component';
+import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-filters.component';
 @NgModule({
   declarations: [
     TasksComponent,
@@ -29,6 +30,7 @@ import { TaskFiltersComponent } from './task-filters/task-filters.component';
     TaskListComponent,
     TaskDetailComponent,
     TaskFiltersComponent,
+    DueDateFilterSheet
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { TaskFiltersComponent } from './task-filters/task-filters.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule
   ],
   exports: [
     TasksComponent

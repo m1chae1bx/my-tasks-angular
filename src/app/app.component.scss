@@ -6,6 +6,14 @@
 
 .toolbar {
     background-color: white;
+
+    .toolbar-content {
+        width: 600px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+    }
+
 }
 
 .task-app {

@@ -6,9 +6,7 @@ export class DateUtil {
     static initDate(): void {
         this.today = new Date();
         this.today.setHours(0,0,0,0);
-        this.tomorrow = new Date();
-        this.tomorrow.setUTCHours(0,0,0,0);
-        this.tomorrow.setMinutes(this.tomorrow.getMinutes() + this.tomorrow.getTimezoneOffset())
+        this.tomorrow = new Date(this.today.getTime());
         this.tomorrow.setDate(this.tomorrow.getDate() + 1);
         this.overmorrow = new Date(this.tomorrow.getTime());
         this.overmorrow.setDate(this.overmorrow.getDate() + 1);

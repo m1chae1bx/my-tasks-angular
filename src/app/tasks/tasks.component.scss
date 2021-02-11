@@ -1,10 +1,13 @@
 .tasks {
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     height: 100%;
 }
 
 .page {
+    -webkit-flex: 1 1 auto;
     flex: 1 1 auto;
     overflow-x: hidden; 
     overflow-y: auto; 
@@ -17,34 +20,40 @@
 
 .sub-toolbar {
     background-color: white;
-    box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.1),
+    box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14);
     z-index: 3;
 
-    .content {
-        height: 100%;
+    .content, .content-x {
         margin: auto;
-
-        .app-add-task-div {
-            margin-bottom: 12px;
+        
+        .app-task-filters {
+            padding: 12px 4px;
         }
+    
+        .app-add-task {
+            margin-bottom: -4px;
+        }
+        
+    }
+
+    .content-x {
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 }
 
 @media only screen and (min-width: 613px) {
     .page {
-        padding: 0px 0px 15%;
-
         .content {
             width: 600px;
-            padding-top: 20px;
+            padding: 0px 12px 15%;
         }
     }
 
     .sub-toolbar {
-        padding: 0px;
-
-        .content {
+        .content, .content-x {
+            padding: 0px;
             width: 600px;
         }
     }
@@ -52,20 +61,22 @@
 
 @media only screen and (max-width: 612px) {
     .page {
-        padding: 0px 12px 60%;
+        padding: 0px 12px;
 
         .content {
             width: 100%;
-            padding-top: 16px;
+            padding: 4px 0px 60%;
         }
         
     }
 
     .sub-toolbar {
-        padding: 0px 12px;
-        
         .content {
-            width: 100%;
+            padding: 0px 12px;
         }
+
+        .content-x {
+            padding: 0px;
+        }        
     }
 }

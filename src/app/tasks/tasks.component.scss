@@ -3,59 +3,58 @@
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
-    height: 100%;
+    height: auto;
 }
 
-.toolbar {
-    position: sticky;
-    position: -webkit-sticky; // For Safari
-    top: 0;
+.main-toolbar {
+    background-color: white; // Override
+    z-index: 1000; // Ensure sub-toolbar doesn't overlap toolbar
+    padding: 8px 0px 4px;
+
+    .content {
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+            font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+            letter-spacing: normal;
+            margin: 0;
+            display: flex;
+            display: -webkit-flex; // For Safari
+            align-items: center;
+        }
+    }
+}
+
+.sub-toolbar {
     background-color: white; // Override
     z-index: 1000; // Ensure content doesn't overlap toolbar
 
-    .main-toolbar {
-        background-color: white; // Override
-        z-index: 1000; // Ensure content doesn't overlap toolbar
-        padding: 8px 0px 4px;
-
-        .content {
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-
-            .title {
-                font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
-                letter-spacing: normal;
-                margin: 0;
-                display: flex;
-                display: -webkit-flex; // For Safari
-                align-items: center;
-            }
-        }
-    }
-
-    .sub-toolbar {
-        background-color: white; // Override
-        z-index: 1000; // Ensure content doesn't overlap toolbar
-
-        .content, .content-x {
-            margin: auto;
-            
-            .app-task-filters {
-                padding: 12px 4px;
-            }
+    .content, .content-x {
+        margin: auto;
+        height: auto;
         
-            .app-add-task {
-                margin-bottom: -4px;
-            }
-            
+        .app-task-filters {
+            padding: 12px 4px;
         }
-    
-        .content-x {
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
+        
     }
+
+    .content-x {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+.sub-toolbar.sticky {
+    position: sticky;
+    position: -webkit-sticky; // For Safari
+    top: 0;
+}
+
+.sub-toolbar.lower {
+    z-index: 999;
 }
 
 @media only screen and (max-width: 612px) {
@@ -93,10 +92,6 @@
 }
 
 .page {
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
-    overflow-x: hidden; 
-    overflow-y: auto; 
     
     .content {
         margin: auto;

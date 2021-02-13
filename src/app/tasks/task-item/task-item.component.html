@@ -23,14 +23,15 @@
             [(ngModel)]="task.name"
             maxlength=100
           >
-          <span *ngIf="task.desc && !itemSelected" class="task-desc">{{ task.desc }}</span>
-          <span 
+          <div *ngIf="task.desc && !itemSelected" class="desc">{{ task.desc }}</div>
+          <div 
             *ngIf="task.dueDate && !itemSelected" 
             class="due-date"
             [ngClass]="{'due-today': this.dueDateStr === 'Today'}"
-          >{{ dueDateStr || (task.dueDate | date) }} 
+          >
+            {{ dueDateStr || (task.dueDate | date) }} 
             <span *ngIf="overdue && !task.completed" class="overdue"> - Overdue</span>
-          </span>
+          </div>
         </div>
       </div>
       <button
@@ -71,14 +72,19 @@
         (click)="remove()"    
       >
         <mat-icon>delete</mat-icon>
-      </button>
+      </button>  
       <button
         mat-stroked-button
         color="accent" 
         aria-label="Edit button"
         (click)="save()"    
+        [disabled]="saving"
+        class="save-btn"
       >
-        Save
+        <div *ngIf="saving" class="spinner-container"> 
+          <mat-spinner color="accent" diameter="24"></mat-spinner>
+        </div>
+        <span [ngClass]="{'btn-saving': saving}">Save</span>
       </button>
     </mat-card-actions>
   </mat-card>

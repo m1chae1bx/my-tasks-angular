@@ -10,14 +10,13 @@
 }
 
 .task-item {
+    display: inline-block;
     margin-top: 2px;
     width: 100%;
 }
 
 .task-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 
 .task-list :first-child{

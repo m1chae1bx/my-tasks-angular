@@ -3,6 +3,7 @@ import { TaskService } from '../../services/task.service';
 import { RepollNotifierService } from '../../services/repoll-notifier.service'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-task',
@@ -23,7 +24,8 @@ export class AddTaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private repollNotifierService: RepollNotifierService
+    private repollNotifierService: RepollNotifierService,
+    private snackBar: MatSnackBar
   ) {
     this.searchSubject.
       pipe(
@@ -48,8 +50,8 @@ export class AddTaskComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.repollNotifierService.notify();
           this.resetTask();
+          this.snackBar.open('Task added', null, { duration: 1500 });
         },
         error => {
           console.log(error);
@@ -65,6 +67,7 @@ export class AddTaskComponent implements OnInit {
     };
     this.filtered = false;
     this.addDisabled = true;
+    this.repollNotifierService.notify({name: this.task.name});
   } 
 
   searchTasks(): void {
@@ -83,6 +86,12 @@ export class AddTaskComponent implements OnInit {
   
   toggleExactPhrase() {
     this.exactPhraseOn = !this.exactPhraseOn;
+    if (this.exactPhraseOn) {
+      this.snackBar.open('Search exact phrase ON', null, { duration: 1500 });
+    }
+    else {
+      this.snackBar.open('Search exact phrase OFF', null, { duration: 1500 });
+    }
     this.searchTasks();
   }
 

@@ -19,8 +19,6 @@
 }
 
 .task-info {
-    display: flex;
-    flex-direction: column;
     padding: 4px 0px;
     margin-left: 12px;
 
@@ -38,16 +36,17 @@
         outline: none;
     }
 
-    .task-desc {
+    .desc {
         font-size: 1em;
         font-style: italic;
         color: rgb(110, 110, 110);
+        text-align: left;
     }
     
     .due-date {
-        //margin-top: -.5em;
         font-size: small;
         color: rgb(110, 110, 110);
+        text-align: left;
     }
 
     .overdue, .due-today{
@@ -75,6 +74,22 @@
     .item-selected {
         margin: 4px 0px;
     }
+}
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.btn-saving {
+    visibility: hidden;
 }
 
 .action-div {

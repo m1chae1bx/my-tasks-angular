@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { TasksModule } from './tasks/tasks.module'
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 
@@ -20,9 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     AppRoutingModule,
     TasksModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule
+    BrowserAnimationsModule
   ],
   providers: [RepollNotifierService],
   bootstrap: [AppComponent]

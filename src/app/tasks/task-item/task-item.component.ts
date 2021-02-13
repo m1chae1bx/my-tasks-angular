@@ -3,6 +3,7 @@ import { Task } from '../task';
 import { TaskService } from '../../services/task.service';
 import { RepollNotifierService } from '../../services/repoll-notifier.service';
 import { DateUtil } from '../../utilities/date-util';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-item',
@@ -16,6 +17,7 @@ export class TaskItemComponent implements OnInit {
   itemSelected: boolean;
   originalTask: any;
   overdue: boolean;
+  saving: boolean;
 
   @Input() task: Task;
   @ViewChild('taskName') taskName: ElementRef;
@@ -23,7 +25,8 @@ export class TaskItemComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private repollNotifierService: RepollNotifierService
+    private repollNotifierService: RepollNotifierService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -49,10 +52,19 @@ export class TaskItemComponent implements OnInit {
   }
 
   update(): void {
+    this.saving = true;
     this.taskService.update(this.task.id, this.task)
       .subscribe(
         response => {
-          setTimeout(()=>{ this.repollNotifierService.notify() }, 500); // @todo: change to emit, updating of list should be done in task-list component
+          setTimeout(()=>{ 
+            this.repollNotifierService.notify();
+            if (this.task.completed) {
+              this.snackBar.open('Task completed', null, { duration: 1500 });
+            } else {
+              this.snackBar.open('Task updated', null, { duration: 1500 });
+            }
+            this.saving = false;
+          }, 500); // @todo: change to emit, updating of list should be done in task-list component
           console.log(response);
         },
         error => {
@@ -75,6 +87,7 @@ export class TaskItemComponent implements OnInit {
         response => {
           console.log(response);
           this.repollNotifierService.notify();
+          this.snackBar.open('Task deleted', null, { duration: 1500 });
         },
         error => {
           console.log(error);

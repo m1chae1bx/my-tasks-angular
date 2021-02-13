@@ -15,6 +15,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
@@ -49,7 +52,10 @@ import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-fi
     MatNativeDateModule,
     MatTooltipModule,
     MatMenuModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     TasksComponent

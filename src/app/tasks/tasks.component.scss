@@ -6,68 +6,63 @@
     height: 100%;
 }
 
-.page {
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
-    overflow-x: hidden; 
-    overflow-y: auto; 
-    height: 100px;
+.toolbar {
+    position: sticky;
+    position: -webkit-sticky; // For Safari
+    top: 0;
+    background-color: white; // Override
+    z-index: 1000; // Ensure content doesn't overlap toolbar
 
-    .content {
-        margin: auto;
-    }
-}
+    .main-toolbar {
+        background-color: white; // Override
+        z-index: 1000; // Ensure content doesn't overlap toolbar
+        padding: 8px 0px 4px;
 
-.sub-toolbar {
-    background-color: white;
-    box-shadow: 0px 4px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14);
-    z-index: 3;
-
-    .content, .content-x {
-        margin: auto;
-        
-        .app-task-filters {
-            padding: 12px 4px;
-        }
-    
-        .app-add-task {
-            margin-bottom: -4px;
-        }
-        
-    }
-
-    .content-x {
-        overflow-x: auto;
-        overflow-y: hidden;
-    }
-}
-
-@media only screen and (min-width: 613px) {
-    .page {
         .content {
-            width: 600px;
-            padding: 0px 12px 15%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+
+            .title {
+                font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+                letter-spacing: normal;
+                margin: 0;
+                display: flex;
+                display: -webkit-flex; // For Safari
+                align-items: center;
+            }
         }
     }
 
     .sub-toolbar {
+        background-color: white; // Override
+        z-index: 1000; // Ensure content doesn't overlap toolbar
+
         .content, .content-x {
-            padding: 0px;
-            width: 600px;
+            margin: auto;
+            
+            .app-task-filters {
+                padding: 12px 4px;
+            }
+        
+            .app-add-task {
+                margin-bottom: -4px;
+            }
+            
+        }
+    
+        .content-x {
+            overflow-x: auto;
+            overflow-y: hidden;
         }
     }
 }
 
 @media only screen and (max-width: 612px) {
-    .page {
-        padding: 0px 12px;
-
+    .main-toolbar {
         .content {
-            width: 100%;
-            padding: 4px 0px 60%;
+            padding: 0px 12px;
         }
-        
     }
 
     .sub-toolbar {
@@ -78,5 +73,50 @@
         .content-x {
             padding: 0px;
         }        
+    }
+}
+
+@media only screen and (min-width: 613px) {
+    .main-toolbar {
+        .content {
+            padding: 0px;
+            width: 600px;
+        }
+    }
+    
+    .sub-toolbar {
+        .content, .content-x {
+            padding: 0px;
+            width: 600px;
+        }
+    }
+}
+
+.page {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    
+    .content {
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 613px) {
+    .page {
+        .content {
+            width: 600px;
+            padding: 4px 0px 15%;
+        }
+    }
+}
+
+@media only screen and (max-width: 612px) {
+    .page {
+        .content {
+            width: 100%;
+            padding: 4px 0px 60%;
+        }
     }
 }

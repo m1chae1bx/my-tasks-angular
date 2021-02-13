@@ -25,6 +25,16 @@
                     <button
                         type="button"
                         mat-icon-button
+                        [matTooltip]="'Add Task'"
+                        aria-label="AddTask"
+                        (click)="addTask()"
+                        color="accent"  
+                    >
+                        <mat-icon>arrow_downward</mat-icon>
+                    </button>  
+                    <button
+                        type="button"
+                        mat-icon-button
                         [matTooltip]="exactPhraseOn ? 'Search exact phrase on' : 'Search exact phrase off'"
                         aria-label="Search with Exact Phrase"
                         (click)="toggleExactPhrase()"    
@@ -35,7 +45,7 @@
                                 'setting-off': !exactPhraseOn 
                             }"
                         >format_quote</mat-icon>
-                </button>                
+                    </button>
                 </div>
             </div>
         </mat-form-field>

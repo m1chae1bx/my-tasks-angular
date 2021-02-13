@@ -1,14 +1,34 @@
 <div class="tasks">
-    <div class="sub-toolbar">
-        <div class="content">
-            <div class="app-add-task">
-                <app-add-task></app-add-task>
+    <div class="toolbar mat-elevation-z3">
+        <div class="main-toolbar">
+            <div class="content">
+                <div class="title">
+                    <mat-icon aria-hidden="true" color="primary">check_box</mat-icon>
+                    &nbsp;
+                    <span class="primary-color">My Tasks</span>
+                </div>
+                <button 
+                    mat-icon-button 
+                    aria-label="menu" 
+                    color="primary"
+                    >
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="sub-toolbar">
+            <div class="content">
+                <div class="app-add-task">
+                    <app-add-task></app-add-task>
+                </div>
             </div>
         </div>
         <mat-divider></mat-divider>
-        <div class="content-x">
-            <div class="app-task-filters">
-                <app-task-filters></app-task-filters>
+        <div class="sub-toolbar">
+            <div class="content-x">
+                <div class="app-task-filters">
+                    <app-task-filters></app-task-filters>
+                </div>
             </div>
         </div>
     </div>
@@ -18,3 +38,5 @@
         </div>
     </div>
 </div>
+
+

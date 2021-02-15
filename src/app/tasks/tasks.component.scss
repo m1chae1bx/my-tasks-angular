@@ -9,21 +9,27 @@
 .main-toolbar {
     background-color: white; // Override
     z-index: 1000; // Ensure sub-toolbar doesn't overlap toolbar
-    padding: 8px 0px 4px;
+    padding-top: 8px;
 
     .content {
         margin: auto;
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
-        .title {
-            font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
-            letter-spacing: normal;
-            margin: 0;
-            display: flex;
-            display: -webkit-flex; // For Safari
-            align-items: center;
+        .menu {
+            margin-right: -8px;
         }
+    }
+}
+
+.title {
+    .title-content {
+        font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+        letter-spacing: normal;
+        display: flex;
+        display: -webkit-flex; // For Safari
+        align-items: center;
     }
 }
 
@@ -32,13 +38,13 @@
     z-index: 1000; // Ensure content doesn't overlap toolbar
 
     .content, .content-x {
-        margin: auto;
         height: auto;
-        
-        .app-task-filters {
-            padding: 12px 4px;
+        display: flex;
+        flex-direction: row;
+
+        .title.desktop {
+            padding: 14px 14px 0 0;
         }
-        
     }
 
     .content-x {
@@ -57,7 +63,76 @@
     z-index: 999;
 }
 
-@media only screen and (max-width: 612px) {
+.divider-light {
+    border-color: #f3f3f3;
+}
+
+@media only screen and (max-width: 600px) {
+    .main-toolbar {
+        display: inline;
+    }
+    
+    .sub-toolbar {
+        .content {
+            justify-content: center;
+        }
+    }
+
+    .page {
+        .content {
+            padding-top: 12px;
+            .app-task-list {
+                margin: auto;
+            }
+        }
+    } 
+
+    .title.desktop {
+        display: none;
+    }
+
+    .app-task-filters {
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .sub-toolbar {
+        .content {
+            margin-left: 25px;
+        }
+
+        .content-x {
+            margin-left: 25px;
+        }
+    }
+
+    .sub-toolbar.add-task {
+        padding-top: 12px;
+    }
+
+    .main-toolbar {
+        display: none;
+    }
+
+    .page {
+        .content {
+            padding-top: 20px;
+
+            .app-task-list {
+                margin-left: 25px;
+            }
+        }
+    }
+    
+    .title.desktop {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+    }
+}
+
+@media only screen and (max-width: 420px) {
     .main-toolbar {
         .content {
             padding: 0px 12px;
@@ -67,51 +142,64 @@
     .sub-toolbar {
         .content {
             padding: 0px 12px;
+
+            .app-add-task {
+                width: 100%;
+            }
         }
 
         .content-x {
             padding: 0px;
         }        
     }
+
+    .app-task-filters {
+        padding: 4px 0px;
+    }
+
+    .page {
+        .content {
+            padding-bottom: 60%;
+
+            .app-task-list {
+                width: 100%;
+            }
+        }
+    }
 }
 
-@media only screen and (min-width: 613px) {
+@media only screen and (min-width: 421px) and (max-width: 600px) {
+    .app-task-filters {
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 421px) {
     .main-toolbar {
         .content {
             padding: 0px;
-            width: 600px;
+            width: 400px;
         }
     }
     
     .sub-toolbar {
         .content, .content-x {
             padding: 0px;
-            width: 600px;
+
+            .app-add-task {
+                width: 400px;
+            }
+            .app-task-filters {
+                padding: 4px 0px;
+            }
         }
     }
-}
 
-.page {
-    
-    .content {
-        margin: auto;
-    }
-}
-
-@media only screen and (min-width: 613px) {
     .page {
-        .content {
-            width: 600px;
-            padding: 4px 0px 15%;
-        }
-    }
-}
-
-@media only screen and (max-width: 612px) {
-    .page {
-        .content {
-            width: 100%;
-            padding: 4px 0px 60%;
+        .content { 
+            .app-task-list {
+                width: 400px;
+            }
         }
     }
 }

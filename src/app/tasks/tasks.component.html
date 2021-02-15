@@ -2,14 +2,17 @@
     <div class="main-toolbar">
         <div class="content">
             <div class="title">
-                <mat-icon aria-hidden="true" color="primary">check_box</mat-icon>
-                &nbsp;
-                <span class="primary-color">My Tasks</span>
+                <div class="title-content">
+                    <mat-icon class="title-icon" aria-hidden="true" color="primary">check_box</mat-icon>
+                    &nbsp;
+                    <span class="primary-color">My Tasks</span>
+                </div>
             </div>
             <button 
                 mat-icon-button 
                 aria-label="menu" 
                 color="primary"
+                class="menu"
                 >
                 <mat-icon>menu</mat-icon>
             </button>
@@ -17,13 +20,20 @@
     </div>
     <div class="sub-toolbar add-task">
         <div class="content">
+            <div class="title desktop">
+                <div class="title-content">
+                    <mat-icon class="title-icon" aria-hidden="true" color="primary">check_box</mat-icon>
+                    &nbsp;
+                    <span class="primary-color">My Tasks</span>
+                </div>
+            </div>
             <div class="app-add-task">
                 <app-add-task></app-add-task>
             </div>
         </div>
     </div>
-    <mat-divider></mat-divider>
-    <div class="sub-toolbar sticky lower mat-elevation-z3">
+    <mat-divider class="divider-light"></mat-divider>
+    <div class="sub-toolbar sticky lower mat-elevation-z2"> <!-- mat-elevation-z3? -->
         <div class="content-x">
             <div class="app-task-filters">
                 <app-task-filters></app-task-filters>
@@ -32,7 +42,9 @@
     </div>
     <div class="page">
         <div class="content">
-            <app-task-list></app-task-list>
+            <div class="app-task-list">
+                <app-task-list></app-task-list>
+            </div>
         </div>
     </div>
 </div>

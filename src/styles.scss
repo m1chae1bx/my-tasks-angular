@@ -19,9 +19,10 @@ body {
 
 .search-div {
     .mat-form-field-outline {
-        background-color: #ebe9e9;
+        border: none;
+        color: #f3f3f3;
+        background-color: #f3f3f3;
         border-radius: 6px;
-        color: rgb(225, 225, 225);
     }
 
     .mat-form-field-outline-thick {
@@ -46,6 +47,7 @@ body {
         flex-wrap: nowrap;
         overflow-x: auto;
         white-space: nowrap;
+        margin: 4px;
         
         .mat-chip {      
                 flex: 0 0 auto;       

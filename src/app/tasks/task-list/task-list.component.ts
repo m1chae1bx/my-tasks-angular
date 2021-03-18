@@ -14,7 +14,7 @@ import { Task } from '../task';
 export class TaskListComponent implements OnInit, OnDestroy {
 
   tasks: Task[];
-  taskCount: Number;
+  taskCount: number;
   private repollSubscription: Subscription;
   nameSearch: String;
   filters: Filters;

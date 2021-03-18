@@ -16,10 +16,9 @@
       "es2018",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
-  // ,
-  // "angularCompilerOptions": {
-  //   "strictTemplates": true
-  // }
   
 }

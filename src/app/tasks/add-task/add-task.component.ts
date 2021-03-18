@@ -4,6 +4,7 @@ import { NotifierService } from '../../services/notifier.service'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-add-task',
@@ -12,10 +13,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddTaskComponent implements OnInit {
 
-  task = {
+  task: Task = {
+    id: null,
     name: '',
-    description: '',
-    dueDate: ''
+    desc: '',
+    dueDate: null,
+    completed: false
   };
   filtered: Boolean;
   addDisabled: Boolean;
@@ -43,7 +46,7 @@ export class AddTaskComponent implements OnInit {
     const data = {
       name: this.task.name,
       dueDate: this.task.dueDate,
-      desc: this.task.description
+      desc: this.task.desc
     };
 
     this.taskService.create(data)
@@ -61,9 +64,11 @@ export class AddTaskComponent implements OnInit {
 
   resetTask(): void {
     this.task = {
+      id: null,
       name: '',
-      description: '',
-      dueDate: null
+      desc: '',
+      dueDate: null,
+      completed: false
     };
     this.filtered = false;
     this.addDisabled = true;

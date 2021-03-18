@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Filters } from '../filters';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { RepollNotifierService } from '../../services/repoll-notifier.service'
+import { NotifierService, RepollData } from '../../services/notifier.service'
 
 @Component({
   selector: 'app-task-filters',
@@ -15,7 +15,7 @@ export class TaskFiltersComponent implements OnInit {
 
   constructor(
     private bottomSheet: MatBottomSheet,
-    private repollNotifierService: RepollNotifierService
+    private NotifierService: NotifierService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class TaskFiltersComponent implements OnInit {
       dueDateDisplay: 'Any Date',
       showCompleted: false
     }
-    this.repollNotifierService.notify({ filters: this.filters});
+    this.NotifierService.notify({ filters: this.filters});
   }
 
   openDueDateSheet(): void {
@@ -32,7 +32,7 @@ export class TaskFiltersComponent implements OnInit {
   }
   toggleCompleted() {
     this.filters.showCompleted = !this.filters.showCompleted;
-    this.repollNotifierService.notify();
+    this.NotifierService.notify(<RepollData>{});
   }
 }
 
@@ -45,7 +45,7 @@ export class DueDateFilterSheet {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: Filters,
     private bottomSheetRef: MatBottomSheetRef<DueDateFilterSheet>,
-    private repollNotifierService: RepollNotifierService
+    private NotifierService: NotifierService
   ) {}
 
   changeDueDate(code: string, displayText: string): void {
@@ -53,7 +53,7 @@ export class DueDateFilterSheet {
       this.data.dueDate = code;
       this.data.dueDateDisplay = displayText;
       this.bottomSheetRef.dismiss();
-      this.repollNotifierService.notify();
+      this.NotifierService.notify(<RepollData>{});
     }
   }
 }

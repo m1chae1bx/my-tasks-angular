@@ -1,0 +1,15 @@
+.navbar-content {
+  padding: 24px 24px 12px 12px;
+  display: flex;
+  display: -webkit-flex; // For Safari
+  align-items: flex-end;
+  flex-direction: column;
+
+  .menu-item {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+    display: flex;
+    display: -webkit-flex; // For Safari
+    align-items: center;
+  }
+}

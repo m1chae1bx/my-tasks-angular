@@ -8,10 +8,20 @@ import { DateUtil } from 'src/app/utilities/date-util';
 })
 export class TasksComponent implements OnInit {
 
+  isScrolling: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
     DateUtil.initDate();
   }
-
+    
+  onScroll(event): void {
+    const scrollTopVal = event.target.scrollTop;
+    if (scrollTopVal < 19) {
+      this.isScrolling = false;
+    } else {
+      this.isScrolling = true;
+    }
+  }  
 }

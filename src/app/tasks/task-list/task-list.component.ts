@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Language } from 'src/app/utilities/language';
-import { RepollNotifierService } from '../../services/repoll-notifier.service'
+import { NotifierService } from '../../services/notifier.service'
 import { TaskService } from '../../services/task.service';
 import { Filters } from '../filters';
 import { Task } from '../task';
@@ -22,7 +22,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   constructor(
     private taskService: TaskService,
-    private repollNotifierService: RepollNotifierService,
+    private NotifierService: NotifierService,
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
       showCompleted: false
     }
     this.nameSearch = null;    
-    this.repollSubscription = this.repollNotifierService.obs.subscribe(data => {
+    this.repollSubscription = this.NotifierService.taskListObs.subscribe(data => {
       console.log('repoll', data);
       if (data?.name || data?.name === '') {
         this.nameSearch = data.name; 

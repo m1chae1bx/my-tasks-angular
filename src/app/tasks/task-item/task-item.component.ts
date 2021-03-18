@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../../services/task.service';
-import { RepollNotifierService } from '../../services/repoll-notifier.service';
+import { NotifierService, RepollData } from '../../services/notifier.service';
 import { DateUtil } from '../../utilities/date-util';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -25,7 +25,7 @@ export class TaskItemComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private repollNotifierService: RepollNotifierService,
+    private NotifierService: NotifierService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -57,7 +57,7 @@ export class TaskItemComponent implements OnInit {
       .subscribe(
         response => {
           setTimeout(()=>{ 
-            this.repollNotifierService.notify();
+            this.NotifierService.notify(<RepollData>{});
             if (this.task.completed) {
               this.snackBar.open('Task completed', null, { duration: 1500 });
             } else {
@@ -86,7 +86,7 @@ export class TaskItemComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.repollNotifierService.notify();
+          this.NotifierService.notify(<RepollData>{});
           this.snackBar.open('Task deleted', null, { duration: 1500 });
         },
         error => {

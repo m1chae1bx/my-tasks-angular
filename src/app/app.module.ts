@@ -3,24 +3,24 @@ import { NgModule } from '@angular/core';
 import { TasksModule } from './tasks/tasks.module'
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { RepollNotifierService } from './services/repoll-notifier.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NotifierService } from './services/notifier.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TasksModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [RepollNotifierService],
+  providers: [NotifierService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,39 @@
+// Side Navigation
+
+.drawer-container {
+    height: 100%;
+    overflow-y: hidden;
+    background-color: rgb(245, 245, 245);;
+}
+
+.drawer-sidenav {
+    padding: 12px;
+    text-align: right;
+
+    .close-menu-btn {
+        display: inline-block;
+    }
+
+    .navbar {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .drawer-sidenav {
+        width: 200px;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    .drawer-sidenav {
+        width: 300px;
+    }
+}
+
+// Tasks Main Div
+
 .tasks {
     display: -webkit-flex;
     display: flex;
@@ -5,6 +41,8 @@
     flex-direction: column;
     height: auto;
 }
+
+// Toolbars
 
 .main-toolbar {
     background-color: white; // Override
@@ -35,46 +73,53 @@
 
 .sub-toolbar {
     background-color: white; // Override
-    z-index: 1000; // Ensure content doesn't overlap toolbar
 
-    .content, .content-x {
+    .content {
         height: auto;
-        display: flex;
-        flex-direction: row;
 
         .title.desktop {
             padding: 14px 14px 0 0;
+            float: left;
+        }
+
+        .menu.desktop {
+            float: right;
         }
     }
 
     .content-x {
+        height: auto;
+        display: flex;
+        flex-direction: row;
         overflow-x: auto;
         overflow-y: hidden;
     }
 }
 
-.sub-toolbar.sticky {
+.sticky {
+    z-index: 999; // Ensure content doesn't overlap toolbar
+    display: flex;
+    flex-direction: column;
     position: sticky;
     position: -webkit-sticky; // For Safari
     top: 0;
-}
-
-.sub-toolbar.lower {
-    z-index: 999;
 }
 
 .divider-light {
     border-color: #f3f3f3;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
     .main-toolbar {
         display: inline;
     }
     
     .sub-toolbar {
         .content {
-            justify-content: center;
+            .app-add-task {
+                padding-top: 8px;
+                margin: auto;
+            }
         }
     }
 
@@ -91,19 +136,28 @@
         display: none;
     }
 
+    .menu.desktop {
+        display: none;
+    }
+
     .app-task-filters {
         width: auto;
     }
 }
 
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: 751px) {
     .sub-toolbar {
         .content {
-            margin-left: 25px;
+            margin-right: calc(25px + 2vw);
+            margin-left: calc(25px + 2vw);
+
+            .app-add-task {
+                float: left;
+            }
         }
 
         .content-x {
-            margin-left: 25px;
+            margin-left: calc(25px + 2vw);
         }
     }
 
@@ -120,7 +174,7 @@
             padding-top: 20px;
 
             .app-task-list {
-                margin-left: 25px;
+                margin-left: calc(25px + 2vw);
             }
         }
     }
@@ -132,7 +186,7 @@
     }
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 520px) {
     .main-toolbar {
         .content {
             padding: 0px 12px;
@@ -168,17 +222,17 @@
     }
 }
 
-@media only screen and (min-width: 421px) and (max-width: 600px) {
+@media only screen and (min-width: 521px) and (max-width: 750px) {
     .app-task-filters {
         margin: auto;
     }
 }
 
-@media only screen and (min-width: 421px) {
+@media only screen and (min-width: 521px) {
     .main-toolbar {
         .content {
             padding: 0px;
-            width: 400px;
+            width: 500px;
         }
     }
     
@@ -187,7 +241,7 @@
             padding: 0px;
 
             .app-add-task {
-                width: 400px;
+                width: 500px;
             }
             .app-task-filters {
                 padding: 4px 0px;
@@ -198,7 +252,7 @@
     .page {
         .content { 
             .app-task-list {
-                width: 400px;
+                width: 500px;
             }
         }
     }

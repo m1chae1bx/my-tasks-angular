@@ -5,13 +5,15 @@ html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color:rgb(235, 233, 233);
 }
 
 .primary-color {
     color:#3f51b5;
 }
 
+.my-feed-color {
+    color:#229705;
+}
 
 .accent-color {
     color: #ff4081;
@@ -34,12 +36,20 @@ body {
     }
 
     .mat-form-field-label {
-        color:rgb(77, 77, 77);     
+        color:rgb(39, 39, 39);     
     }
 }
 
 .task-list .mat-list-item {
     height: auto;
+}
+
+@media only screen and (max-width: 520px) {
+    .task-item {
+        .mat-card {
+            border-radius: 0;
+        }
+    }
 }
 
 .content-x {

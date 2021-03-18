@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task.service';
-import { RepollNotifierService } from '../../services/repoll-notifier.service'
+import { NotifierService } from '../../services/notifier.service'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,7 +24,7 @@ export class AddTaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private repollNotifierService: RepollNotifierService,
+    private NotifierService: NotifierService,
     private snackBar: MatSnackBar
   ) {
     this.searchSubject.
@@ -67,19 +67,19 @@ export class AddTaskComponent implements OnInit {
     };
     this.filtered = false;
     this.addDisabled = true;
-    this.repollNotifierService.notify({name: this.task.name});
+    this.NotifierService.notify({name: this.task.name});
   } 
 
   searchTasks(): void {
     if (this.task.name.length > 0) {
       this.addDisabled = false;
-      this.repollNotifierService.notify({
+      this.NotifierService.notify({
         name: this.exactPhraseOn ? '\"' + this.task.name + '\"' : this.task.name
       });
       this.filtered = true;
     } else {
       this.addDisabled = true;
-      this.repollNotifierService.notify({ name: '' });
+      this.NotifierService.notify({ name: '' });
       this.filtered = false;
     }
   }

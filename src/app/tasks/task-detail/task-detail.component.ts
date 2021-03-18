@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RepollNotifierService } from 'src/app/services/repoll-notifier.service';
-import { TaskService } from '../../services/task.service';
 import { Task } from '../task';
 import { DateUtil } from '../../utilities/date-util';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
@@ -19,10 +17,7 @@ export class TaskDetailComponent implements OnInit {
   @Input() hideDescription: boolean = false;
   @Output() dateChanged = new EventEmitter<string>();
 
-  constructor(
-    private taskService: TaskService,
-    private repollNotifierService: RepollNotifierService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.dueDate = this.task.dueDate; // || new Date();

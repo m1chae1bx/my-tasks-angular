@@ -18,6 +18,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
@@ -25,6 +26,7 @@ import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-filters.component';
+import { NavbarComponent } from './../navbar/navbar.component'
 @NgModule({
   declarations: [
     TasksComponent,
@@ -33,7 +35,8 @@ import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-fi
     TaskListComponent,
     TaskDetailComponent,
     TaskFiltersComponent,
-    DueDateFilterSheet
+    DueDateFilterSheet,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +58,8 @@ import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-fi
     MatBottomSheetModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule
   ],
   exports: [
     TasksComponent

@@ -22,21 +22,36 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
-import { TaskItemComponent } from './task-item/task-item.component';
+import { TaskItemComponent, TaskDetailSheet } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-filters.component';
-import { NavbarComponent } from './../navbar/navbar.component'
+import { NavbarComponent } from './../navbar/navbar.component';
+import { SearchAndAddBoxComponent } from './search-and-add-box/search-and-add-box.component';
+import { TaskSetDueDateComponent } from './task-item/task-set-due-date/task-set-due-date.component';
+import { TaskAssignListComponent } from './task-item/task-assign-list/task-assign-list.component';
+import { TaskSetReminderComponent } from './task-item/task-set-reminder/task-set-reminder.component';
+import { TaskMakeRecurringComponent } from './task-item/task-make-recurring/task-make-recurring.component';
+import { TaskSetNameComponent } from './task-item/task-set-name/task-set-name.component';
+import { TaskSetDescComponent } from './task-item/task-set-desc/task-set-desc.component';
 @NgModule({
   declarations: [
     TasksComponent,
     AddTaskComponent,
     TaskItemComponent,
+    TaskDetailSheet,
     TaskListComponent,
     TaskDetailComponent,
     TaskFiltersComponent,
     DueDateFilterSheet,
-    NavbarComponent
+    NavbarComponent,
+    SearchAndAddBoxComponent,
+    TaskSetDueDateComponent,
+    TaskAssignListComponent,
+    TaskSetReminderComponent,
+    TaskMakeRecurringComponent,
+    TaskSetNameComponent,
+    TaskSetDescComponent,
   ],
   imports: [
     CommonModule,

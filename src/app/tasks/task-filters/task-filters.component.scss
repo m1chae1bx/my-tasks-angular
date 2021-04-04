@@ -1,14 +1,22 @@
-.due-date-chips {
-    margin-bottom: 8px; 
+.due-date-header {
+    display: flex;
+    display: -webkit-flex; // For Safari
+    justify-content: center;
+    margin-bottom: -4px;
+    margin-top: 16px;
 }
 
-@media only screen and (min-width: 601px) {
+.due-date-chips {
+    margin: 24px 16px 36px;
+}
+
+@media only screen and (min-width: 521px) {
     .chip-list-div {
         padding: 0px;
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 520px) {
     .chip-list-div {
         padding: 0px 12px;
     }
@@ -31,9 +39,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.due-date-header {
-    margin-bottom: -24px;
-    margin-top: 8px;
 }

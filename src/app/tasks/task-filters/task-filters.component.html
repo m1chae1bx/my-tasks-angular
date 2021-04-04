@@ -7,7 +7,7 @@
             <mat-icon class="chip-icon-right" aria-hidden="true">arrow_drop_down</mat-icon>
         </mat-chip>
         <mat-chip 
-            selected="true"
+            [selected]="filters.dueDate !== 'default'"
             color="accent"
             (click)="openDueDateSheet()"
         >

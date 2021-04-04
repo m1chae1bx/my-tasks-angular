@@ -14,6 +14,22 @@ export class DateUtil {
         this.nextWeek.setDate(this.nextWeek.getDate() + 6);
     }
 
+    static isToday(date: Date): boolean {
+        return this.today.getDate() === date?.getDate()
+            && this.today.getMonth() === date?.getMonth()
+            && this.today.getFullYear() === date?.getFullYear();
+    }
+
+    static isTomorrow(date: Date): boolean {
+        return this.tomorrow.getDate() === date?.getDate()
+            && this.tomorrow.getMonth() === date?.getMonth()
+            && this.tomorrow.getFullYear() === date?.getFullYear();
+    }
+
+    static isCurrentYear(date: Date): boolean {
+        return this.today.getFullYear() === date?.getFullYear();
+    }
+
     static today: Date;
     static tomorrow: Date;
     static overmorrow: Date;

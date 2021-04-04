@@ -1,4 +1,7 @@
-// Side Navigation
+
+/**********************************************************************
+    Side Navigation
+ **********************************************************************/
 
 .drawer-container {
     height: 100%;
@@ -28,11 +31,13 @@
 
 @media only screen and (min-width: 401px) {
     .drawer-sidenav {
-        width: 300px;
+        width: 200px;
     }
 }
 
-// Tasks Main Div
+/**********************************************************************
+    Tasks Main Div
+ **********************************************************************/
 
 .tasks {
     display: -webkit-flex;
@@ -42,26 +47,77 @@
     height: auto;
 }
 
-// Toolbars
+
+/**********************************************************************
+    Main Toolbar
+ **********************************************************************/
 
 .main-toolbar {
-    background-color: white; // Override
-    z-index: 1000; // Ensure sub-toolbar doesn't overlap toolbar
-    padding-top: 8px;
+    background-color: white;    // Override
+    z-index: 1000;                // Ensure sub-toolbar doesn't overlap toolbar
+    padding-top: 12px;
+    padding-bottom: 12px;
 
+    .content, .content-mobile {
+        padding: 0px 12px;
+    }
+    
     .content {
-        margin: auto;
         display: flex;
+        display: -webkit-flex; // For Safari
         align-items: center;
         justify-content: space-between;
+        height: 42px;
+        
+        .left {
+            .title, .app-search-and-add-box  {
+                display: inline-block;
+            }
 
-        .menu {
-            margin-right: -8px;
+            .app-search-and-add-box {
+                margin-left: 12px;
+            }
         }
+    }
+
+    .content-mobile {
+        .title-bar.hidden, .search-bar.hidden {
+            display: none;
+        }
+
+        .title-bar {
+            display: flex;
+            display: -webkit-flex; // For Safari
+            align-items: center;
+            justify-content: space-between;
+            height: 42px;
+
+            .actions {
+                display: flex;
+            }
+        }
+
+        .search-bar {
+            display: flex;
+            display: -webkit-flex; // For Safari
+            height: 42px;
+            
+            .back-btn {
+                margin-left: -8px;
+            }
+    
+            .app-search-and-add-box {
+                flex: 1 1 auto;
+            }
+        }
+        
     }
 }
 
 .title {
+    display: flex;
+    display: -webkit-flex; // For Safari
+    align-items: center;
     .title-content {
         font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
         letter-spacing: normal;
@@ -70,6 +126,63 @@
         align-items: center;
     }
 }
+
+.menu {
+    margin-right: -8px;
+}
+
+@media only screen and (max-width: 425px) {
+    .main-toolbar {
+        .content {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (min-width: 426px) {
+    .main-toolbar {
+        .content-mobile {
+            display: none;
+        }
+
+        .content {
+            .left {
+                .app-search-and-add-box {
+                    width: calc(234px + ((100vw - 426px) * 0.5))
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 521px) {
+    .main-toolbar {
+        .content {
+            padding: 0;
+            width: 500px;
+            margin: auto;
+
+            .left {
+                .app-search-and-add-box {
+                    width: 281px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 751px) {
+    .main-toolbar {
+        .content {
+            margin: 0 calc(25px + 2vw);
+            width: auto;
+        }
+    }
+}
+
+/**********************************************************************
+    Sub Toolbar and Page
+ **********************************************************************/
 
 .sub-toolbar {
     background-color: white; // Override
@@ -105,14 +218,7 @@
     top: 0;
 }
 
-.divider-light {
-    border-color: #f3f3f3;
-}
-
 @media only screen and (max-width: 750px) {
-    .main-toolbar {
-        display: inline;
-    }
     
     .sub-toolbar {
         .content {
@@ -165,10 +271,6 @@
         padding-top: 12px;
     }
 
-    .main-toolbar {
-        display: none;
-    }
-
     .page {
         .content {
             padding-top: 20px;
@@ -187,12 +289,6 @@
 }
 
 @media only screen and (max-width: 520px) {
-    .main-toolbar {
-        .content {
-            padding: 0px 12px;
-        }
-    }
-
     .sub-toolbar {
         .content {
             padding: 0px 12px;
@@ -225,17 +321,11 @@
 @media only screen and (min-width: 521px) and (max-width: 750px) {
     .app-task-filters {
         margin: auto;
+        width: 500px;
     }
 }
 
 @media only screen and (min-width: 521px) {
-    .main-toolbar {
-        .content {
-            padding: 0px;
-            width: 500px;
-        }
-    }
-    
     .sub-toolbar {
         .content, .content-x {
             padding: 0px;

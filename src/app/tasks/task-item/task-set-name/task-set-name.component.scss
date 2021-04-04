@@ -1,0 +1,15 @@
+.task-name {
+  border: none;
+  resize: none;
+  outline: none;
+  overflow: auto;
+}
+
+.task-name::placeholder {
+  color: rgb(151, 151, 151);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #555555;
+}

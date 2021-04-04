@@ -1,0 +1,35 @@
+<div class="search-box focused" [ngClass]="{'focused': focused}">
+  <form class="search-form" (ngSubmit)="onSubmit()">
+    <div class="search-field">
+      <mat-icon aria-hidden="true" class="search-icon">search</mat-icon>
+      <input 
+        #searchInput
+        class="task-input"
+        placeholder="Search"
+        type="text" 
+        id="task-input" 
+        name="task-input"
+        autocomplete="off"
+        maxlength=100
+        [(ngModel)]="task.name"
+        (keyup)="searchSubject.next()"
+        (focus)="toggleFocus(true)"
+        (blur)="toggleFocus(false)"
+      >
+    </div>
+    <div class="suffix">
+        <button
+            type="button"
+            mat-button
+            [matTooltip]="'Quick Add'"
+            aria-label="AddTask"
+            (click)="addTask()"
+            [disabled]="addDisabled"
+            color="accent"  
+        >
+            Add
+        </button>
+    </div>
+  </form>
+</div>
+

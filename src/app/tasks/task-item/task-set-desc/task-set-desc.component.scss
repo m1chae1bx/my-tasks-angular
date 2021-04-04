@@ -1,0 +1,9 @@
+.task-desc{
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.task-desc::placeholder {
+  color: rgb(151, 151, 151);
+}

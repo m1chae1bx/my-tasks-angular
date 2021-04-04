@@ -7,17 +7,414 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* Text */
+
+.break-word {
+    word-break: break-word;
+}
+
+/* Flexbox */
+
+.flex {
+    display: flex !important;
+    display: -webkit-flex !important;
+}
+
+.flex-auto {
+    flex: 1 1 auto;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-space-between {
+    justify-content: space-between;
+}
+
+.margin-auto {
+    margin: 0 auto;
+}
+
+/* Appearance and Layouting */
+
+.hidden {
+    visibility: hidden;
+}
+
+.overflow-y-hidden {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.full-width {
+    width: 100% !important;
+}
+
+.full-height {
+    height: 100% !important;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.top {
+    top: 0;
+}
+
+.right {
+    right: 0;
+}
+
+.left {
+    left: 0;
+}
+
+.bottom {
+    bottom: 0;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+/* Spacing */
+
+// All margins
+
+.margin-xx-small {
+    margin: 2px !important;
+}
+
+.margin-x-small {
+    margin: 4px !important;
+}
+
+.margin-small {
+    margin: 8px !important;
+}
+
+.margin-medium {
+    margin: 12px !important;
+}
+
+.margin-large {
+    margin: 16px !important;
+}
+
+.margin-x-large {
+    margin: 24px !important;
+}
+
+// Bottom margin
+
+.margin-bottom-xx-small {
+    margin-bottom: 2px !important;
+}
+
+.margin-bottom-x-small {
+    margin-bottom: 4px !important;
+}
+
+.margin-bottom-small {
+    margin-bottom: 8px !important;
+}
+
+.margin-bottom-medium {
+    margin-bottom: 12px !important;
+}
+
+.margin-bottom-large {
+    margin-bottom: 16px !important;
+}
+
+.margin-bottom-x-large {
+    margin-bottom: 24px !important;
+}
+
+// Left margin
+
+.margin-left-xx-small {
+    margin-left: 2px !important;
+}
+
+.margin-left-x-small {
+    margin-left: 4px !important;
+}
+
+.margin-left-small {
+    margin-left: 8px !important;
+}
+
+.margin-left-medium {
+    margin-left: 12px !important;
+}
+
+.margin-left-large {
+    margin-left: 16px !important;
+}
+
+.margin-left-x-large {
+    margin-left: 24px !important;
+}
+
+// Top margin
+
+.margin-top-xx-small {
+    margin-top: 2px !important;
+}
+
+.margin-top-x-small {
+    margin-top: 4px !important;
+}
+
+.margin-top-small {
+    margin-top: 8px !important;
+}
+
+.margin-top-medium {
+    margin-top: 12px !important;
+}
+
+.margin-top-large {
+    margin-top: 16px !important;
+}
+
+.margin-top-x-large {
+    margin-top: 24px !important;
+}
+
+// Right margin
+
+.margin-right-xx-small {
+    margin-right: 2px !important;
+}
+
+.margin-right-x-small {
+    margin-right: 4px !important;
+}
+
+.margin-right-small {
+    margin-right: 8px !important;
+}
+
+.margin-right-medium {
+    margin-right: 12px !important;
+}
+
+.margin-right-large {
+    margin-right: 16px !important;
+}
+
+.margin-right-x-large {
+    margin-right: 24px !important;
+}
+
+// All paddings
+
+.padding-x-small {
+    padding: 4px !important;
+}
+
+.padding-small {
+    padding: 8px !important;
+}
+
+.padding-medium {
+    padding: 12px !important;
+}
+
+.padding-large {
+    padding: 16px !important;
+}
+
+.padding-x-large {
+    padding: 24px !important;
+}
+
+// Bottom padding
+
+.padding-bottom-xx-small {
+    padding-bottom: 2px !important;
+}
+
+.padding-bottom-x-small {
+    padding-bottom: 4px !important;
+}
+
+.padding-bottom-small {
+    padding-bottom: 8px !important;
+}
+
+.padding-bottom-medium {
+    padding-bottom: 12px !important;
+}
+
+.padding-bottom-large {
+    padding-bottom: 16px !important;
+}
+
+.padding-bottom-x-large {
+    padding-bottom: 24px !important;
+}
+
+// Left padding
+
+.padding-left-xx-small {
+    padding-left: 2px !important;
+}
+
+.padding-left-x-small {
+    padding-left: 4px !important;
+}
+
+.padding-left-small {
+    padding-left: 8px !important;
+}
+
+.padding-left-medium {
+    padding-left: 12px !important;
+}
+
+.padding-left-large {
+    padding-left: 16px !important;
+}
+
+.padding-left-x-large {
+    padding-left: 24px !important;
+}
+
+// Top padding
+
+.padding-top-xx-small {
+    padding-top: 2px !important;
+}
+
+.padding-top-x-small {
+    padding-top: 4px !important;
+}
+
+.padding-top-small {
+    padding-top: 8px !important;
+}
+
+.padding-top-medium {
+    padding-top: 12px !important;
+}
+
+.padding-top-large {
+    padding-top: 16px !important;
+}
+
+.padding-top-x-large {
+    padding-top: 24px !important;
+}
+
+// Right padding
+
+.padding-right-xx-small {
+    padding-right: 2px !important;
+}
+
+.padding-right-x-small {
+    padding-right: 4px !important;
+}
+
+.padding-right-small {
+    padding-right: 8px !important;
+}
+
+.padding-right-medium {
+    padding-right: 12px !important;
+}
+
+.padding-right-large {
+    padding-right: 16px !important;
+}
+
+.padding-right-x-large {
+    padding-right: 24px !important;
+}
+
+/* Colors */
+
 .primary-color {
     color:#3f51b5;
 }
 
-.my-feed-color {
-    color:#229705;
+.primary-bg-color {
+    background-color:#3f51b5;
 }
 
 .accent-color {
     color: #ff4081;
 }
+
+.warn-color {
+    color: red;
+}
+
+.default-color {
+    color: black;
+}
+
+.inverse-default-color {
+    color: white;
+}
+
+.caption-color {
+    color: #555555;
+}
+
+.emphasis-color {
+    color:#229705;
+}
+
+/* Typography */
+
+.font-material {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.font-x-small {
+    font-size: x-small;    
+}
+
+.font-small {
+    font-size: small;    
+}
+
+.font-medium {
+    font-size: medium;    
+}
+
+.font-large {
+    font-size: large;    
+}
+
+.font-x-large {
+    font-size: x-large;    
+}
+
+/* Material Styling Override */
 
 .search-div {
     .mat-form-field-outline {
@@ -32,7 +429,7 @@ body {
     }
 
     .mat-form-field-wrapper {
-        padding-bottom: 12px;
+         padding-bottom: 4px;
     }
 
     .mat-form-field-label {
@@ -69,4 +466,23 @@ body {
     .mat-toolbar-row {
         padding: 0px 0px;
     }
+}
+
+.mat-bottom-sheet-container {
+    border-radius: 8px 8px 0 0;
+    padding: 0 !important;
+}
+
+.divider-light {
+    border-color: #f3f3f3;
+}
+
+.action-typo {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.mat-chip.mat-standard-chip {
+    background-color: #f3f3f3;
+    color: rgba(0,0,0,.87);
 }

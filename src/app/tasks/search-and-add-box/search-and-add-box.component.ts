@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { NotifierService } from '../../services/notifier.service'
 import { Subject } from 'rxjs';
@@ -7,12 +7,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from '../task';
 
 @Component({
-  selector: 'app-add-task',
-  templateUrl: './add-task.component.html',
-  styleUrls: ['./add-task.component.scss']
+  selector: 'app-search-and-add-box',
+  templateUrl: './search-and-add-box.component.html',
+  styleUrls: ['./search-and-add-box.component.scss']
 })
-// Deprecated, replaced by search-and-add-box.component
-export class AddTaskComponent implements OnInit {
+export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
 
   task: Task = {
     id: null,
@@ -21,10 +20,13 @@ export class AddTaskComponent implements OnInit {
     dueDate: null,
     completed: false
   };
-  filtered: Boolean;
-  addDisabled: Boolean;
+  filtered: boolean;
+  focused: boolean;
+  addDisabled: boolean;
   searchSubject = new Subject();
-  exactPhraseOn: boolean;
+  // exactPhraseOn: boolean;
+
+  @ViewChild("searchInput") searchInput: ElementRef;
 
   constructor(
     private taskService: TaskService,
@@ -40,7 +42,23 @@ export class AddTaskComponent implements OnInit {
   ngOnInit(): void {
     this.filtered = false;
     this.addDisabled = true;
-    this.exactPhraseOn = true;
+    this.focused = true;
+    
+    setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      this.searchInput.nativeElement.focus();
+    },0);  
+  }
+
+  ngOnDestroy(): void {
+    this.resetTask();
+  }
+
+  onSubmit(): void {
+    this.addTask();
+  }
+
+  toggleFocus(focused: boolean): void {
+    this.focused = focused;
   }
 
   addTask(): void {
@@ -80,7 +98,8 @@ export class AddTaskComponent implements OnInit {
     if (this.task.name.length > 0) {
       this.addDisabled = false;
       this.NotifierService.notify({
-        name: this.exactPhraseOn ? '\"' + this.task.name + '\"' : this.task.name
+        // name: this.exactPhraseOn ? '\"' + this.task.name + '\"' : this.task.name
+        name: this.task.name
       });
       this.filtered = true;
     } else {
@@ -90,15 +109,15 @@ export class AddTaskComponent implements OnInit {
     }
   }
   
-  toggleExactPhrase() {
-    this.exactPhraseOn = !this.exactPhraseOn;
-    if (this.exactPhraseOn) {
-      this.snackBar.open('Search exact phrase ON', null, { duration: 1500 });
-    }
-    else {
-      this.snackBar.open('Search exact phrase OFF', null, { duration: 1500 });
-    }
-    this.searchTasks();
-  }
+  // toggleExactPhrase() {
+  //   this.exactPhraseOn = !this.exactPhraseOn;
+  //   if (this.exactPhraseOn) {
+  //     this.snackBar.open('Search exact phrase ON', null, { duration: 1500 });
+  //   }
+  //   else {
+  //     this.snackBar.open('Search exact phrase OFF', null, { duration: 1500 });
+  //   }
+  //   this.searchTasks();
+  // }
 
 }

@@ -21,7 +21,7 @@ export class TaskFiltersComponent implements OnInit {
   ngOnInit(): void {
     this.filters = {
       dueDate: 'default',
-      dueDateDisplay: 'Any Date',
+      dueDateDisplay: 'Due Date',
       showCompleted: false
     }
     this.NotifierService.notify({ filters: this.filters});

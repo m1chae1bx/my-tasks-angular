@@ -1,0 +1,11 @@
+<textarea
+  #taskName
+  class="task-name primary-color font-material font-large full-width"
+  [ngClass]="{'completed': task.completed}" 
+  [(ngModel)]="task.name"
+  maxlength="200"
+  rows="1"
+  placeholder="Rename Task"
+  (ngModelChange)="onChange()"
+  (blur)="onBlur()"
+></textarea>

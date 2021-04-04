@@ -1,0 +1,11 @@
+<div class="action-item flex">
+  <mat-icon class="action-icon flex items-center" aria-hidden="true">alarm</mat-icon>
+  <div class="action-text action-typo flex items-center margin-left-large">
+    <span *ngIf="true; else reminderVal">
+      Add Reminder
+    </span>
+    <ng-template #reminderVal>
+      <span></span>
+    </ng-template>
+  </div>
+</div>

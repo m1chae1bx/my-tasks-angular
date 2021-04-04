@@ -1,0 +1,9 @@
+<textarea
+  #taskDesc
+  class="task-desc caption-color font-material font-small full-width"
+  [(ngModel)]="task.desc"
+  maxlength="400"
+  rows="1"
+  placeholder="Add a description"
+  (ngModelChange)="onChange()"
+></textarea>

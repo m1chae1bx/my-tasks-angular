@@ -1,15 +1,21 @@
 <div class="task-item-div" #taskItemDiv>
   <mat-card 
+    matRipple
     class="task-item-card mat-elevation-z0"
   >
-    <div class="task-item-card-contents">
+    <div class="task-item-card-contents relative">
       <div class="checkbox-and-info">
-        <mat-checkbox 
+        <mat-checkbox
           [(ngModel)]="task.completed"
           (change)="toggleCompleted()"
           >
         </mat-checkbox>
-        <div class="task-info margin-left-large flex-auto"  (click)="openTaskDetailSheet()">
+        <div
+          #taskInfo
+          class="task-info margin-left-large flex-auto" 
+          (click)="openTaskDetailSheet()"
+        >
+          <div *ngIf="isUpdated" class="task-state emphasis-color font-small">Updated✨</div>
           <div class="relative">
             <div 
               class="task-name primary-color break-word overflow-y-hidden"
@@ -31,7 +37,7 @@
           </div>
           <div 
             *ngIf="task.dueDate"
-            class="due-date caption-color"
+            class="due-date font-small caption-color"
             [ngClass]="{'due-today': isToday}"
           >
             <ng-container *ngIf="isToday; else tomorrow">Today</ng-container>

@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Language } from 'src/app/utilities/language';
@@ -10,11 +11,23 @@ import { Task } from '../task';
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
+  animations: [
+    trigger('slideOut', [
+      transition('completed => void', [
+        animate('600ms ease-in', style({ opacity: 0, transform: 'translateX(100%)' })),
+      ]),
+    ]),
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter', [
+        animate('200ms')
+      ]),
+    ])
+  ]
 })
 export class TaskListComponent implements OnInit, OnDestroy {
 
   tasks: Task[];
-  taskCount: number;
   private repollSubscription: Subscription;
   nameSearch: String;
   filters: Filters;
@@ -41,6 +54,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
         this.filters = data.filters;
       }
       
+      this.tasks = null;
       this.getTasks();
     });
   }
@@ -51,6 +65,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   getTasks() {
     this.taskService.find(
+      null,
       this.nameSearch, 
       this.filters.showCompleted ? null : false,
       this.filters.dueDate === 'default' ? null : this.filters.dueDate
@@ -67,8 +82,43 @@ export class TaskListComponent implements OnInit, OnDestroy {
               completed: x.completed
             }
           });
-          this.taskCount = Object.keys(this.tasks).length;
           console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  onTaskComplete(index: number): void {
+    if (!this.filters.showCompleted && index > -1) {
+      this.tasks.splice(index, 1);
+    }
+  }
+
+  onTaskUpdate(event: any): void {
+    let tasks: Task[];
+    this.taskService.find(
+      event.id,
+      this.nameSearch, 
+      this.filters.showCompleted ? null : false,
+      this.filters.dueDate === 'default' ? null : this.filters.dueDate
+    )
+      .subscribe(
+        data => {
+          tasks = data.map((x: { _id: any; name: any; desc: any; dueDate: any; completed: any; }) => {
+            return <Task>
+            {
+              id: x._id,
+              name: x.name,
+              desc: x.desc,
+              dueDate: x.dueDate ? new Date(x.dueDate) : null,
+              completed: x.completed
+            }
+          });
+          if (tasks.length === 0) {
+            this.tasks.splice(event.index, 1);
+          }
         },
         error => {
           console.log(error);

@@ -5,6 +5,7 @@ html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f3f3f3;
 }
 
 /* Text */
@@ -24,6 +25,7 @@ body {
     flex: 1 1 auto;
 }
 
+
 .items-center {
     align-items: center;
 }
@@ -36,6 +38,10 @@ body {
     justify-content: space-between;
 }
 
+.justify-flex-end {
+    justify-content: flex-end;
+}
+
 .margin-auto {
     margin: 0 auto;
 }
@@ -44,6 +50,10 @@ body {
 
 .hidden {
     visibility: hidden;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
 
 .overflow-y-hidden {
@@ -361,7 +371,19 @@ body {
 }
 
 .primary-bg-color {
-    background-color:#3f51b5;
+    background-color:#3f51b5 !important;
+}
+
+.transparent-bg-color {
+    background-color: transparent !important;
+}
+
+.default-bg-color {
+    background-color: white !important;
+}
+
+.emphasis-bg-color {
+    background-color: #229705 !important;
 }
 
 .accent-color {
@@ -485,4 +507,8 @@ body {
 .mat-chip.mat-standard-chip {
     background-color: #f3f3f3;
     color: rgba(0,0,0,.87);
+}
+
+.mat-drawer-container {
+    background-color: transparent !important;
 }

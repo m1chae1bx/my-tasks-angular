@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatRippleModule } from '@angular/material/core';
 
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
@@ -74,7 +75,8 @@ import { TaskSetDescComponent } from './task-item/task-set-desc/task-set-desc.co
     MatToolbarModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatRippleModule
   ],
   exports: [
     TasksComponent

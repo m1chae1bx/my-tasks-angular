@@ -38,12 +38,17 @@ export class TaskService {
   }
 
   find(
+    id: string,
     name: String,
     completed: Boolean,
     dueDate: String
   ): Observable<any> {
     var request = `${baseUrl}`;
     var prefix = '?';
+    if (id) {
+      request = request + prefix + `id=${id}`;
+      prefix = '&';
+    }
     if (name) {
       request = request + prefix + `name=${name}`;
       prefix = '&';

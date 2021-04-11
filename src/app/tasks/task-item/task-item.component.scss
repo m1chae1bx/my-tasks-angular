@@ -1,5 +1,6 @@
 .task-item-card {
     z-index: 1;
+    margin: 2px 0;
 }
 
 .spinner-container {
@@ -99,13 +100,13 @@
 
     .fade-text.name {
         height: 20px;
-        width: 40px;
+        width: 30px;
         top: 40px;
     }
 
     .fade-text.desc {
         height: 20px;
-        width: 40px;
+        width: 30px;
         top: 40px;
     }
 
@@ -115,8 +116,11 @@
     }
     
     .due-date {
-        font-size: small;
         text-align: left;
+    }
+
+    .task-state {
+        border-radius: 4px;
     }
 
     .overdue {

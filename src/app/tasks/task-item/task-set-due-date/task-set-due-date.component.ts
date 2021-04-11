@@ -37,7 +37,7 @@ export class TaskSetDueDateComponent implements OnInit {
   onChangeDate(): void {
     this.notifier.genericNotify(
       this.notifier.taskEditDueDateSubject, 
-      this.task.dueDate.toString() != this.originalDate?.toString()
+      this.task.dueDate?.toString() != this.originalDate?.toString()
     );
     this.updateDisplayDate();  
   }
@@ -71,5 +71,6 @@ export class TaskSetDueDateComponent implements OnInit {
 
   clearDueDate(): void {
     this.task.dueDate = null;
+    this.onChangeDate();
   }
 }

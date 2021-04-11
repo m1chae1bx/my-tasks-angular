@@ -73,6 +73,15 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
         response => {
           console.log(response);
           this.resetTask();
+          /* Move to Add Task workflow */
+          // this.NotifierService.genericNotify(this.NotifierService.taskAddedSubject, 
+          //   <Task>{
+          //     id: response._id,
+          //     name: response.name,
+          //     desc: response.desc,
+          //     dueDate: response.dueDate,
+          //     completed: response.completed
+          //   }); 
           this.snackBar.open('Task added', null, { duration: 1500 });
         },
         error => {

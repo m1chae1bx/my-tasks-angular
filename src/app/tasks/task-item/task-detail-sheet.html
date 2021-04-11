@@ -34,7 +34,7 @@
   </mat-nav-list> 
 </div>
 <mat-divider></mat-divider>
-<div class="task-detail-actions padding-medium"> <!-- flex items-center justify-space-between"> -->
+<div class="task-detail-actions padding-medium">
   <button
     mat-icon-button
     color="accent" 
@@ -42,7 +42,10 @@
     (click)="remove()"    
     class="delete-btn float-left"
   >
-    <mat-icon>delete</mat-icon>
+    <div *ngIf="isDeleting" class="spinner-container"> 
+      <mat-spinner color="accent" diameter="24"></mat-spinner>
+    </div>
+    <mat-icon [ngClass]="{'hidden': isDeleting}">delete</mat-icon>
   </button>
   <button
     mat-icon-button

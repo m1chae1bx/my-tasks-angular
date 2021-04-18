@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { NotifierService } from 'src/app/services/notifier.service';
 import { DateUtil } from 'src/app/utilities/date-util';
@@ -16,9 +17,11 @@ export class TaskSetDueDateComponent implements OnInit {
   isTomorrow: boolean;
   isCurrentYear: boolean;
   originalDate: Date;
+  weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   @Input() task: Task;
   @ViewChild('menuTrigger', {read: MatMenuTrigger}) menuTrigger: MatMenuTrigger;
+  @ViewChild('picker') picker: MatDatepicker<any>;
 
   constructor(private notifier: NotifierService) {}
 
@@ -47,24 +50,23 @@ export class TaskSetDueDateComponent implements OnInit {
     this.menuTrigger.openMenu();
   }
 
-  setDueDate(i: number): void {
+  setDueDate(i: number): void { // convert to smaller data type
     switch(i) {
-      case 1: {
+      case 0:
         this.task.dueDate = DateUtil.today;
         break;
-      }
-      case 2: {
+      case 1:
         this.task.dueDate = DateUtil.tomorrow;
         break;
-      }
-      case 3: {
+      case 2:
         this.task.dueDate = DateUtil.overmorrow;
         break;
-      }
-      case 4: {
+      case 7:
         this.task.dueDate = DateUtil.nextWeek;
         break;
-      }
+      case 9:
+        this.picker.open();
+        break;
     }
     this.onChangeDate();
   }
@@ -73,4 +75,39 @@ export class TaskSetDueDateComponent implements OnInit {
     this.task.dueDate = null;
     this.onChangeDate();
   }
+
+  getDay(filter: number): string {
+    switch(filter) {
+      case 0:
+        return this.weekday[DateUtil.today.getDay()];
+        break;
+      case 1:
+        return this.weekday[DateUtil.tomorrow.getDay()];
+        break;
+      // case 2:
+      //   return this.weekday[DateUtil.overmorrow.getDay()];
+      //   break;
+      // case 7:
+      //   return this.weekday[DateUtil.nextWeek.getDay()];
+      //   break;
+    }
+  }
+
+  getDate(filter: number): Date {
+    switch(filter) {
+      // case 0:
+      //   return DateUtil.today.;
+      //   break;
+      // case 1:
+      //   return DateUtil.tomorrow;
+      //   break;
+      case 2:
+        return DateUtil.overmorrow;
+        break;
+      case 7:
+        return DateUtil.nextWeek;
+        break;
+    }
+  }
+
 }

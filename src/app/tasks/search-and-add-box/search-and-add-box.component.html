@@ -1,5 +1,5 @@
 <div class="search-box focused" [ngClass]="{'focused': focused}">
-  <form class="search-form" (ngSubmit)="addTask()">
+  <form class="search-form" (ngSubmit)="searchTasks()">
     <div class="search-field">
       <mat-icon aria-hidden="true" class="search-icon">search</mat-icon>
       <input 
@@ -12,7 +12,7 @@
         autocomplete="off"
         maxlength=200
         [(ngModel)]="task.name"
-        (keyup)="searchSubject.next()"
+        (keyup)="onKeyUp($event)"
         (focus)="toggleFocus(true)"
         (blur)="toggleFocus(false)"
       >

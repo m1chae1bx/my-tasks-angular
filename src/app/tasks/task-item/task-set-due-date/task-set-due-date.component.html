@@ -33,11 +33,31 @@
 </div>
 <mat-menu #menu="matMenu" yPosition="above">
   <ng-template matMenuContent>
-      <button mat-menu-item (click)="picker.open()">Custom Date</button>
-      <button mat-menu-item (click)="setDueDate(4)">Next Week</button>
-      <button mat-menu-item (click)="setDueDate(3)">In 2 Days</button>
-      <button mat-menu-item (click)="setDueDate(2)">Tomorrow</button>
-      <button mat-menu-item (click)="setDueDate(1)">Today</button>
+      <button mat-menu-item (click)="setDueDate(9)">
+        <mat-icon>edit_calendar</mat-icon>
+        <span>Custom Date</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="setDueDate(7)">
+        <mat-icon>fast_forward</mat-icon>
+        <span class="menu-item-text">Next Week</span>
+        <span class="margin-left-small italic">{{getDate(7) | date:'MMM d'}}</span>
+      </button>
+      <button mat-menu-item (click)="setDueDate(2)">
+        <mat-icon>looks_two</mat-icon>
+        <span class="menu-item-text">In 2 Days</span>
+        <span class="margin-left-small italic">{{getDate(2) | date:'MMM d'}}</span>
+      </button>
+      <button mat-menu-item (click)="setDueDate(1)">
+        <mat-icon>plus_one</mat-icon>
+        <span class="menu-item-text">Tomorrow</span>
+        <span class="margin-left-small italic">{{getDay(1)}}</span>
+      </button>
+      <button mat-menu-item (click)="setDueDate(0)">
+        <mat-icon>today</mat-icon>
+        <span class="menu-item-text">Today</span>
+        <span class="margin-left-small italic">{{getDay(0)}}</span>
+      </button>
   </ng-template>
 </mat-menu>
 <input 

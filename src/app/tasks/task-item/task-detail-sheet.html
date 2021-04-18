@@ -10,8 +10,8 @@
   </div>
 </div>
 <mat-divider></mat-divider>
-<div class="task-detail-body margin-bottom-small">
-  <mat-nav-list class="relative">
+<div class="task-detail-body">
+  <mat-nav-list class="relative padding-none">
     <a mat-list-item><app-task-assign-list></app-task-assign-list></a>
     <a mat-list-item (click)="dueDate.openMenu($event)">
       <app-task-set-due-date #dueDate class="full-width" [task]="task"></app-task-set-due-date>
@@ -56,9 +56,9 @@
   >
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
-  <div class="save-btn-div margin-auto">
+  <div class="save-btn-div margin-auto padding-x-small">
     <button
-      mat-stroked-button
+      mat-flat-button
       color="accent" 
       aria-label="Save task"
       (click)="save()"    
@@ -68,8 +68,7 @@
       <div *ngIf="isSaving" class="spinner-container"> 
         <mat-spinner color="accent" diameter="24"></mat-spinner>
       </div>
-      <span [ngClass]="{'hidden': isSaving}">Save</span>
-      <mat-icon [ngClass]="{'hidden': isSaving}">keyboard_arrow_down</mat-icon>
+      <mat-icon [ngClass]="{'hidden': isSaving}">done</mat-icon>
     </button>
   </div>
 </div>

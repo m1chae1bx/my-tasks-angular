@@ -364,6 +364,10 @@ body {
     padding-right: 24px !important;
 }
 
+.padding-none {
+    padding: 0 !important;
+}
+
 /* Colors */
 
 .primary-color {
@@ -387,15 +391,15 @@ body {
 }
 
 .accent-color {
-    color: #ff4081;
+    color: #ff4081 !important;
 }
 
 .warn-color {
-    color: red;
+    color: red !important;
 }
 
 .default-color {
-    color: black;
+    color: black !important;
 }
 
 .inverse-default-color {
@@ -414,6 +418,14 @@ body {
 
 .font-material {
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
 }
 
 .font-x-small {

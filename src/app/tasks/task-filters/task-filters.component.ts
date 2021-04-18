@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Filters } from '../filters';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
@@ -12,6 +12,10 @@ import { NotifierService, RepollData } from '../../services/notifier.service'
 export class TaskFiltersComponent implements OnInit {
 
   filters: Filters;
+
+  @ViewChild('dueDateChip') dueDateChip: ElementRef;
+  @ViewChild('showCompletedChip') showCompletedChip: ElementRef;
+  @ViewChild('listChip') listChip: ElementRef;
 
   constructor(
     private bottomSheet: MatBottomSheet,
@@ -30,9 +34,26 @@ export class TaskFiltersComponent implements OnInit {
   openDueDateSheet(): void {
     const bottomSheetRef = this.bottomSheet.open(DueDateFilterSheet, { data: this.filters});
   }
+
   toggleCompleted() {
     this.filters.showCompleted = !this.filters.showCompleted;
     this.NotifierService.notify(<RepollData>{});
+  }
+
+  onFocus(event: FocusEvent): void {
+    //event.preventDefault();
+    this.listChip.nativeElement.blur();
+    this.dueDateChip.nativeElement.blur();  
+    this.showCompletedChip.nativeElement.blur();
+  }
+
+  changeDueDate(code: string, displayText: string): void {
+    if (this.filters.dueDate != code) {
+      this.filters.dueDate = code;
+      this.filters.dueDateDisplay = displayText;
+      //this.bottomSheetRef.dismiss();
+      this.NotifierService.notify(<RepollData>{});
+    }
   }
 }
 

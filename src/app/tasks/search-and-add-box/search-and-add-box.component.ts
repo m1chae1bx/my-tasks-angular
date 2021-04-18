@@ -23,20 +23,24 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
   filtered: boolean;
   focused: boolean;
   addDisabled: boolean;
-  searchSubject = new Subject();
-  // exactPhraseOn: boolean;
+  searchTermSubject = new Subject<KeyboardEvent>();
+  prevSearch: string;
 
   @ViewChild("searchInput") searchInput: ElementRef;
 
   constructor(
     private taskService: TaskService,
-    private NotifierService: NotifierService,
+    private notifierService: NotifierService,
     private snackBar: MatSnackBar
   ) {
-    this.searchSubject.
+    this.searchTermSubject.
       pipe(
-        debounceTime(300),
-      ).subscribe(() => this.searchTasks());
+        debounceTime(500),
+      ).subscribe(event => {
+        if (event.key !== "Enter" && (this.task.name || this.prevSearch)) {
+          this.searchTasks();
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -55,6 +59,10 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.addTask();
+  }
+
+  onKeyUp(event: KeyboardEvent): void {
+    this.searchTermSubject.next(event);
   }
 
   toggleFocus(focused: boolean): void {
@@ -100,20 +108,24 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
     };
     this.filtered = false;
     this.addDisabled = true;
-    this.NotifierService.notify({name: this.task.name});
+    if (this.prevSearch) {
+      this.prevSearch = '';
+      this.notifierService.notify({name: this.task.name});
+    }
   } 
 
   searchTasks(): void {
+    this.prevSearch = this.task.name;
     if (this.task.name.length > 0) {
       this.addDisabled = false;
-      this.NotifierService.notify({
+      this.notifierService.notify({
         // name: this.exactPhraseOn ? '\"' + this.task.name + '\"' : this.task.name
         name: this.task.name
       });
       this.filtered = true;
     } else {
       this.addDisabled = true;
-      this.NotifierService.notify({ name: '' });
+      this.notifierService.notify({ name: '' });
       this.filtered = false;
     }
   }

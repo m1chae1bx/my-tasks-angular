@@ -14,7 +14,7 @@ import { Task } from '../task';
   animations: [
     trigger('slideOut', [
       transition('completed => void', [
-        animate('600ms ease-in', style({ opacity: 0, transform: 'translateX(100%)' })),
+        animate('600ms ease-in', style({ transform: 'translateX(100%)' })), // @todo try not slide, distracting when snack bar also appears, slide up?
       ]),
     ]),
     trigger('fade', [

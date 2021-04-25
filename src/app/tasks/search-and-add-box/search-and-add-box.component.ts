@@ -46,11 +46,7 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.filtered = false;
     this.addDisabled = true;
-    this.focused = true;
-    
-    setTimeout(()=>{ // this will make the execution after the above boolean has changed
-      this.searchInput.nativeElement.focus();
-    },0);  
+    this.focused = false;
   }
 
   ngOnDestroy(): void {
@@ -67,6 +63,11 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
 
   toggleFocus(focused: boolean): void {
     this.focused = focused;
+    if (focused) {
+      setTimeout(()=>{
+        this.searchInput.nativeElement.focus();
+      },0); 
+    }
   }
 
   addTask(): void {

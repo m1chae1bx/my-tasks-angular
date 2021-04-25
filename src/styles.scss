@@ -14,6 +14,11 @@ body {
     word-break: break-word;
 }
 
+/* Grid */
+.grid {
+    display: grid;
+}
+
 /* Flexbox */
 
 .flex {
@@ -48,8 +53,16 @@ body {
 
 /* Appearance and Layouting */
 
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block !important;
+}
+
 .hidden {
-    visibility: hidden;
+    visibility: hidden; // takes up space
 }
 
 .overflow-hidden {
@@ -483,12 +496,12 @@ body {
     }
 }
 
-.content-x {
+.content-x-scrollable {
     .mat-chip-list-wrapper {
         flex-wrap: nowrap;
         overflow-x: auto;
         white-space: nowrap;
-        margin: 4px;
+        margin: 4px 0 4px 4px;
         
         .mat-chip {      
                 flex: 0 0 auto;       
@@ -498,7 +511,7 @@ body {
 
 .mat-toolbar {
     .mat-toolbar-row {
-        padding: 0px 0px;
+        padding: 0;
     }
 }
 
@@ -523,4 +536,19 @@ body {
 
 .mat-drawer-container {
     background-color: transparent !important;
+}
+
+.mat-menu-panel {
+    border-radius: 8px !important;
+    .mat-menu-content:not(:empty) {
+        padding: 0 !important;
+    }
+}
+
+.mat-flat-button.mat-button-disabled {
+    background-color: rgba(0,0,0,.05) !important;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+    margin: 8px 0;
 }

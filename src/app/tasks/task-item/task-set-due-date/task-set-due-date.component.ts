@@ -17,7 +17,7 @@ export class TaskSetDueDateComponent implements OnInit {
   isTomorrow: boolean;
   isCurrentYear: boolean;
   originalDate: Date;
-  weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   @Input() task: Task;
   @ViewChild('menuTrigger', {read: MatMenuTrigger}) menuTrigger: MatMenuTrigger;

@@ -1,0 +1,44 @@
+<div class="grid" [ngClass]="{'searching': isSearching}">
+  <div class="title" [ngClass]="{'searching': isSearching}">
+      <div class="title-content">
+          <mat-icon aria-hidden="true" color="primary">check_box</mat-icon>
+          <span #titleText class="title-text primary-color padding-left-small">My Tasks</span>
+      </div>
+  </div>
+  <div class="back-btn" [ngClass]="{'searching': isSearching}">
+      <button 
+          mat-icon-button 
+          aria-label="back-btn" 
+          color="primary"
+          (click)="toggleSearch()"
+      >
+          <mat-icon>arrow_back</mat-icon>
+      </button>
+  </div>
+  <div 
+    class="search-bar" 
+    [ngClass]="{'searching': isSearching}" 
+  >
+    <app-search-and-add-box #searchBox></app-search-and-add-box>
+  </div>
+  <div class="search-btn" [ngClass]="{'searching': isSearching}">
+    <button 
+      mat-icon-button 
+      aria-label="search-btn" 
+      color="primary"
+      (click)="toggleSearch()"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div class="menu-btn" [ngClass]="{'searching': isSearching}">
+    <button
+      mat-icon-button
+      aria-label="menu"
+      color="primary"
+      (click)="toggleSidenav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</div>

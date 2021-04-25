@@ -30,7 +30,7 @@
     </div>
     <mat-menu #dueDateMenu="matMenu" yPosition="below" xPosition="before">
         <ng-template matMenuContent>
-            <button mat-menu-item (click)="changeDueDate('default', 'Due Date')">
+            <button mat-menu-item (click)="changeDueDate('default', 'Due Date')" [disabled]="filters.dueDate === 'default'">
                 <mat-icon>clear</mat-icon>
                 <span>Clear</span>
             </button>

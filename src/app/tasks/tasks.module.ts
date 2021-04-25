@@ -27,7 +27,8 @@ import { TaskItemComponent, TaskDetailSheet } from './task-item/task-item.compon
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-filters.component';
-import { NavbarComponent } from './../navbar/navbar.component';
+import { NavbarComponent } from '../core/navbar/navbar.component';
+import { MainToolbarComponent } from '../core/main-toolbar/main-toolbar.component';
 import { SearchAndAddBoxComponent } from './search-and-add-box/search-and-add-box.component';
 import { TaskSetDueDateComponent } from './task-item/task-set-due-date/task-set-due-date.component';
 import { TaskAssignListComponent } from './task-item/task-assign-list/task-assign-list.component';
@@ -35,6 +36,7 @@ import { TaskSetReminderComponent } from './task-item/task-set-reminder/task-set
 import { TaskMakeRecurringComponent } from './task-item/task-make-recurring/task-make-recurring.component';
 import { TaskSetNameComponent } from './task-item/task-set-name/task-set-name.component';
 import { TaskSetDescComponent } from './task-item/task-set-desc/task-set-desc.component';
+import { SubToolbarComponent } from '../core/sub-toolbar/sub-toolbar.component';
 @NgModule({
   declarations: [
     TasksComponent,
@@ -53,6 +55,8 @@ import { TaskSetDescComponent } from './task-item/task-set-desc/task-set-desc.co
     TaskMakeRecurringComponent,
     TaskSetNameComponent,
     TaskSetDescComponent,
+    MainToolbarComponent,
+    SubToolbarComponent,
   ],
   imports: [
     CommonModule,

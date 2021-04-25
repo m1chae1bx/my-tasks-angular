@@ -9,7 +9,7 @@
     <app-task-set-desc [task]="task"></app-task-set-desc>
   </div>
 </div>
-<mat-divider></mat-divider>
+<mat-divider class="divider-light"></mat-divider>
 <div class="task-detail-body">
   <mat-nav-list class="relative padding-none">
     <a mat-list-item><app-task-assign-list></app-task-assign-list></a>
@@ -33,8 +33,8 @@
     <a mat-list-item><app-task-make-recurring></app-task-make-recurring></a>
   </mat-nav-list> 
 </div>
-<mat-divider></mat-divider>
-<div class="task-detail-actions padding-medium">
+<mat-divider class="divider-light"></mat-divider>
+<div class="task-detail-actions padding-small">
   <button
     mat-icon-button
     color="accent" 
@@ -54,7 +54,8 @@
     (click)="dismiss()"    
     class="float-right"
   >
-    <mat-icon>keyboard_arrow_down</mat-icon>
+    <mat-icon *ngIf="!isEdited">keyboard_arrow_down</mat-icon>
+    <mat-icon *ngIf="isEdited">close</mat-icon>
   </button>
   <div class="save-btn-div margin-auto padding-x-small">
     <button

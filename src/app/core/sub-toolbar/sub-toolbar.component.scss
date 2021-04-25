@@ -1,0 +1,43 @@
+.content-x-scrollable {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media only screen and (max-width: 520px) {
+  .content-x-scrollable {
+      padding: 0px;
+  }        
+
+  .app-task-filters {
+      padding: 4px 0px;
+      width: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .app-task-filters {
+      margin: auto;
+      width: 500px;
+  }
+}
+
+@media only screen and (min-width: 521px) {
+
+  .content-x-scrollable {
+    padding: 0px;
+
+    .app-task-filters {
+        padding: 4px 0px;
+    }
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .app-task-filters {
+    margin: auto;
+    width: calc(700px + ((100vw - 769px) / 2));
+}
+}

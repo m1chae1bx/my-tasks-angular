@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { TaskService } from '../../services/task.service';
 import { NotifierService } from '../../services/notifier.service'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
@@ -7,11 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from '../task';
 
 @Component({
-  selector: 'app-search-and-add-box',
-  templateUrl: './search-and-add-box.component.html',
-  styleUrls: ['./search-and-add-box.component.scss']
+  selector: 'app-search-task',
+  templateUrl: './search-task.component.html',
+  styleUrls: ['./search-task.component.scss']
 })
-export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
+export class SearchTaskComponent implements OnInit, OnDestroy {
 
   task: Task = {
     id: null,
@@ -29,9 +28,7 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
   @ViewChild("searchInput") searchInput: ElementRef;
 
   constructor(
-    private taskService: TaskService,
-    private notifierService: NotifierService,
-    private snackBar: MatSnackBar
+    private notifierService: NotifierService
   ) {
     this.searchTermSubject.
       pipe(
@@ -53,10 +50,6 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
     this.resetTask();
   }
 
-  onSubmit(): void {
-    this.addTask();
-  }
-
   onKeyUp(event: KeyboardEvent): void {
     this.searchTermSubject.next(event);
   }
@@ -68,35 +61,6 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
         this.searchInput.nativeElement.focus();
       },0); 
     }
-  }
-
-  addTask(): void {
-    const data = {
-      name: this.task.name,
-      dueDate: this.task.dueDate,
-      desc: this.task.desc
-    };
-
-    this.taskService.create(data)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.resetTask();
-          /* Move to Add Task workflow */
-          // this.NotifierService.genericNotify(this.NotifierService.taskAddedSubject, 
-          //   <Task>{
-          //     id: response._id,
-          //     name: response.name,
-          //     desc: response.desc,
-          //     dueDate: response.dueDate,
-          //     completed: response.completed
-          //   }); 
-          this.snackBar.open('Task added', null, { duration: 1500 });
-        },
-        error => {
-          console.log(error);
-        }
-      );
   }
 
   resetTask(): void {
@@ -120,7 +84,6 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
     if (this.task.name.length > 0) {
       this.addDisabled = false;
       this.notifierService.notify({
-        // name: this.exactPhraseOn ? '\"' + this.task.name + '\"' : this.task.name
         name: this.task.name
       });
       this.filtered = true;
@@ -130,16 +93,4 @@ export class SearchAndAddBoxComponent implements OnInit, OnDestroy {
       this.filtered = false;
     }
   }
-  
-  // toggleExactPhrase() {
-  //   this.exactPhraseOn = !this.exactPhraseOn;
-  //   if (this.exactPhraseOn) {
-  //     this.snackBar.open('Search exact phrase ON', null, { duration: 1500 });
-  //   }
-  //   else {
-  //     this.snackBar.open('Search exact phrase OFF', null, { duration: 1500 });
-  //   }
-  //   this.searchTasks();
-  // }
-
 }

@@ -1,7 +1,7 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { NotifierService } from 'src/app/services/notifier.service';
-import { SearchAndAddBoxComponent } from 'src/app/tasks/search-and-add-box/search-and-add-box.component';
+import { SearchTaskComponent } from 'src/app/tasks/search-task/search-task.component';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -22,7 +22,7 @@ export class MainToolbarComponent implements OnInit {
   isTitleVisible: boolean;
 
   @Output() menuClicked = new EventEmitter();
-  @ViewChild('searchBox') searchBox: SearchAndAddBoxComponent;
+  @ViewChild('searchBox') searchBox: SearchTaskComponent;
   @ViewChild('titleText') titleText: ElementRef;
   
   constructor(private notifierService: NotifierService) { }
@@ -38,7 +38,6 @@ export class MainToolbarComponent implements OnInit {
   }
 
   toggleSearch(): void {
-    console.log('toggle search');
     this.isSearching = !this.isSearching;
     (this.titleText.nativeElement as HTMLSpanElement).classList.add('reappear');
     this.searchBox.resetTask();

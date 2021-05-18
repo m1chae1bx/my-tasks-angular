@@ -1,12 +1,12 @@
-import { AfterViewChecked, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Task } from '../task';
 import { TaskService } from '../../services/task.service';
-import { NotifierService, RepollData } from '../../services/notifier.service';
+import { NotifierService } from '../../services/notifier.service';
 import { DateUtil } from '../../utilities/date-util';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { combineLatest, Subscription } from 'rxjs';
+import { MatBottomSheet} from '@angular/material/bottom-sheet';
 import { take } from 'rxjs/operators';
+import { EditTaskSheetComponent } from '../edit-task-sheet/edit-task-sheet.component';
 
 @Component({
   selector: 'app-task-item',
@@ -56,7 +56,6 @@ export class TaskItemComponent implements OnInit, AfterViewChecked {
       }
     }
   }
-  
 
   ngOnInit(): void {
     this.updateDisplayDate();
@@ -72,7 +71,7 @@ export class TaskItemComponent implements OnInit, AfterViewChecked {
   }
 
   openTaskDetailSheet(): void {
-    const bottomSheetRef = this.bottomSheet.open(TaskDetailSheet, { data: {... this.task}});
+    const bottomSheetRef = this.bottomSheet.open(EditTaskSheetComponent, { data: {... this.task}});
     const updateWatcher = this.notifierService.taskUpdated.pipe(take(1)).subscribe(data => {
       this.updated.emit({id: data.id, index: this.index});
       this.task = data;
@@ -108,99 +107,121 @@ export class TaskItemComponent implements OnInit, AfterViewChecked {
   }
 }
 
-@Component({
-  selector: 'task-detail-sheet',
-  templateUrl: 'task-detail-sheet.html',
-  styleUrls: ['./task-item.component.scss']
-})
-export class TaskDetailSheet implements OnInit, OnDestroy {
+// @Component({
+//   selector: 'task-detail-sheet',
+//   templateUrl: 'task-detail-sheet.html',
+//   styleUrls: ['./task-item.component.scss']
+// })
+// export class TaskDetailSheet implements OnInit, OnDestroy {
 
-  isSaving: boolean;
-  isEdited: boolean;
-  isDeleting: boolean;
-  taskEditSubs: Subscription;
-  uneditedTask: Task;
+//   isSaving: boolean;
+//   isEdited: boolean;
+//   isDeleting: boolean;
+//   taskEditSubs: Subscription;
+//   uneditedTask: Task;
+//   editTaskForm: FormGroup;
+//   nameFormControl = new FormControl(this.task.name);
+//   descFormControl = new FormControl(this.task.desc);
+//   dueDateFormControl = new FormControl(this.task.dueDate);
+//   completedFormControl = new FormControl(this.task.completed);
 
-  constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) public task: Task,
-    private taskService: TaskService,
-    private notifierService: NotifierService,
-    private snackBar: MatSnackBar,
-    private bottomSheetRef: MatBottomSheetRef<TaskDetailSheet>
-  ) {}
+//   @ViewChild('submitBtn') submitBtn: MatButton;
 
-  ngOnInit(): void {
-    this.uneditedTask = {... this.task};
-    this.notifierService.taskEditNameSubject.next(false);
-    this.notifierService.taskEditDescSubject.next(false);
-    this.notifierService.taskEditDueDateSubject.next(false);
-    this.notifierService.taskIsDoneSubject.next(false);
+//   constructor(
+//     @Inject(MAT_BOTTOM_SHEET_DATA) public task: Task,
+//     private taskService: TaskService,
+//     private notifierService: NotifierService,
+//     private snackBar: MatSnackBar,
+//     private bottomSheetRef: MatBottomSheetRef<TaskDetailSheet>
+//   ) {}
 
-    this.taskEditSubs = combineLatest([
-      this.notifierService.taskNameChanged,
-      this.notifierService.taskDescChanged,
-      this.notifierService.taskDueDateChanged,
-      this.notifierService.taskIsDoneChanged
-    ])
-    .subscribe(([nameChanged, descChanged, dueDateChanged, isDoneChanged]) => {
-      this.isEdited = nameChanged || descChanged || dueDateChanged || isDoneChanged;
-    });
-  }
+//   ngOnInit(): void {
+//     this.editTaskForm = new FormGroup({
+//       'name': this.nameFormControl,
+//       'desc': this.descFormControl,
+//       'dueDate': this.dueDateFormControl,
+//       'completed': this.completedFormControl
+//     });
+//     this.uneditedTask = {... this.task};
+//     this.notifierService.taskEditNameSubject.next(false);
+//     this.notifierService.taskEditDescSubject.next(false);
+//     this.notifierService.taskEditDueDateSubject.next(false);
+//     this.notifierService.taskIsDoneSubject.next(false);
 
-  ngOnDestroy(): void {
-    this.taskEditSubs.unsubscribe();
-  }
+//     this.taskEditSubs = combineLatest([
+//       this.notifierService.taskNameChanged,
+//       this.notifierService.taskDescChanged,
+//       this.notifierService.taskDueDateChanged,
+//       this.notifierService.taskIsDoneChanged
+//     ])
+//     .subscribe(([nameChanged, descChanged, dueDateChanged, isDoneChanged]) => {
+//       this.isEdited = nameChanged || descChanged || dueDateChanged || isDoneChanged;
+//     });
+//   }
 
-  toggleCompleted(): void {
-    this.notifierService.genericNotify(this.notifierService.taskIsDoneSubject, this.task.completed != this.uneditedTask.completed);
-  }
+//   ngOnDestroy(): void {
+//     this.taskEditSubs.unsubscribe();
+//   }
 
-  save(): void {
-    this.update();
-  }
+//   toggleCompleted(): void {
+//     this.notifierService.genericNotify(this.notifierService.taskIsDoneSubject, this.completedFormControl.value != this.uneditedTask.completed);
+//   }
 
-  remove(): void {
-    this.isDeleting = true;
-    this.taskService.delete(this.task.id)
-      .subscribe(
-        response => {
-          this.isDeleting = false;
-          console.log(response);
-          this.dismiss();
-          this.notifierService.notify(<RepollData>{});
-          this.snackBar.open('Task deleted', null, { duration: 1500 });
-        },
-        error => {
-          this.isDeleting = false;
-          this.snackBar.open('A problem occured while deleting the task. Please try again later.', null, { duration: 1500 });
-          console.log(error);
-        }
-      );
-  }
+//   save(): void {
+//     this.update();
+//   }
 
-  dismiss(): void {
-    this.bottomSheetRef.dismiss();
-  }
+//   remove(): void {
+//     this.isDeleting = true;
+//     this.taskService.delete(this.task.id)
+//       .subscribe(
+//         response => {
+//           this.isDeleting = false;
+//           console.log(response);
+//           this.dismiss();
+//           this.notifierService.notify(<RepollData>{});
+//           this.snackBar.open('Task deleted', null, { duration: 1500 });
+//         },
+//         error => {
+//           this.isDeleting = false;
+//           this.snackBar.open('An error occured while deleting the task. Please try again later.', null, { duration: 4000 });
+//           console.log(error);
+//         }
+//       );
+//   }
 
-  update(): void {
-    this.isSaving = true;
-    this.taskService.update(this.task.id, this.task)
-      .subscribe(
-        response => {
-          this.dismiss();// @todo what if this is moved to output emitter
-          this.notifierService.genericNotify(this.notifierService.taskUpdatedSubject, this.task);
-          if (this.task.completed) {
-            this.snackBar.open('Task completed', null, { duration: 1500 });
-          } else {
-            this.snackBar.open('Task updated', null, { duration: 1500 });
-          }
-          this.isSaving = false;
-          console.log(response);
-        },
-        error => {
-          this.isSaving = false;
-          console.log(error);
-        }
-      );
-  }
-}
+//   dismiss(): void {
+//     this.bottomSheetRef.dismiss();
+//   }
+
+//   submitForm(): void {
+//     (this.submitBtn._elementRef.nativeElement as HTMLButtonElement).click();
+//   }
+
+//   update(): void {
+//     this.isSaving = true;
+//     this.task.name = this.nameFormControl.value;
+//     this.task.desc = this.descFormControl.value;
+//     this.task.dueDate = this.dueDateFormControl.value;
+//     this.task.completed = this.completedFormControl.value;
+
+//     this.taskService.update(this.task.id, this.task)
+//       .subscribe(
+//         response => {
+//           this.dismiss();// @todo what if this is moved to output emitter
+//           this.notifierService.genericNotify(this.notifierService.taskUpdatedSubject, this.task);
+//           if (this.task.completed) {
+//             this.snackBar.open('Task completed', null, { duration: 1500 });
+//           } else {
+//             this.snackBar.open('Task updated', null, { duration: 1500 });
+//           }
+//           console.log(response);
+//         },
+//         error => {
+//           this.isSaving = false;
+//           this.snackBar.open('An error occured while updating the task. Please try again later.', null, { duration: 4000 });
+//           console.log(error);
+//         }
+//       );
+//   }
+// }

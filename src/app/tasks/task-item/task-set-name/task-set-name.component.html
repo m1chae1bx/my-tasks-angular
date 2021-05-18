@@ -1,11 +1,14 @@
 <textarea
+  required
   #taskName
-  class="task-name primary-color font-material font-large full-width"
-  [ngClass]="{'completed': task.completed}" 
-  [(ngModel)]="task.name"
+  name="name"
   maxlength="200"
   rows="1"
-  placeholder="Rename Task"
-  (ngModelChange)="onChange()"
+  placeholder="{{placeholder}}"
+  class="task-name primary-color font-material font-large full-width"
+  [ngClass]="{'completed': completed}" 
   (blur)="onBlur()"
+  (keydown)="onKeydown($event)"
+  [formControl]="nameFormControl"
+  (ngModelChange)="onChange()"
 ></textarea>

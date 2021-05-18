@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { NotifierService } from 'src/app/services/notifier.service';
@@ -19,7 +20,8 @@ export class TaskSetDueDateComponent implements OnInit {
   originalDate: Date;
   weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  @Input() task: Task;
+  @Input() dueDateFormControl: FormControl;
+  @Input() completed: boolean;
   @ViewChild('menuTrigger', {read: MatMenuTrigger}) menuTrigger: MatMenuTrigger;
   @ViewChild('picker') picker: MatDatepicker<any>;
 
@@ -27,20 +29,20 @@ export class TaskSetDueDateComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateDisplayDate();
-    this.originalDate = this.task.dueDate;
+    this.originalDate = this.dueDateFormControl.value;
   }
 
   updateDisplayDate(): void {
-    this.isCurrentYear = DateUtil.isCurrentYear(this.task.dueDate);
-    this.isToday = DateUtil.isToday(this.task.dueDate);
-    this.isTomorrow = DateUtil.isTomorrow(this.task.dueDate);
-    this.isOverdue = this.task.dueDate?.getTime() < DateUtil.today.getTime();
+    this.isCurrentYear = DateUtil.isCurrentYear(this.dueDateFormControl.value);
+    this.isToday = DateUtil.isToday(this.dueDateFormControl.value);
+    this.isTomorrow = DateUtil.isTomorrow(this.dueDateFormControl.value);
+    this.isOverdue = this.dueDateFormControl.value?.getTime() < DateUtil.today.getTime();
   }
 
   onChangeDate(): void {
     this.notifier.genericNotify(
       this.notifier.taskEditDueDateSubject, 
-      this.task.dueDate?.toString() != this.originalDate?.toString()
+      this.dueDateFormControl.value?.toString() != this.originalDate?.toString()
     );
     this.updateDisplayDate();  
   }
@@ -53,16 +55,16 @@ export class TaskSetDueDateComponent implements OnInit {
   setDueDate(i: number): void { // convert to smaller data type
     switch(i) {
       case 0:
-        this.task.dueDate = DateUtil.today;
+        this.dueDateFormControl.setValue(DateUtil.today);
         break;
       case 1:
-        this.task.dueDate = DateUtil.tomorrow;
+        this.dueDateFormControl.setValue(DateUtil.tomorrow);
         break;
       case 2:
-        this.task.dueDate = DateUtil.overmorrow;
+        this.dueDateFormControl.setValue(DateUtil.overmorrow);
         break;
       case 7:
-        this.task.dueDate = DateUtil.nextWeek;
+        this.dueDateFormControl.setValue(DateUtil.nextWeek);
         break;
       case 9:
         this.picker.open();
@@ -72,7 +74,7 @@ export class TaskSetDueDateComponent implements OnInit {
   }
 
   clearDueDate(): void {
-    this.task.dueDate = null;
+    this.dueDateFormControl.setValue(null);
     this.onChangeDate();
   }
 

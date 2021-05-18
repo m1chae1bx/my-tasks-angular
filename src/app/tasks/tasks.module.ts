@@ -22,14 +22,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRippleModule } from '@angular/material/core';
 
 import { TasksComponent } from './tasks.component';
-import { AddTaskComponent } from './add-task/add-task.component';
-import { TaskItemComponent, TaskDetailSheet } from './task-item/task-item.component';
+import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
-import { TaskDetailComponent } from './task-detail/task-detail.component';
-import { TaskFiltersComponent, DueDateFilterSheet } from './task-filters/task-filters.component';
+import { TaskFiltersComponent } from './task-filters/task-filters.component';
 import { NavbarComponent } from '../core/navbar/navbar.component';
 import { MainToolbarComponent } from '../core/main-toolbar/main-toolbar.component';
-import { SearchAndAddBoxComponent } from './search-and-add-box/search-and-add-box.component';
+import { SearchTaskComponent } from './search-task/search-task.component';
 import { TaskSetDueDateComponent } from './task-item/task-set-due-date/task-set-due-date.component';
 import { TaskAssignListComponent } from './task-item/task-assign-list/task-assign-list.component';
 import { TaskSetReminderComponent } from './task-item/task-set-reminder/task-set-reminder.component';
@@ -37,18 +35,16 @@ import { TaskMakeRecurringComponent } from './task-item/task-make-recurring/task
 import { TaskSetNameComponent } from './task-item/task-set-name/task-set-name.component';
 import { TaskSetDescComponent } from './task-item/task-set-desc/task-set-desc.component';
 import { SubToolbarComponent } from '../core/sub-toolbar/sub-toolbar.component';
+import { AddTaskSheetComponent } from './add-task-sheet/add-task-sheet.component';
+import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.component';
 @NgModule({
   declarations: [
     TasksComponent,
-    AddTaskComponent,
     TaskItemComponent,
-    TaskDetailSheet,
     TaskListComponent,
-    TaskDetailComponent,
     TaskFiltersComponent,
-    DueDateFilterSheet,
     NavbarComponent,
-    SearchAndAddBoxComponent,
+    SearchTaskComponent,
     TaskSetDueDateComponent,
     TaskAssignListComponent,
     TaskSetReminderComponent,
@@ -57,6 +53,8 @@ import { SubToolbarComponent } from '../core/sub-toolbar/sub-toolbar.component';
     TaskSetDescComponent,
     MainToolbarComponent,
     SubToolbarComponent,
+    AddTaskSheetComponent,
+    EditTaskSheetComponent,
   ],
   imports: [
     CommonModule,

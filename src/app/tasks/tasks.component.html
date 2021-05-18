@@ -1,8 +1,12 @@
 <mat-drawer-container class="drawer-container" autosize>
+    <!-- For future implementation -->
+    <!-- <mat-drawer class="drawer-sidenav display-block-vlap display-none" mode="side" position="start" opened="true"> 
+        <app-navbar class="navbar"></app-navbar>
+    </mat-drawer> -->
     <mat-drawer #drawer class="drawer-sidenav" mode="over" position="end">
         <button 
             mat-icon-button 
-            aria-label="close-menu-btn" 
+            aria-label="Close menu button" 
             color="primary"
             class="close-menu"
             (click)="toggleSidenav()"
@@ -13,14 +17,37 @@
     </mat-drawer>
     <mat-drawer-content (scroll)="onScroll($event)"> 
         <div class="tasks">
-            <app-main-toolbar (menuClicked)="toggleSidenav()" class="default-bg-color"></app-main-toolbar>
-            <mat-divider class="divider-light"></mat-divider>
-            <app-sub-toolbar class="sticky default-bg-color" [ngClass]="{'mat-elevation-z2': isScrolling}"></app-sub-toolbar>
+            <div class="placeholder full-width" 
+                [ngClass]="{'display-block': toolbarFixed}"
+            ></div>
+            <div 
+                #headerDiv
+                class="default-bg-color full-width z-toolbar header" 
+                [ngClass]="{
+                    'no-animation': noAnimation,
+                    'slide-out': hideToolbar,
+                    'fixed': toolbarFixed
+                }"
+            >
+                <app-main-toolbar class="full-width flex flex-column" (menuClicked)="toggleSidenav()"></app-main-toolbar>
+                <app-sub-toolbar></app-sub-toolbar>
+                <mat-divider></mat-divider>
+            </div>
             <div class="page">
                 <div class="content">
                     <div class="app-task-list">
                         <app-task-list></app-task-list>
                     </div>
+                    <button 
+                        class="add-btn z-foreground-2 fixed bottom margin-bottom-large"
+                        [ngClass]="{'hide': hideToolbar}"
+                        mat-fab
+                        aria-label="Add task button" 
+                        color="accent"
+                        (click)="openAddTaskSheet()"
+                    >
+                        <mat-icon>add</mat-icon>
+                    </button>
                 </div>
             </div>
         </div>

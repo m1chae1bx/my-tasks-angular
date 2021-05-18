@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchAndAddBoxComponent } from './search-and-add-box.component';
+import { EditTaskSheetComponent } from './edit-task-sheet.component';
 
-describe('SearchAndAddBoxComponent', () => {
-  let component: SearchAndAddBoxComponent;
-  let fixture: ComponentFixture<SearchAndAddBoxComponent>;
+describe('EditTaskSheetComponent', () => {
+  let component: EditTaskSheetComponent;
+  let fixture: ComponentFixture<EditTaskSheetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchAndAddBoxComponent ]
+      declarations: [ EditTaskSheetComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchAndAddBoxComponent);
+    fixture = TestBed.createComponent(EditTaskSheetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

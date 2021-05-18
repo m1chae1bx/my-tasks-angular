@@ -1,15 +1,11 @@
-.task-list-card {
-    margin-top: 12px;
-    padding-top: 8px;
-}
-
 .results-caption {
     margin-bottom: -4px;
 }
 
 .task-item {
     display: block;
-    width: 100%;
+    width: auto;
+    margin: 4px 0;
 }
 
 .task-list :first-child{

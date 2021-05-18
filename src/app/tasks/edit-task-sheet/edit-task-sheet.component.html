@@ -1,0 +1,70 @@
+<form [formGroup]="editTaskForm" (ngSubmit)="save()" novalidate>
+  <div class="task-detail-header padding-large padding-bottom-medium padding-top-x-large flex items-center">
+    <mat-checkbox 
+      (change)="toggleCompleted()"
+      [formControl]="completedFormControl"
+      >
+    </mat-checkbox>
+    <div class="margin-left-medium flex-auto">
+      <app-task-set-name 
+        [placeholder]="'Rename Task'" 
+        [nameFormControl]="nameFormControl" 
+        [completed]="task.completed"
+        (submitForm)="submitForm()"
+      ></app-task-set-name>
+      <app-task-set-desc [descFormControl]="descFormControl"></app-task-set-desc>
+    </div>
+  </div>
+  <mat-divider class="divider-light"></mat-divider>
+  <div class="task-detail-body">
+    <mat-nav-list class="relative padding-none">
+      <a mat-list-item><app-task-assign-list></app-task-assign-list></a>
+      <a mat-list-item (click)="dueDate.openMenu($event)">
+        <app-task-set-due-date #dueDate class="full-width" [dueDateFormControl]="dueDateFormControl" [completed]="task.completed"></app-task-set-due-date>
+      </a>
+      <a mat-list-item><app-task-set-reminder></app-task-set-reminder></a>
+      <a mat-list-item><app-task-make-recurring></app-task-make-recurring></a>
+    </mat-nav-list>
+  </div>
+  <mat-divider class="divider-light"></mat-divider>
+  <div class="task-detail-actions padding-medium padding-left-large padding-right-large flex justify-space-between">
+    <button
+      type="button"
+      mat-icon-button
+      color="warn" 
+      aria-label="Delete task"
+      (click)="remove()"
+      class="delete-btn"
+    >
+      <div *ngIf="isDeleting" class="spinner-container">
+        <mat-spinner color="warn" diameter="24"></mat-spinner>
+      </div>
+      <mat-icon [ngClass]="{'hidden': isDeleting}">delete</mat-icon>
+    </button>
+    <button
+      #submitBtn
+      mat-flat-button
+      type="submit"
+      color="accent" 
+      aria-label="Save task"
+      (click)="save()"    
+      [disabled]="!editTaskForm.valid || isSaving || !isEdited"
+      class="special-btn"
+    >
+      <div *ngIf="isSaving" class="spinner-container"> 
+        <mat-spinner color="accent" diameter="24"></mat-spinner>
+      </div>
+      <mat-icon [ngClass]="{'hidden': isSaving}">done</mat-icon>
+    </button>
+    <button
+      type="button"
+      mat-icon-button
+      aria-label="Cancel edit"
+      color="accent"
+      (click)="dismiss()"
+    >
+      <mat-icon *ngIf="!isEdited">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="isEdited">close</mat-icon>
+    </button>
+  </div>
+</form>

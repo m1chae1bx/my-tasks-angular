@@ -3,17 +3,17 @@
     class="action-icon flex items-center" 
     aria-hidden="true"
     [ngClass]="{
-      'accent-color': task.dueDate
+      'accent-color': dueDateFormControl.value
     }"
   >calendar_today</mat-icon>
   <span #menuTrigger [matMenuTriggerFor]="menu"></span>
   <div 
     class="action-typo flex items-center margin-left-large flex-auto justify-space-between" 
     [ngClass]="{
-      'accent-color': task.dueDate
+      'accent-color': dueDateFormControl.value
     }"
   >
-    <span *ngIf="!task.dueDate; else dueDateVal">
+    <span *ngIf="!dueDateFormControl.value; else dueDateVal">
       Set Due Date
     </span>
     <ng-template #dueDateVal>
@@ -23,8 +23,8 @@
           <ng-container *ngIf="isTomorrow else displayDate">Tomorrow</ng-container>
         </ng-template>
         <ng-template #displayDate>
-          {{ isCurrentYear ? (task.dueDate | date:'MMM d') : (task.dueDate | date) }} 
-          <span *ngIf="isOverdue && !task.completed" class="warn-color"> - Overdue</span>
+          {{ isCurrentYear ? (dueDateFormControl.value | date:'MMM d') : (dueDateFormControl.value | date) }} 
+          <span *ngIf="isOverdue && !completed" class="warn-color"> - Overdue</span>
         </ng-template>
       </span>
     </ng-template>
@@ -58,14 +58,18 @@
         <span class="menu-item-text">Today</span>
         <span class="margin-left-small italic">{{getDay(0)}}</span>
       </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="clearDueDate()" [disabled]="!dueDateFormControl.value">
+        <mat-icon>clear</mat-icon>
+        <span class="menu-item-text">Clear</span>
+      </button>
   </ng-template>
 </mat-menu>
 <input 
     matInput 
     [matDatepicker]="picker"
-    [(ngModel)]="task.dueDate"
-    #dateInput
     [hidden]="true"
     (dateChange)="onChangeDate()"
+    [formControl]="dueDateFormControl"
 >
 <mat-datepicker touchUi #picker></mat-datepicker>

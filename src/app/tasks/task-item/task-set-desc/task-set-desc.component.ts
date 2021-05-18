@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NotifierService } from 'src/app/services/notifier.service';
-import { Task } from '../../task';
 
 @Component({
   selector: 'app-task-set-desc',
@@ -11,34 +11,34 @@ export class TaskSetDescComponent implements OnInit, AfterViewInit {
 
   originalDesc: string;
 
-  @Input() task: Task;
+  @Input() descFormControl: FormControl;
   @ViewChild('taskDesc') taskDesc: ElementRef;
 
   constructor(private notifier: NotifierService) { }
 
   ngOnInit(): void {
-    this.originalDesc = this.task.desc;
+    this.originalDesc = this.descFormControl.value;
   }
 
   ngAfterViewInit(): void {
-    this.taskDesc.nativeElement.value = this.task.desc;
+    this.taskDesc.nativeElement.value = this.descFormControl.value;
     this.adjustHeight();
   }
   
   onChange(): void {
     this.notifier.genericNotify(
       this.notifier.taskEditDescSubject, 
-      this.task.desc != this.originalDesc
+      this.descFormControl.value != this.originalDesc
     );
     this.adjustHeight();
   }
   
   adjustHeight() {
     this.taskDesc.nativeElement.style.height = 'auto';
-    if (this.taskDesc.nativeElement.scrollHeight < 53) { // 4 rows
+    if (this.taskDesc.nativeElement.scrollHeight < 40) { // 4 rows
       this.taskDesc.nativeElement.style.height = this.taskDesc.nativeElement.scrollHeight+'px';
     } else {
-      this.taskDesc.nativeElement.style.height = '64px';
+      this.taskDesc.nativeElement.style.height = '50px';
     }
   }
 }

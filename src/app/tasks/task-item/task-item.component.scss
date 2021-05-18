@@ -1,54 +1,8 @@
 .task-item-card {
     z-index: 1;
-}
-
-.spinner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    display: flex;
-    display: -webkit-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.save-btn-div {
-    width: 80px;
-}
-
-.task-detail-actions {
-    height: 40px;
-}
-
-.save-btn {
-    border-radius: 20px !important;
-}
-
-.cancel-btn {
-    border-radius: 16px !important;
-}
-
-.remove-btn {
-    z-index: 900;
-}
-
-.remove-1 {
-    top: 4px;
-}
-
-.remove-2 {
-    top: 52px;
-}
-
-.remove-3 {
-    top: 100px;
-}
-
-.remove-4 {
-    top: 148px;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.05);
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.05);
+    -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.05);
 }
 
 .task-item-card-contents {

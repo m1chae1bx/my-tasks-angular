@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NotifierService } from 'src/app/services/notifier.service';
-import { Task } from '../../task';
 
 @Component({
   selector: 'app-task-set-name',
@@ -10,31 +10,50 @@ import { Task } from '../../task';
 export class TaskSetNameComponent implements OnInit, AfterViewInit {
 
   originalName: string;
+  focused: boolean;
 
-  @Input() task: Task;
+  @Input() placeholder: string;
+  @Input() nameFormControl: FormControl;
+  @Input() completed: boolean;
+  @Output() submitForm = new EventEmitter();
   @ViewChild('taskName') taskName: ElementRef;
 
   constructor(private notifier: NotifierService) {}
 
   ngOnInit(): void {
-    this.originalName = this.task.name;
+    this.originalName = this.nameFormControl.value;
+    this.focused = true;
   }
 
   ngAfterViewInit(): void {
-    this.taskName.nativeElement.value = this.task.name;
+    this.taskName.nativeElement.value = this.nameFormControl.value;
     this.adjustHeight();
   }
 
   onChange() {
     this.notifier.genericNotify(
       this.notifier.taskEditNameSubject, 
-      this.task.name != this.originalName
+      this.nameFormControl.value != this.originalName
     );
     this.adjustHeight();
   }
 
   onBlur() {
-    if (!this.task.name) this.task.name = this.originalName;
+    if (!this.nameFormControl.value) this.nameFormControl.setValue(this.originalName);
+    this.focused = false;
+  }
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      this.submitForm.emit(null);
+    }
+  }
+
+  focus() {
+    setTimeout(()=>{
+      this.taskName.nativeElement.focus();
+    },0); 
   }
 
   adjustHeight(): void {

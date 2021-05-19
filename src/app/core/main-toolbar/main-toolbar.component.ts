@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { NotifierService } from 'src/app/services/notifier.service';
-import { SearchTaskComponent } from 'src/app/tasks/search-task/search-task.component';
+import { SearchTaskComponent } from 'src/app/my-tasks/search-task/search-task.component';
 
 @Component({
   selector: 'app-main-toolbar',

@@ -21,7 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRippleModule } from '@angular/material/core';
 
-import { TasksComponent } from './tasks.component';
+import { MyTasksComponent } from './my-tasks.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskFiltersComponent } from './task-filters/task-filters.component';
@@ -39,7 +39,7 @@ import { AddTaskSheetComponent } from './add-task-sheet/add-task-sheet.component
 import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.component';
 @NgModule({
   declarations: [
-    TasksComponent,
+    MyTasksComponent,
     TaskItemComponent,
     TaskListComponent,
     TaskFiltersComponent,
@@ -81,7 +81,7 @@ import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.compon
     MatRippleModule
   ],
   exports: [
-    TasksComponent
+    MyTasksComponent
   ]
 })
-export class TasksModule { }
+export class MyTasksModule { }

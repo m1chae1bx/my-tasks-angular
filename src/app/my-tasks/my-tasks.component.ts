@@ -8,10 +8,10 @@ import { AddTaskSheetComponent } from './add-task-sheet/add-task-sheet.component
 
 @Component({
   selector: 'app-todo-list',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss'],
+  templateUrl: './my-tasks.component.html',
+  styleUrls: ['./my-tasks.component.scss'],
 })
-export class TasksComponent implements OnInit {
+export class MyTasksComponent implements OnInit {
 
   hideToolbar: boolean;
   toolbarFixed: boolean;

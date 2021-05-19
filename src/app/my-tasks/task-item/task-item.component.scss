@@ -90,6 +90,12 @@
     
 }
 
+@media only screen and (max-width: 520px) {
+    .task-item-card {
+        border-radius: 0;
+    }
+}
+
 @media only screen and (max-width: 612px) {
     .item-selected {
         margin: 4px 0px;

@@ -4,10 +4,12 @@ import { MyTasksModule } from './my-tasks/my-tasks.module'
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StartModule } from './start/start.module';
 
 import { AppComponent } from './app.component';
 
 import { NotifierService } from './services/notifier.service';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { NotifierService } from './services/notifier.service';
     MyTasksModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    StartModule
   ],
   providers: [NotifierService],
   bootstrap: [AppComponent]

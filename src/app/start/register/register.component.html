@@ -1,0 +1,145 @@
+<div class="title-bar default-bg-color padding-large">
+  <div class="content flex justify-space-between margin-auto">
+    <span class="primary-color flex items-center font-x-large">
+      <mat-icon aria-hidden="true" color="primary" class="margin-right-small">light_mode</mat-icon>
+      [App Title]
+    </span>
+    <button mat-button color="accent" (click)="navToLogin()">Sign In</button>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="register-div margin-top-medium">
+  <mat-card class="border-not-rounded-500 mat-elevation-z0 basic-shadow">
+    <span class="primary-color flex items-center font-large padding-bottom-large">
+      <mat-icon class="margin-right-small">how_to_reg</mat-icon> Create an Account
+    </span>
+    <mat-divider></mat-divider>
+    <form [formGroup]="registerForm" class="flex flex-column margin-top-x-large" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">badge</mat-icon>
+        <input 
+          matInput 
+          required 
+          maxlength="200"
+          [formControl]="fullName"
+        >
+        <mat-icon matSuffix *ngIf="fullName.valid" class="success-color">check</mat-icon>
+        <mat-error *ngIf="fullName.invalid">
+          <div *ngIf="fullName.errors?.required">Full Name is required</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="margin-bottom-medium">
+        <mat-label>Nickname</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">person</mat-icon>
+        <input 
+          matInput 
+          required
+          maxlength="20"
+          [formControl]="nickname"
+        >
+        <mat-icon matSuffix *ngIf="nickname.valid" class="success-color">check</mat-icon>
+        <mat-hint>This will be used to refer to you in the app</mat-hint>
+        <mat-error *ngIf="nickname.invalid">
+          <div *ngIf="nickname.errors?.required">Nickname is required</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">email</mat-icon>
+        <input 
+          matInput 
+          type="email" 
+          required
+          maxlength="100"
+          [formControl]="email"
+          [email]="true"
+        >
+        <mat-icon matSuffix *ngIf="email.valid" class="success-color">check</mat-icon>
+        <mat-error *ngIf="email.invalid">
+          <div *ngIf="email.errors?.required">Email is required</div>
+          <div *ngIf="email.errors?.email">Please enter a valid email address</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="margin-bottom-large">
+        <mat-label>Username</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">account_circle</mat-icon>
+        <input 
+          matInput 
+          required
+          maxlength="30"
+          minlength="6"
+          pattern="[A-Za-z0-9.]*"
+          [formControl]="username"
+        >
+        <mat-icon matSuffix *ngIf="username.valid" class="success-color">check</mat-icon>
+        <mat-hint>
+          <div>May only contain letters, numbers & periods</div>
+          <div>Must be between 6-30 characters long</div>
+        </mat-hint>
+        <mat-error *ngIf="username.invalid">
+          <div *ngIf="username.errors?.required">Username is required</div>
+          <div *ngIf="username.errors?.pattern" class="margin-bottom-x-small">Letters (a-z), numbers (0-9) & periods (.) only</div>
+          <div *ngIf="username.errors?.minlength">Username must be at least 6 characters</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="margin-bottom-large">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">password</mat-icon>
+        <input 
+          matInput 
+          type="password" 
+          required
+          maxlength="20"
+          minlength="8"
+          pattern="^(?=[^A-Za-z]*[A-Za-z])(?=[^0-9]*[0-9])(?=[^@#$%&!_:\-.]*[@#$%&!_:\-.]).*"
+          [formControl]="password"
+        >
+        <mat-icon matSuffix *ngIf="password.valid" class="success-color">check</mat-icon>
+        <mat-icon 
+          matSuffix 
+          color="accent" 
+          matTooltip="Required symbols include @#$%&!_:\-."
+          #tooltip="matTooltip"
+          (click)="tooltip.toggle()"
+          *ngIf="!password.valid"
+        >help</mat-icon>
+        <mat-hint>
+          <div>Must have a mix of letters, numbers & special symbols</div>
+          <div>Must be between 8-20 characters long</div>
+        </mat-hint>
+        <mat-error *ngIf="password.invalid">
+          <div *ngIf="password.errors?.required">Password is required</div>
+          <div *ngIf="password.errors?.pattern" class="margin-bottom-x-small">Must have a mix of letters, numbers & special symbols</div>
+          <div *ngIf="password.errors?.minlength">Password must be at least 6 characters</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">password</mat-icon>
+        <input 
+          matInput 
+          type="password" 
+          required
+          maxlength="20"
+          minlength="8"
+          [formControl]="confirmPass"
+        >
+        <mat-icon matSuffix *ngIf="confirmPass.valid" class="success-color">check</mat-icon>
+        <mat-error *ngIf="confirmPass.invalid" class="flex">
+          <div *ngIf="confirmPass.errors?.notEqual">Passwords do not match</div>
+        </mat-error>
+      </mat-form-field>
+      <button 
+        mat-flat-button 
+        type="submit" 
+        color="accent" 
+        class="special-btn"
+        [disabled]="!registerForm.valid"
+      >
+        Sign Up
+      </button>
+      <span class="margin-top-x-large">Already have an account? <a href="/login">Sign In!</a></span>
+    </form>
+  </mat-card>
+</div>

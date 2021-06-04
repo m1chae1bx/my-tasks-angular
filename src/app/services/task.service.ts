@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
-import { Task } from '../my-tasks/task';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 const baseUrl = 'http://localhost:8080/api/tasks'
 
@@ -11,31 +10,34 @@ const baseUrl = 'http://localhost:8080/api/tasks'
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService
+  ) { }
 
   // getAll(): Observable<any> {
   //   return this.http.get(baseUrl);
   // }
 
   get(id: String): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${baseUrl}/${id}`, { headers: this.auth.getAuthHeader()});
   }
 
   create(data): Observable<any> {
-    return this.http.post(baseUrl, data);
+    return this.http.post(baseUrl, data, { headers: this.auth.getAuthHeader()});
   }
 
-  update(id: String, data): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  update(id: String, data): Observable<any> { // @todo fix typing for data
+    return this.http.put(`${baseUrl}/${id}`, data, { headers: this.auth.getAuthHeader()});
   }
 
   delete(id: String): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${baseUrl}/${id}`, { headers: this.auth.getAuthHeader()});
   }
 
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
+  // deleteAll(): Observable<any> {
+  //   return this.http.delete(baseUrl);
+  // }
 
   find(
     id: string,
@@ -65,6 +67,6 @@ export class TaskService {
       prefix = '&';
     }
     console.log('request', request);
-    return this.http.get(request);
+    return this.http.get(request, { headers: this.auth.getAuthHeader()});
   }
 }

@@ -84,9 +84,6 @@
 }
 
 .drawer-sidenav {
-    padding: 12px;
-    text-align: right;
-
     .close-menu-btn {
         display: inline-block;
     }
@@ -98,14 +95,14 @@
 
 @media only screen and (max-width: 400px) {
     .drawer-sidenav {
-        width: 200px;
+        width: 250px;
         max-width: 100%;
     }
 }
 
 @media only screen and (min-width: 401px) {
     .drawer-sidenav {
-        width: 200px;
+        width: 250px;
     }
 }
 

@@ -11,12 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { RegisterComponent } from './register/register.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StartComponent } from './start.component';
 
 @NgModule({
   declarations: [
     LandingComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    StartComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ]
 })
 export class StartModule { }

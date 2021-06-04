@@ -4,15 +4,6 @@
         <app-navbar class="navbar"></app-navbar>
     </mat-drawer> -->
     <mat-drawer #drawer class="drawer-sidenav" mode="over" position="end">
-        <button 
-            mat-icon-button 
-            aria-label="Close menu button" 
-            color="primary"
-            class="close-menu"
-            (click)="toggleSidenav()"
-        >
-            <mat-icon>close</mat-icon>
-        </button>
         <app-navbar class="navbar"></app-navbar>
     </mat-drawer>
     <mat-drawer-content (scroll)="onScroll($event)"> 

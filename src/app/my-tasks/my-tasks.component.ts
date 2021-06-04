@@ -36,9 +36,9 @@ export class MyTasksComponent implements OnInit {
       throttleTime(400, undefined, {leading: true, trailing: true})
     ).subscribe(scrollTopVal => {
       if (scrollTopVal > 300){
-        if (scrollTopVal - this.prevScrollVal > 30) {
+        if (scrollTopVal - this.prevScrollVal > 15) { //30
           this.hideToolbar = true;
-        } else if (this.prevScrollVal - scrollTopVal > 30) {
+        } else if (this.prevScrollVal - scrollTopVal > 15) { //30
           this.noAnimation = false;
           this.hideToolbar = false;
         }

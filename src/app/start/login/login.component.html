@@ -1,54 +1,57 @@
-<div class="title-bar default-bg-color padding-large">
-  <div class="content flex justify-space-between margin-auto">
-    <span class="primary-color flex items-center font-x-large">
-      <mat-icon aria-hidden="true" color="primary" class="margin-right-small">light_mode</mat-icon>
-      [App Title]
-    </span>
-   <button mat-button color="accent" (click)="navToRegister()">Sign Up</button>
-  </div>
-</div>
-<mat-divider></mat-divider>
-<div class="login-div margin-top-medium">
-  <mat-card class="border-not-rounded-500 mat-elevation-z0 basic-shadow">
-    <span class="primary-color flex items-center font-large padding-bottom-large">
-      <mat-icon class="margin-right-small">login</mat-icon> Sign In
-    </span>
-    <mat-divider></mat-divider>
-    <form [formGroup]="loginFormGroup" class="flex flex-column margin-top-x-large">
-      <mat-form-field appearance="outline">
-        <mat-label>Email or username</mat-label>
-        <mat-icon matPrefix color="primary" class="margin-right-small">account_circle</mat-icon>
-        <input 
-          matInput 
-          required
-          type="email" 
-          [formControl]="this.emailOrUsername">
-        <mat-error *ngIf="emailOrUsername.invalid">
-          <div *ngIf="emailOrUsername.errors?.required">Email or username is required</div>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <mat-icon matPrefix color="primary" class="margin-right-small">password</mat-icon>
-        <input 
-          matInput 
-          required
-          type="password"
-          [formControl]="this.password">
-        <mat-error *ngIf="password.invalid">
-          <div *ngIf="password.errors?.required">Password is required</div>
-        </mat-error>
-      </mat-form-field>
-      <div><button type="button" mat-button color="accent" (click)="navToForgotPass()">Forgot Password?</button></div>
-      <button 
-        mat-flat-button 
-        type="submit" 
-        color="accent" 
-        class="special-btn margin-top-x-large"
-        [disabled]="!loginFormGroup.valid"
-      >Sign In</button>
-      <span class="margin-top-x-large">Don't have an account yet? <a href="/register">Sign Up Now!</a></span>
-    </form>
+<div class="login-div full-width-500 full-height-500 flex flex-column">
+  <mat-card class="border-not-rounded-500 mat-elevation-z0 basic-shadow flex-auto">
+    <div class="flex flex-column justify-center margin-top-large">
+      <div class="primary-color font-x-large bold text-center">[App Title]</div>
+      <div class="primary-color font-large text-center margin-top-large margin-bottom-xx-large">
+        Sign In
+      </div>
+      <form [formGroup]="loginFormGroup" class="flex flex-column margin-bottom-xxx-large" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <mat-icon matPrefix color="primary" class="margin-right-small">account_circle</mat-icon>
+          <input 
+            matInput 
+            required
+            type="text" 
+            [formControl]="this.username">
+          <mat-error *ngIf="username.invalid">
+            <div *ngIf="username.errors?.required">Username is required</div>
+            <div *ngIf="username.errors?.notFound">User was not found</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix color="primary" class="margin-right-small">password</mat-icon>
+          <input 
+            matInput 
+            required
+            type="password"
+            [formControl]="this.password">
+          <mat-error *ngIf="password.invalid">
+            <div *ngIf="password.errors?.required">Password is required</div>
+            <div *ngIf="password.errors?.incorrect">Password is incorrect</div>
+          </mat-error>
+        </mat-form-field>
+        <button 
+          mat-flat-button 
+          type="submit" 
+          color="accent" 
+          class="special-btn margin-top-small"
+          [disabled]="!loginFormGroup.valid || isLoggingIn"
+        >
+          <div *ngIf="isLoggingIn" class="spinner-container">
+            <mat-spinner color="accent" diameter="24"></mat-spinner>
+          </div>
+          <span [ngClass]="{'hidden': isLoggingIn}">Sign In</span>
+        </button>
+        <a href="#" class="link margin-top-x-large text-center">Forgot password?</a>
+      </form>
+      <div class="absolute bottom left right text-center padding-bottom-large">
+        <span>Don't have an account yet?&nbsp;&nbsp;<a href="/register" class="bold link accent-color">Sign Up</a></span>
+      </div>
+    </div>
+    
+    
   </mat-card>
 </div>
-<!-- @todo Add forgot email, password -->
+<!-- @todo Add forgot email -->

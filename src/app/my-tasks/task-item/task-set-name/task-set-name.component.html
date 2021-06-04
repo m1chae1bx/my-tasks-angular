@@ -1,0 +1,14 @@
+<textarea
+  required
+  #taskName
+  name="name"
+  maxlength="200"
+  rows="1"
+  placeholder="{{placeholder}} *"
+  class="task-name primary-color font-material font-large full-width"
+  [ngClass]="{'completed': completed}" 
+  (blur)="onBlur()"
+  (keydown)="onKeydown($event)"
+  [formControl]="nameFormControl"
+  (ngModelChange)="onChange()"
+></textarea>

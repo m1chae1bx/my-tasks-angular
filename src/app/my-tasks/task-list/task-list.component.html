@@ -1,0 +1,21 @@
+<div *ngIf="nameSearch && tasks" class="results-caption margin-left-medium margin-right-medium">
+    <i>
+        <p class="break-word">
+            Showing {{ tasks.length }} {{ this.processCount('result', tasks.length)}} for 
+            <b>{{ nameSearch }}</b>
+        </p>
+    </i>
+</div>
+<div class="task-list" *ngIf="tasks" @fade>
+    <ng-container *ngFor="let task of tasks; index as i">
+        <app-task-item
+            class="task-item"
+            [task]=task
+            [index]="i"
+            [@slideOut]="tasks[i].completed && !filters.showCompleted ? 'completed' : ''"
+            (completed)="onTaskComplete($event)"
+            (updated)="onTaskUpdate($event)"
+        ></app-task-item>
+    </ng-container>
+</div>
+

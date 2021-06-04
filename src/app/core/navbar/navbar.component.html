@@ -1,0 +1,49 @@
+<!-- <div class="navbar-content"> -->
+  <div class="font-xx-large flex items-center padding-large">
+    <mat-icon color="primary" inline="true" class="margin-right-small">account_circle</mat-icon>
+    <span>
+      <div class="font-large bold primary-color">{{user.fullname}}</div>
+      <div class="font-small">@{{user.username}}</div>
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Manage Account
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <mat-nav-list class="padding-none">
+      <a mat-list-item class="action-typo" (click)="edit()">
+        <div class="font-medium flex items-center">
+          <mat-icon class="margin-right-large" inline="true">edit</mat-icon>
+          <span>Edit Profile</span>
+        </div>
+      </a>
+      <a mat-list-item class="action-typo" (click)="logout()">
+        <div class="font-medium flex items-center">
+          <mat-icon class="margin-right-large" inline="true">logout</mat-icon>
+          <span>Sign Out</span>
+        </div>
+      </a>
+      <a mat-list-item class="action-typo">
+        <div class="font-medium flex items-center warn-color">
+          <mat-icon class="margin-right-large" inline="true">delete</mat-icon>
+          <span>Delete Account</span>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-divider></mat-divider>
+  <!-- <div class="menu-item padding-medium">
+    <span class="primary-color">My Feed</span>
+    &nbsp;
+    <mat-icon class="menu-item-icon primary-color" aria-hidden="true">feed</mat-icon>
+  </div>
+  <div class="menu-item padding-medium">
+    <span class="primary-color">My Tasks</span>
+    &nbsp;
+    <mat-icon class="menu-item-icon" aria-hidden="true" color="primary">check_box</mat-icon>
+  </div> -->
+<!-- </div> -->

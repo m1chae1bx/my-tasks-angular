@@ -1,0 +1,72 @@
+<form
+  #newTaskForm
+  [formGroup]="newTaskFormGroup" 
+  (ngSubmit)="addTask()"
+>
+  <div class="padding-large padding-bottom-medium padding-top-x-large flex items-center">
+    <mat-checkbox 
+      disabled="true"
+    >
+    </mat-checkbox>
+    <div class="margin-left-medium flex-auto">
+      <app-task-set-name 
+        #taskSetName 
+        [placeholder]="'Enter task name'" 
+        [nameFormControl]="nameFormControl"
+        (submitForm)="submitForm()"
+      >
+      </app-task-set-name>
+      <app-task-set-desc [descFormControl]="descFormControl"></app-task-set-desc>
+    </div>
+  </div>
+  <mat-divider class="divider-light"></mat-divider>
+  <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        More actions...
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider class="divider-light"></mat-divider> 
+    <mat-nav-list class="relative padding-none">
+      <a mat-list-item><app-task-assign-list></app-task-assign-list></a>
+      <a mat-list-item (click)="dueDate.openMenu($event)">
+        <app-task-set-due-date 
+          #dueDate 
+          class="full-width" 
+          [dueDateFormControl]="dueDateFormControl"
+        >
+        </app-task-set-due-date>
+      </a>
+      <a mat-list-item><app-task-set-reminder></app-task-set-reminder></a>
+      <a mat-list-item><app-task-make-recurring></app-task-make-recurring></a>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  
+  <mat-divider class="divider-light"></mat-divider>
+  <div class="actions-div padding-medium padding-left-large padding-right-large flex justify-space-evenly">
+    <button
+      type="button"
+      mat-button
+      aria-label="Cancel adding of task"
+      color="warn"
+      class="special-btn"
+      (click)="dismiss()"
+    >
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      #submitBtn
+      type="submit"
+      aria-label="Add task"
+      color="accent"
+      class="special-btn"
+      [disabled]="!newTaskFormGroup.valid || isSaving"
+    >
+      <div *ngIf="isSaving" class="spinner-container"> 
+        <mat-spinner color="accent" diameter="24"></mat-spinner>
+      </div>
+      <mat-icon [ngClass]="{'hidden': isSaving}">done</mat-icon>
+    </button>
+  </div>
+</form>

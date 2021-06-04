@@ -1,0 +1,107 @@
+.task-item-card {
+    z-index: 1;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.05);
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.05);
+    -moz-box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.05);
+}
+
+.task-item-card-contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.checkbox-and-info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.task-details {
+    padding-top: 12px;
+}
+
+.task-info {
+
+    .task-name {
+        max-height: 60px;
+        border: none;
+        font-size: 1.1em;
+
+        .task-name-value {
+            display: block;
+        }
+    }
+
+    .task-desc {
+        max-height: 60px;
+        font-size: 1em;
+        font-style: italic;
+        text-align: left;
+
+        .task-desc-value {
+            display: block;  
+        }
+    }
+
+    .fade-text {
+        background-image: linear-gradient(to right, transparent, white, white);
+        background-image: -o-linear-gradient(to right, transparent, white, white);
+        background-image: -moz-linear-gradient(to right,transparent, white, white);
+        background-image: -webkit-linear-gradient(to right, transparent, white, white);
+        background-image: -ms-linear-gradient(to right, transparent, white, white);
+        text-align: right;
+        display: none;
+    }
+
+    .fade-text.name {
+        height: 20px;
+        width: 30px;
+        top: 40px;
+    }
+
+    .fade-text.desc {
+        height: 20px;
+        width: 30px;
+        top: 40px;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: #555555;
+    }
+    
+    .due-date {
+        text-align: left;
+    }
+
+    .task-state {
+        border-radius: 4px;
+    }
+
+    .overdue {
+        color: red;
+    }
+
+    .due-today {
+        color: red;
+    }
+    
+}
+
+@media only screen and (max-width: 520px) {
+    .task-item-card {
+        border-radius: 0;
+    }
+}
+
+@media only screen and (max-width: 612px) {
+    .item-selected {
+        margin: 4px 0px;
+    }
+}
+
+.divider {
+    margin-top: 12px;
+}

@@ -1,0 +1,32 @@
+.content {
+  height: 58px;
+  overflow-y: hidden;
+}
+
+.content-x-scrollable {
+  height: 72px;
+}
+
+@media only screen and (max-width: 520px) {
+  .content-x-scrollable {
+    padding: 0px;
+  }        
+
+  .app-task-filters {
+    padding: 4px 0px;
+    width: auto;
+  }
+}
+
+@media only screen and (min-width: 521px) {
+
+  .content-x-scrollable {
+    padding: 0px;
+
+    .app-task-filters {
+      padding: 4px 0px;
+      margin: 0 auto;
+      width: 500px;
+    }
+  }
+}

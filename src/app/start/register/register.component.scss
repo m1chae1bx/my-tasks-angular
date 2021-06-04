@@ -1,0 +1,19 @@
+.register-div {
+  max-width: 500px;
+  margin: auto;
+}
+
+@media only screen and (min-width: 501px) {
+  .register-div {
+    margin-top: 32px;
+  }
+}
+
+.title-bar {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+
+  .content {
+    max-width: 500px;
+    // height: 44px;
+  }
+}

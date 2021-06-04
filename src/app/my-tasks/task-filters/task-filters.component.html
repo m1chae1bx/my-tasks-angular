@@ -1,0 +1,60 @@
+<mat-chip-list multiple="true">
+    <div class="chip-list-div">
+        <span class="margin-left-xx-small">Filters</span>&nbsp;&nbsp;&nbsp;
+        <mat-chip #listChip>
+            <mat-icon class="chip-icon" aria-hidden="true">list</mat-icon>
+            List
+            <mat-icon class="chip-icon-right flex items-center justify-flex-end" aria-hidden="true">arrow_drop_down</mat-icon>
+        </mat-chip>
+        <mat-chip 
+            #dueDateChip
+            [selected]="filters.dueDate !== 'default'"
+            [matMenuTriggerFor]="dueDateMenu"
+            color="accent"
+            (focus)="onFocus($event)"
+        >
+            <mat-icon class="chip-icon" aria-hidden="true">calendar_today</mat-icon>
+            {{filters.dueDateDisplay}}
+            <mat-icon class="chip-icon-right flex items-center justify-flex-end" aria-hidden="true">arrow_drop_down</mat-icon>
+        </mat-chip>
+        <mat-chip
+            #showCompletedChip
+            [selected]="filters.showCompleted"
+            color="accent"
+            (click)="toggleCompleted()"
+            (focus)="onFocus($event)"
+        >
+            <mat-icon class="chip-icon" aria-hidden="true">check_box</mat-icon>
+            Show Completed
+        </mat-chip>
+    </div>
+    <mat-menu #dueDateMenu="matMenu" yPosition="below" xPosition="before">
+        <ng-template matMenuContent>
+            <button mat-menu-item (click)="changeDueDate('default', 'Due Date')" [disabled]="filters.dueDate === 'default'">
+                <mat-icon>clear</mat-icon>
+                <span>Clear</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button [ngClass]="{'accent-color': filters.dueDate === 'overdue'}" mat-menu-item (click)="changeDueDate('overdue', 'Overdue')">
+                <mat-icon [ngClass]="{'accent-color': filters.dueDate === 'overdue'}">priority_high</mat-icon>
+                <span>Overdue</span>
+            </button>
+            <button [ngClass]="{'accent-color': filters.dueDate === 'today'}" mat-menu-item (click)="changeDueDate('today', 'Today')">
+                <mat-icon [ngClass]="{'accent-color': filters.dueDate === 'today'}">today</mat-icon>
+                <span>Today</span>
+            </button>
+            <button [ngClass]="{'accent-color': filters.dueDate === 'tomorrow'}" mat-menu-item (click)="changeDueDate('tomorrow', 'Tomorrow')">
+                <mat-icon [ngClass]="{'accent-color': filters.dueDate === 'tomorrow'}">forward</mat-icon>
+                <span>Tomorrow</span>
+            </button>
+            <button [ngClass]="{'accent-color': filters.dueDate === 'upcoming'}" mat-menu-item (click)="changeDueDate('upcoming', 'Upcoming')">
+                <mat-icon [ngClass]="{'accent-color': filters.dueDate === 'upcoming'}">upcoming</mat-icon>
+                <span>Upcoming</span>
+            </button>
+            <button [ngClass]="{'accent-color': filters.dueDate === 'unplanned'}" mat-menu-item (click)="changeDueDate('unplanned', 'Unplanned')">
+                <mat-icon [ngClass]="{'accent-color': filters.dueDate === 'unplanned'}">next_plan</mat-icon>
+                <span>Unplanned</span>
+            </button>
+        </ng-template>
+      </mat-menu>
+</mat-chip-list>

@@ -1,6 +1,6 @@
-import { Observable, ReplaySubject } from 'rxjs';
-import { startWith } from 'rxjs/operators';
-import { Filters } from '../tasks/filters';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Filters } from '../my-tasks/filters';
+import { Task } from '../my-tasks/task';
 
 export class NotifierService {
 
@@ -8,18 +8,24 @@ export class NotifierService {
   taskListObs: Observable<any> = this.taskListSubject.asObservable();
 
   taskEditNameSubject: ReplaySubject<any> = new ReplaySubject();
-  taskEditNameObs: Observable<any> = this.taskEditNameSubject.asObservable();
+  taskNameChanged: Observable<any> = this.taskEditNameSubject.asObservable();
   taskEditDescSubject: ReplaySubject<any> = new ReplaySubject();
-  taskEditDescObs: Observable<any> = this.taskEditDescSubject.asObservable();
+  taskDescChanged: Observable<any> = this.taskEditDescSubject.asObservable();
   taskEditDueDateSubject: ReplaySubject<any> = new ReplaySubject();
-  taskEditDueDateObs: Observable<any> = this.taskEditDueDateSubject.asObservable();
+  taskDueDateChanged: Observable<any> = this.taskEditDueDateSubject.asObservable();
+  taskIsDoneSubject: ReplaySubject<boolean> = new ReplaySubject();
+  taskIsDoneChanged: Observable<boolean> = this.taskIsDoneSubject.asObservable();
 
+  taskUpdatedSubject: Subject<Task> = new Subject();
+  taskUpdated: Observable<Task> = this.taskUpdatedSubject.asObservable();
+  taskAddedSubject: Subject<Task> = new Subject();
+  taskAdded: Observable<Task> = this.taskAddedSubject.asObservable();
 
   notify = (data: RepollData) => {
     this.taskListSubject.next(data)
   }
 
-  genericNotify(subject: ReplaySubject<any>, data: any): void {
+  genericNotify(subject: Subject<any>, data: any): void {
     subject.next(data);
   }
 }

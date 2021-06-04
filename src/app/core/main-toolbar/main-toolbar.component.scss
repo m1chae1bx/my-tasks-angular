@@ -1,0 +1,117 @@
+@keyframes fadeSlideInFromRight {
+  from { opacity: 0; transform: translateX(4px);}
+  to { opacity: 1; transform: translateX(0px);}
+}
+
+@-webkit-keyframes fadeSlideInFromRight {
+  from { opacity: 0; transform: translateX(4px);}
+  to { opacity: 1; transform: translateX(0px);}
+}
+
+@keyframes fadeSlideInFromLeft {
+  from { opacity: 0; transform: translateX(-4px);}
+  to { opacity: 1; transform: translateX(0px);}
+}
+
+@-webkit-keyframes fadeSlideInFromLeft {
+  from { opacity: 0; transform: translateX(-4px);}
+  to { opacity: 1; transform: translateX(0px);}
+}
+
+.grid {
+  grid-template-columns: max-content auto max-content;
+  grid-template-rows: 44px;
+  padding: 12px 16px 0;
+  align-items: center;
+}
+
+.search-bar {
+  width: 100%;
+}
+  
+.search-btn {
+  float: right;
+}
+  
+.back-btn {
+  float: left;
+  margin-left: -8px;
+}
+
+.menu-btn {
+  float: right;
+  margin-right: -8px;
+}
+
+.title .title-content {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  display: flex;
+  display: -webkit-flex; // For Safari
+  align-items: center;
+}
+
+.grid.searching {
+  grid-template-columns: max-content auto;
+}
+
+.title.searching, .search-btn.searching, .menu-btn.searching {
+  display: none;
+}
+
+.search-bar.searching, .back-btn.searching {
+  display: block;
+}
+
+@media only screen and (max-width: 520px) {
+  .grid {
+    grid-template-columns: auto max-content max-content;
+  }
+
+  .search-bar {
+    display: none;
+  }
+  
+  .back-btn {
+    display: none;
+  }
+  
+  .search-btn {
+    display: block;
+  }
+
+  .title-text.reappear {
+    animation-name: fadeSlideInFromLeft;
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+  }
+
+  .search-bar.searching {
+    display: block;
+    animation-name: fadeSlideInFromRight;
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+  }
+}
+
+@media only screen and (min-width: 521px) {
+  .grid {
+    grid-template-columns: max-content auto max-content !important;
+    margin: auto;
+    width: 500px;
+  }
+  .search-btn {
+    display: none;
+  }
+  .back-btn {
+    display: none !important;
+  }
+  .search-bar {
+    display: block;
+    width: 300px !important;
+    margin-left: 12px;
+  }
+  .title, .menu-btn {
+    display: block !important;
+  }
+}

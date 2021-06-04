@@ -1,0 +1,75 @@
+<div class="action-item flex" (click)="openMenu($event)">
+  <mat-icon 
+    class="action-icon flex items-center" 
+    aria-hidden="true"
+    [ngClass]="{
+      'accent-color': dueDateFormControl.value
+    }"
+  >calendar_today</mat-icon>
+  <span #menuTrigger [matMenuTriggerFor]="menu"></span>
+  <div 
+    class="action-typo flex items-center margin-left-large flex-auto justify-space-between" 
+    [ngClass]="{
+      'accent-color': dueDateFormControl.value
+    }"
+  >
+    <span *ngIf="!dueDateFormControl.value; else dueDateVal">
+      Set Due Date
+    </span>
+    <ng-template #dueDateVal>
+      <span>
+        <ng-container *ngIf="isToday; else tomorrow">Today</ng-container>
+        <ng-template #tomorrow>
+          <ng-container *ngIf="isTomorrow else displayDate">Tomorrow</ng-container>
+        </ng-template>
+        <ng-template #displayDate>
+          {{ isCurrentYear ? (dueDateFormControl.value | date:'MMM d') : (dueDateFormControl.value | date) }} 
+          <span *ngIf="isOverdue && !completed" class="warn-color"> - Overdue</span>
+        </ng-template>
+      </span>
+    </ng-template>
+    
+  </div>
+</div>
+<mat-menu #menu="matMenu" yPosition="above">
+  <ng-template matMenuContent>
+      <button mat-menu-item (click)="setDueDate(9)">
+        <mat-icon>edit_calendar</mat-icon>
+        <span>Custom Date</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="setDueDate(7)">
+        <mat-icon>fast_forward</mat-icon>
+        <span class="menu-item-text">Next Week</span>
+        <span class="margin-left-small italic">{{getDate(7) | date:'MMM d'}}</span>
+      </button>
+      <button mat-menu-item (click)="setDueDate(2)">
+        <mat-icon>looks_two</mat-icon>
+        <span class="menu-item-text">In 2 Days</span>
+        <span class="margin-left-small italic">{{getDate(2) | date:'MMM d'}}</span>
+      </button>
+      <button mat-menu-item (click)="setDueDate(1)">
+        <mat-icon>plus_one</mat-icon>
+        <span class="menu-item-text">Tomorrow</span>
+        <span class="margin-left-small italic">{{getDay(1)}}</span>
+      </button>
+      <button mat-menu-item (click)="setDueDate(0)">
+        <mat-icon>today</mat-icon>
+        <span class="menu-item-text">Today</span>
+        <span class="margin-left-small italic">{{getDay(0)}}</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="clearDueDate()" [disabled]="!dueDateFormControl.value">
+        <mat-icon>clear</mat-icon>
+        <span class="menu-item-text">Clear</span>
+      </button>
+  </ng-template>
+</mat-menu>
+<input 
+    matInput 
+    [matDatepicker]="picker"
+    [hidden]="true"
+    (dateChange)="onChangeDate()"
+    [formControl]="dueDateFormControl"
+>
+<mat-datepicker touchUi #picker></mat-datepicker>

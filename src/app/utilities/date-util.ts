@@ -26,6 +26,10 @@ export class DateUtil {
             && this.tomorrow.getFullYear() === date?.getFullYear();
     }
 
+    static isOverdue(date: Date): boolean {
+        return date?.getTime() < DateUtil.today.getTime();
+    }
+
     static isCurrentYear(date: Date): boolean {
         return this.today.getFullYear() === date?.getFullYear();
     }

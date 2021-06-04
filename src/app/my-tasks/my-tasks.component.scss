@@ -1,0 +1,156 @@
+@keyframes slideInFromTop {
+    from { transform: translateY(-126px);}
+    to { transform: translateY(0px);}
+}
+
+@keyframes slideOutToTop {
+    from { transform: translateY(0px);}
+    to { transform: translateY(-126px);}
+}
+
+@keyframes grow {
+    from { transform: scale(0);}
+    to { transform: scale(1);}
+}
+
+@keyframes shrink {
+    from { transform: scale(1);}
+    to { transform: scale(0);}
+}
+
+.add-btn.hide {
+    animation-name: shrink;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.add-btn {
+    animation-name: grow;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@media only screen and (max-width: 768px) {
+    .add-btn {
+        right: 0;
+        margin-right: 16px;
+    } 
+}
+
+@media only screen and (min-width: 769px) {
+    .add-btn {
+        right: 50%;
+        margin-right: -28px;
+    } 
+}
+
+.placeholder {
+    height: 115px;
+    display: none;
+}
+
+.header {
+    // background-image: linear-gradient( 109.6deg,  rgba(62,161,219,1) 11.2%, rgba(93,52,236,1) 100.2% );
+    // background-image: linear-gradient(109.6deg, #3ea1db 11.2%, #8160f7 100.2%)
+}
+
+.header.fixed.no-animation {
+    animation: none !important;
+    visibility: hidden;
+}
+
+.header.fixed {
+    animation-name: slideInFromTop;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+}
+
+.header.fixed.slide-out {
+    animation-name: slideOutToTop;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+/**********************************************************************
+    Side Navigation
+ **********************************************************************/
+
+.drawer-container {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.drawer-sidenav {
+    .close-menu-btn {
+        display: inline-block;
+    }
+
+    .navbar {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .drawer-sidenav {
+        width: 250px;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    .drawer-sidenav {
+        width: 250px;
+    }
+}
+
+/**********************************************************************
+    Tasks Main Div
+ **********************************************************************/
+
+.tasks {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: auto;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .page {
+        .content {
+            padding-top: 12px;
+            .app-task-list {
+                margin: auto;
+            }
+        }
+    } 
+}
+
+@media only screen and (max-width: 520px) {
+    .page {
+        .content {
+            padding-bottom: 60%;
+
+            .app-task-list {
+                width: auto;
+                //margin: 0 12px;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 521px) {
+    .page {
+        .content { 
+            padding-top: 16px;
+            .app-task-list {
+                width: 500px;
+                margin: auto;
+            }
+        }
+    }
+}

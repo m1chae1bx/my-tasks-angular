@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NotifierService } from '../../services/notifier.service'
+import { NotifierService } from '../../../services/notifier.service'
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar';

@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { DeleteAccountDialogComponent } from 'src/app/manage-account/delete-account-dialog/delete-account-dialog.component';
+import { DeleteAccountDialogComponent } from 'src/app/sub-modules/manage-account/delete-account-dialog/delete-account-dialog.component';
 import { AuthService, User } from 'src/app/services/auth.service';
 
 @Component({

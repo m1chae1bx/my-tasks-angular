@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { Filters } from '../filters';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { NotifierService, RepollData } from '../../services/notifier.service'
+import { NotifierService, RepollData } from '../../../services/notifier.service'
 
 @Component({
   selector: 'app-task-filters',

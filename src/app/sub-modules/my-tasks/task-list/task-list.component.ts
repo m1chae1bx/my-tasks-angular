@@ -2,8 +2,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Language } from 'src/app/utilities/language';
-import { NotifierService } from '../../services/notifier.service'
-import { TaskService } from '../../services/task.service';
+import { NotifierService } from '../../../services/notifier.service'
+import { TaskService } from '../../../services/task.service';
 import { Filters } from '../filters';
 import { Task } from '../task';
 

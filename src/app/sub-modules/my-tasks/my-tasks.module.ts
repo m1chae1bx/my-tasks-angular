@@ -25,7 +25,7 @@ import { MyTasksComponent } from './my-tasks.component';
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskFiltersComponent } from './task-filters/task-filters.component';
-import { NavbarComponent } from '../core/navbar/navbar.component';
+import { NavbarComponent } from '../../sub-components/navbar/navbar.component';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { TaskSetDueDateComponent } from './task-item/task-set-due-date/task-set-due-date.component';

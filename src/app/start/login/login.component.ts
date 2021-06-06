@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(payload).subscribe(
       response => {
         console.log(response);
-        this.snackBar.open('Signed in successfully', null, {duration: 2000});
+        this.snackBar.open('Signed in successfully', null, {duration: 1500});
         this.router.navigate(['/my-tasks']);
       },
       (error: HttpErrorResponse) => {

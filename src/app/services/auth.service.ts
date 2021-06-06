@@ -121,13 +121,30 @@ export class AuthService {
     );
   }
 
-  public logout(): void {
+  public deleteAccount(password: string): Observable<any> {
+    const user: User = this.getUser();
+    return this.http.request(
+      'delete',
+      `${baseUrl}/user/${user._id}`, 
+      {
+        body: {
+          password: password
+        },
+        headers: this.getAuthHeader()
+      }
+    );
+  }
+
+  public removeSession(): void {
     this.token = '';
     this.user = null;
     window.localStorage.removeItem('mean-token');
     window.localStorage.removeItem('user');
-    this.snackBar.open('Signed out successfully', null, {duration: 2000});
-    console.log('logging out...');
+  }
+
+  public logout(): void {
+    this.removeSession();
+    this.snackBar.open('Signed out successfully', null, {duration: 1500});
     this.router.navigateByUrl('/');
   }
 }

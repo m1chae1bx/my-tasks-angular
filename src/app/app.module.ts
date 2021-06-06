@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StartModule } from './start/start.module';
+import { ManageAccountModule } from './manage-account/manage-account.module';
 
 import { AppComponent } from './app.component';
 
@@ -21,7 +22,8 @@ import { NotifierService } from './services/notifier.service';
     MyTasksModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StartModule
+    StartModule,
+    ManageAccountModule
   ],
   providers: [NotifierService],
   bootstrap: [AppComponent]

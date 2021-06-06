@@ -4,7 +4,7 @@
         <app-navbar class="navbar"></app-navbar>
     </mat-drawer> -->
     <mat-drawer #drawer class="drawer-sidenav" mode="over" position="end">
-        <app-navbar class="navbar"></app-navbar>
+        <app-navbar class="navbar" (done)="toggleSidenav()"></app-navbar>
     </mat-drawer>
     <mat-drawer-content (scroll)="onScroll($event)"> 
         <div class="tasks">

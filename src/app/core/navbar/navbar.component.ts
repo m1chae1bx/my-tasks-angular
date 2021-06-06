@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DeleteAccountDialogComponent } from 'src/app/manage-account/delete-account-dialog/delete-account-dialog.component';
 import { AuthService, User } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,11 +13,13 @@ import { AuthService, User } from 'src/app/services/auth.service';
 export class NavbarComponent implements OnInit {
 
   user: User;
+  @Output() done = new EventEmitter();
 
   constructor(
     private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +32,13 @@ export class NavbarComponent implements OnInit {
 
   edit(): void {
     this.snackBar.open('This functionality is not yet implemented.', null, {duration: 2000})
+  }
+
+  openDeleteDialog(): void {
+    this.done.emit();
+    this.dialog.open(DeleteAccountDialogComponent, {
+      width: '400px'
+    });
   }
 
 }

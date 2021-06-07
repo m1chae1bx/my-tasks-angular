@@ -31,7 +31,9 @@ export class NavbarComponent implements OnInit {
   }
 
   edit(): void {
-    this.snackBar.open('This functionality is not yet implemented.', null, {duration: 2000})
+    console.log('current url', this.router.url);
+    this.router.navigate(['/edit-profile'], { queryParams: {backUrl: this.router.url}});
+    // this.snackBar.open('This functionality is not yet implemented.', null, {duration: 2000})
   }
 
   openDeleteDialog(): void {

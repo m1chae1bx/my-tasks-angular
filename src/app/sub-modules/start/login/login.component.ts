@@ -4,11 +4,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService, LoginPayload } from 'src/app/services/auth.service';
+import { fade } from 'src/app/utilities/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [fade]
 })
 export class LoginComponent implements OnInit {
 
@@ -76,6 +78,16 @@ export class LoginComponent implements OnInit {
         }
       }
     )
+  }
+
+  trim(control: string): void {
+    switch(control) {
+      case 'username':
+        this.username.setValue(this.username.value?.trim());
+        break;
+      default:
+        break;
+    }
   }
 
 }

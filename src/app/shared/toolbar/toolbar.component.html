@@ -1,0 +1,22 @@
+<div class="default-bg-color full-width z-toolbar">
+  <div class="content flex items-center max-width-500 margin-auto padding-medium padding-left-small">
+    <button
+      *ngIf="backUrl"
+      mat-icon-button 
+      aria-label="back-btn" 
+      color="primary"
+      class="margin-right-x-small"
+      (click)="back()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="flex-auto flex justify-space-between">
+      <span *ngIf="title" class="main font-large bold primary-color">
+        {{title}}
+      </span>
+      <ng-content></ng-content>
+    </div>
+    
+  </div>
+</div>
+<mat-divider></mat-divider>

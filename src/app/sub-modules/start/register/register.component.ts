@@ -1,15 +1,17 @@
-import { ThrowStmt } from '@angular/compiler';
+import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, Form, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService, RegisterPayload } from 'src/app/services/auth.service';
+import { fade } from 'src/app/utilities/animations';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [fade]
 })
 export class RegisterComponent implements OnInit {
 
@@ -104,6 +106,25 @@ export class RegisterComponent implements OnInit {
       }
       return;
     };
+  }
+
+  trim(control: string): void {
+    switch(control) {
+      case 'fullName':
+        this.fullName.setValue(this.fullName.value?.trim());
+        break;
+      case 'nickname':
+        this.nickname.setValue(this.nickname.value?.trim());
+        break;
+      case 'username':
+        this.username.setValue(this.username.value?.trim());
+        break;
+      case 'email':
+        this.email.setValue(this.email.value?.trim());
+        break;
+      default:
+        break;
+    }
   }
 
 }

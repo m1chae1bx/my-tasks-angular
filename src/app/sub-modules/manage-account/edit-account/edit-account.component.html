@@ -1,0 +1,90 @@
+<app-toolbar 
+  [backUrl]="backUrl"
+  title="Edit Account"
+>
+  <button 
+    mat-button 
+    type="submit" 
+    form="editForm" 
+    color="accent"
+    [disabled]="!editForm.valid || isSaving"
+  >
+    <div *ngIf="isSaving" class="spinner-container">
+      <mat-spinner color="accent" diameter="24"></mat-spinner>
+    </div>
+    <span [ngClass]="{'hidden': isSaving}">Save</span>
+  </button>
+</app-toolbar>
+<div class="full-width max-width-500 margin-top-medium margin-auto" @fade>
+  <mat-card class="mat-elevation-z0 border-not-rounded-500">
+    <form 
+      id="editForm"
+      [formGroup]="editForm" 
+      class="flex flex-column" 
+      (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">badge</mat-icon>
+        <input
+          matInput
+          required
+          maxlength="200"
+          [formControl]="fullName"
+          (blur)="trim('fullName')"
+        >
+        <mat-error *ngIf="fullName.invalid">
+          <div *ngIf="fullName.errors?.required">Full Name is required</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="margin-bottom-medium">
+        <mat-label>Nickname</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">person</mat-icon>
+        <input
+          matInput
+          required
+          maxlength="20"
+          [formControl]="nickname"
+          (blur)="trim('nickname')"
+        >
+        <mat-hint>This will be used to refer to you in the app</mat-hint>
+        <mat-error *ngIf="nickname.invalid">
+          <div *ngIf="nickname.errors?.required">Nickname is required</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">email</mat-icon>
+        <input
+          matInput
+          required
+          maxlength="100"
+          [formControl]="email"
+          [email]="true"
+        >
+        <mat-error *ngIf="email.invalid">
+          <div *ngIf="email.errors?.required">Email address is required</div>
+          <div *ngIf="email.errors?.email">Please enter a valid email address</div>
+          <div *ngIf="email.errors?.unavailable">Email address already registered</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="">
+        <mat-label>Username</mat-label>
+        <mat-icon matPrefix color="primary" class="margin-right-small">account_circle</mat-icon>
+        <input
+          matInput
+          required
+          maxlength="30"
+          minlength="6"
+          pattern="[A-Za-z0-9.]*"
+          [formControl]="username"
+        >
+        <mat-error *ngIf="username.invalid">
+          <div *ngIf="username.errors?.required">Username is required</div>
+          <div *ngIf="username.errors?.pattern" class="margin-bottom-x-small">Letters (a-z), numbers (0-9) & periods (.) only</div>
+          <div *ngIf="username.errors?.minlength">Username must be at least 6 characters</div>
+          <div *ngIf="username.errors?.unavailable">Username already taken</div>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card>
+</div>

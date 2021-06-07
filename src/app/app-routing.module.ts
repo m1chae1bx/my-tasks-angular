@@ -7,11 +7,13 @@ import { LandingComponent } from './sub-modules/start/landing/landing.component'
 import { LoginComponent } from './sub-modules/start/login/login.component';
 import { RegisterComponent } from './sub-modules/start/register/register.component';
 import { StartComponent } from './sub-modules/start/start.component';
+import { EditAccountComponent } from './sub-modules/manage-account/edit-account/edit-account.component';
 
 const routes: Routes = [
-  { path: 'my-tasks', component: MyTasksComponent, canActivate: [AuthGuard] },
+  { path: 'my-tasks', component: MyTasksComponent, canActivate: [AuthGuard], data: { animation: 'MyTasks'} },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'edit-profile', component: EditAccountComponent, data: { animation: 'EditAccount' } },
   { path: '', component: StartComponent },
   // { path: '**', component: PageNotFoundComponent }, @TODO
 ];

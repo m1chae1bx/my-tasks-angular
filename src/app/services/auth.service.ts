@@ -28,6 +28,11 @@ export interface RegisterPayload {
   nickname: string
 }
 
+export interface EditAccountPayload {
+  fullName: string,
+  nickname: string
+}
+
 interface TokenResponse {
   token: string;
 }
@@ -117,6 +122,15 @@ export class AuthService {
       switchMap((data: TokenResponse) => {
         this.saveToken(data.token);
         return this.loadUserFromDB(this.loadUserFromToken(data.token));
+      })
+    );
+  }
+
+  public editAccount(payload: EditAccountPayload): Observable<any> {
+    const user: User = this.getUser();
+    return this.http.put(`${baseUrl}/user/${user._id}`, payload, { headers: this.getAuthHeader()}).pipe(
+      switchMap(() => {
+        return this.loadUserFromDB(user);
       })
     );
   }

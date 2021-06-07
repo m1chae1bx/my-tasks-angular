@@ -1,5 +1,5 @@
-<div class="register-div full-width-500 full-height-500 flex flex-column">
-  <mat-card class="border-not-rounded-500 mat-elevation-z0 basic-shadow flex-auto">
+<div class="register-div max-width-500 full-height-500 flex flex-column">
+  <mat-card class="border-not-rounded-500 mat-elevation-z0 basic-shadow flex-auto" @fade>
     <div class="flex flex-column justify-center margin-top-large">
       <div class="primary-color font-x-large bold text-center">[App Title]</div>
       <div class="primary-color font-large text-center margin-top-large margin-bottom-xx-large">
@@ -14,6 +14,7 @@
             required
             maxlength="200"
             [formControl]="fullName"
+            (blur)="trim('fullName')"
           >
           <mat-icon matSuffix *ngIf="fullName.valid" class="success-color">check</mat-icon>
           <mat-error *ngIf="fullName.invalid">
@@ -28,6 +29,7 @@
             required
             maxlength="20"
             [formControl]="nickname"
+            (blur)="trim('nickname')"
           >
           <mat-icon matSuffix *ngIf="nickname.valid" class="success-color">check</mat-icon>
           <mat-hint>This will be used to refer to you in the app</mat-hint>
@@ -44,6 +46,7 @@
             maxlength="100"
             [formControl]="email"
             [email]="true"
+            (blur)="trim('email')"
           >
           <mat-icon matSuffix *ngIf="email.valid" class="success-color">check</mat-icon>
           <mat-error *ngIf="email.invalid">
@@ -62,6 +65,7 @@
             minlength="6"
             pattern="[A-Za-z0-9.]*"
             [formControl]="username"
+            (blur)="trim('username')"
           >
           <mat-icon matSuffix *ngIf="username.valid" class="success-color">check</mat-icon>
           <mat-hint>

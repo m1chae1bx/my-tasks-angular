@@ -1,6 +1,6 @@
 import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { Filters } from '../sub-modules/my-tasks/filters';
-import { Task } from '../sub-modules/my-tasks/task';
+import { Filters } from '../my-tasks/filters';
+import { Task } from '../my-tasks/task';
 
 export class NotifierService {
 

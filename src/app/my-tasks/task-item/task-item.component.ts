@@ -1,8 +1,8 @@
 import { AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Task } from '../task';
-import { TaskService } from '../../../services/task.service';
-import { NotifierService } from '../../../services/notifier.service';
-import { DateUtil } from '../../../utilities/date-util';
+import { TaskService } from '../../services/task.service';
+import { NotifierService } from '../../services/notifier.service';
+import { DateUtil } from '../../utilities/date-util';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatBottomSheet} from '@angular/material/bottom-sheet';
 import { take } from 'rxjs/operators';

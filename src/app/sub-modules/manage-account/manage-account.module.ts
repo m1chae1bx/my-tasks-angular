@@ -12,9 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ToolbarModule } from 'src/app/shared/toolbar/toolbar.module';
 import { MatCardModule } from '@angular/material/card';
-
-
-
+import { ManageAccountRoutingModule } from './manage-account-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +30,8 @@ import { MatCardModule } from '@angular/material/card';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     ToolbarModule,
-    MatCardModule
+    MatCardModule,
+    ManageAccountRoutingModule
   ]
 })
 export class ManageAccountModule { }

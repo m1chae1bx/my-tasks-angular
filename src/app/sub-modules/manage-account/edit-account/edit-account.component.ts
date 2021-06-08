@@ -57,7 +57,7 @@ export class EditAccountComponent implements OnInit {
       response => {
         this.isSaving = false;
         console.log('yey', response); // @todo
-        this.snackBar.open('Your account has been updated successfully.', null, {duration: 1500});
+        this.snackBar.open('Your account has been updated successfully', null, {duration: 1500});
       },
       error => {
         this.isSaving = false;

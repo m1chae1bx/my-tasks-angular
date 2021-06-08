@@ -37,6 +37,7 @@ import { TaskSetDescComponent } from './task-item/task-set-desc/task-set-desc.co
 import { SubToolbarComponent } from './sub-toolbar/sub-toolbar.component';
 import { AddTaskSheetComponent } from './add-task-sheet/add-task-sheet.component';
 import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.component';
+import { MyTasksRoutingModule } from './my-tasks-routing.module';
 @NgModule({
   declarations: [
     MyTasksComponent,
@@ -78,7 +79,8 @@ import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.compon
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
-    MatRippleModule
+    MatRippleModule,
+    MyTasksRoutingModule
   ],
   exports: [
     MyTasksComponent

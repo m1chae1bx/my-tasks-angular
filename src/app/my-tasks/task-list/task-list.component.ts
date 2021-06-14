@@ -72,10 +72,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
     )
       .subscribe(
         data => {
-          this.tasks = data.map((x: { _id: any; name: any; desc: any; dueDate: any; completed: any; }) => {
+          this.tasks = data.map((x: { id: any; name: any; desc: any; dueDate: any; completed: any; }) => {
             return <Task>
             {
-              id: x._id,
+              id: x.id,
               name: x.name,
               desc: x.desc,
               dueDate: x.dueDate ? new Date(x.dueDate) : null,
@@ -106,10 +106,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
     )
       .subscribe(
         data => {
-          tasks = data.map((x: { _id: any; name: any; desc: any; dueDate: any; completed: any; }) => {
+          tasks = data.map((x: { id: any; name: any; desc: any; dueDate: any; completed: any; }) => {
             return <Task>
             {
-              id: x._id,
+              id: x.id,
               name: x.name,
               desc: x.desc,
               dueDate: x.dueDate ? new Date(x.dueDate) : null,

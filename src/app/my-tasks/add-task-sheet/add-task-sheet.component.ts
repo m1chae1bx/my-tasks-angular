@@ -74,7 +74,7 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
           /* Move to Add Task workflow */
           // this.NotifierService.genericNotify(this.NotifierService.taskAddedSubject, 
           //   <Task>{
-          //     id: response._id,
+          //     id: response.id,
           //     name: response.name,
           //     desc: response.desc,
           //     dueDate: response.dueDate,

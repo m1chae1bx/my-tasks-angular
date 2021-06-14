@@ -32,6 +32,7 @@
           <mat-error *ngIf="password.invalid">
             <div *ngIf="password.errors?.required">Password is required</div>
             <div *ngIf="password.errors?.incorrect">Password is incorrect</div>
+            <div *ngIf="password.errors?.badCredentials">Incorrect username or password</div>
           </mat-error>
         </mat-form-field>
         <button 

@@ -41,7 +41,7 @@ export class EditAccountComponent implements OnInit {
       'username': this.username,
     });
     this.user = this.auth.getUser();
-    this.fullName.setValue(this.user.fullname);
+    this.fullName.setValue(this.user.fullName);
     this.nickname.setValue(this.user.nickname);
     this.email.setValue(this.user.email);
     this.username.setValue(this.user.username);

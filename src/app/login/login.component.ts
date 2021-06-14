@@ -67,6 +67,10 @@ export class LoginComponent implements OnInit {
             case 'pass':
               this.password.setErrors({incorrect: true});
               break;
+            case 'badCredentials':
+              this.username.setErrors({badCredentials: true});
+              this.password.setErrors({badCredentials: true});
+              break;
             default:
               console.log(error);
               this.snackBar.open('An error occured while signing in. Please try again later.', null, {duration: 4000});

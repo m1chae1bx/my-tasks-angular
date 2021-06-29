@@ -40,7 +40,7 @@
           type="submit" 
           color="accent" 
           class="special-btn margin-top-small"
-          [disabled]="!loginFormGroup.valid || isLoggingIn"
+          [disabled]="isLoggingIn"
         >
           <div *ngIf="isLoggingIn" class="spinner-container">
             <mat-spinner color="accent" diameter="24"></mat-spinner>

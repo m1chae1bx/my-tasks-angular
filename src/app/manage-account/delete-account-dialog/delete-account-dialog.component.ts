@@ -40,6 +40,7 @@ export class DeleteAccountDialogComponent implements OnInit {
         if (error.status === 401) {
           switch(error.error?.code) {
             case 'pass':
+            case 'badCredentials':
               this.password.setErrors({incorrect: true});
               break;
             default:

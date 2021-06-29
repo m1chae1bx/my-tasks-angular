@@ -92,6 +92,7 @@ export class AuthService {
         user.fullName = result.fullName;
         user.username = result.username;
         user.nickname = result.nickname;
+        user.email    = result.email;
         this.saveUser(user);
       })
     );
@@ -146,6 +147,7 @@ export class AuthService {
       `${baseUrl}/user/${user.id}`, 
       {
         body: {
+          username: user.username,
           password: password
         },
         headers: this.getAuthHeader()

@@ -28,7 +28,7 @@ export class TaskService {
   }
 
   update(id: String, data): Observable<any> { // @todo fix typing for data
-    return this.http.put(baseUrl, data, { headers: this.auth.getAuthHeader()});
+    return this.http.put(`${baseUrl}/${id}`, data, { headers: this.auth.getAuthHeader()});
   }
 
   delete(id: String): Observable<any> {

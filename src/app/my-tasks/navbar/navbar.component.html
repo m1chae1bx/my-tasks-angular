@@ -2,7 +2,7 @@
   <div class="font-xx-large flex items-center padding-large">
     <mat-icon color="primary" inline="true" class="margin-right-small">account_circle</mat-icon>
     <span>
-      <div class="font-large bold primary-color">{{user.fullname}}</div>
+      <div class="font-large bold primary-color">{{user.fullName}}</div>
       <div class="font-small">@{{user.username}}</div>
     </span>
   </div>
@@ -18,7 +18,7 @@
       <a mat-list-item class="action-typo" (click)="edit()">
         <div class="font-medium flex items-center">
           <mat-icon class="margin-right-large" inline="true">edit</mat-icon>
-          <span>Edit Profile</span>
+          <span>Edit Account</span>
         </div>
       </a>
       <a mat-list-item class="action-typo" (click)="logout()">
@@ -27,7 +27,7 @@
           <span>Sign Out</span>
         </div>
       </a>
-      <a mat-list-item class="action-typo">
+      <a mat-list-item class="action-typo" (click)="openDeleteDialog()">
         <div class="font-medium flex items-center warn-color">
           <mat-icon class="margin-right-large" inline="true">delete</mat-icon>
           <span>Delete Account</span>

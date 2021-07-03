@@ -4,7 +4,7 @@ import { Task } from '../my-tasks/task';
 
 export class NotifierService {
 
-  taskListSubject: ReplaySubject<any> = new ReplaySubject();
+  taskListSubject: Subject<any> = new Subject();
   taskListObs: Observable<any> = this.taskListSubject.asObservable();
 
   taskEditNameSubject: ReplaySubject<any> = new ReplaySubject();

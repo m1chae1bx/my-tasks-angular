@@ -1,17 +1,29 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { MyTasksComponent } from './my-tasks/my-tasks.component';
 import { AuthGuard } from './services/auth.guard';
-import { LandingComponent } from './start/landing/landing.component';
-import { LoginComponent } from './start/login/login.component';
-import { RegisterComponent } from './start/register/register.component';
 import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
-  { path: 'my-tasks', component: MyTasksComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { 
+    path: 'my-tasks', 
+    loadChildren:() => import('./my-tasks/my-tasks.module').then(m => m.MyTasksModule), 
+    canActivate: [AuthGuard], 
+    // data: { animation: 'MyTasks'} // @todo For router animation
+  },
+  { 
+    path: 'login', 
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule), 
+  },
+  { 
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterModule), 
+  },
+  { 
+    path: 'manage-account', 
+    loadChildren: () => import('./manage-account/manage-account.module').then(m => m.ManageAccountModule), 
+    canActivate: [AuthGuard], 
+    // data: { animation: 'EditAccount' } // @todo For router animation
+  },
   { path: '', component: StartComponent },
   // { path: '**', component: PageNotFoundComponent }, @TODO
 ];

@@ -107,10 +107,11 @@ export class EditTaskSheetComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           this.dismiss();// @todo what if this is moved to output emitter
-          this.notifierService.genericNotify(this.notifierService.taskUpdatedSubject, this.task);
           if (this.task.completed) {
+            this.notifierService.genericNotify(this.notifierService.taskUpdatedSubject, this.task);
             this.snackBar.open('Task completed', null, { duration: 1500 });
           } else {
+            this.notifierService.notify(<RepollData>{});
             this.snackBar.open('Task updated', null, { duration: 1500 });
           }
           console.log(response);

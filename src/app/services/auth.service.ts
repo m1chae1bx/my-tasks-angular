@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 export interface User {
-  _id: string,
+  id: string,
   email: string,
   username: string,
   nickname?: string,
-  fullname?: string
+  fullName?: string
   exp: number,
   iat: number
 }
@@ -24,6 +24,11 @@ export interface RegisterPayload {
   username: string,
   password: string,
   email: string,
+  fullName: string,
+  nickname: string
+}
+
+export interface EditAccountPayload {
   fullName: string,
   nickname: string
 }
@@ -75,14 +80,19 @@ export class AuthService {
   private loadUserFromToken(token: string): User {
     var payload = token.split('.')[1];
     payload = window.atob(payload);
+    console.log(JSON.parse(window.atob(token.split('.')[0])))
+    // console.log(JSON.parse(window.atob(token.split('.')[2])))
     return JSON.parse(payload);
   }
 
   private loadUserFromDB(user: User): Observable<any> {
-    return this.http.get(`${baseUrl}/user/${user._id}`, {headers: this.getAuthHeader()}).pipe(
+    console.log(user);
+    return this.http.get(`${baseUrl}/user/${user.id}`, {headers: this.getAuthHeader()}).pipe(
       map((result: User) => {
-        user.fullname = result.fullname;
+        user.fullName = result.fullName;
+        user.username = result.username;
         user.nickname = result.nickname;
+        user.email    = result.email;
         this.saveUser(user);
       })
     );
@@ -104,7 +114,7 @@ export class AuthService {
   }
 
   public login(user: LoginPayload): Observable<any> {
-    return this.http.post(`${baseUrl}/login`, user).pipe(
+    return this.http.post(`${baseUrl}/auth/login`, user).pipe(
       switchMap((data: TokenResponse) => {
         this.saveToken(data.token);
         return this.loadUserFromDB(this.loadUserFromToken(data.token));
@@ -113,7 +123,7 @@ export class AuthService {
   }
 
   public register(user: RegisterPayload): Observable<any> {
-    return this.http.post(`${baseUrl}/register`, user).pipe(
+    return this.http.post(`${baseUrl}/auth/register`, user).pipe(
       switchMap((data: TokenResponse) => {
         this.saveToken(data.token);
         return this.loadUserFromDB(this.loadUserFromToken(data.token));
@@ -121,13 +131,40 @@ export class AuthService {
     );
   }
 
-  public logout(): void {
+  public editAccount(payload: EditAccountPayload): Observable<any> {
+    const user: User = this.getUser();
+    return this.http.put(`${baseUrl}/user/${user.id}`, payload, { headers: this.getAuthHeader()}).pipe(
+      switchMap(() => {
+        return this.loadUserFromDB(user);
+      })
+    );
+  }
+
+  public deleteAccount(password: string): Observable<any> {
+    const user: User = this.getUser();
+    return this.http.request(
+      'delete',
+      `${baseUrl}/user/${user.id}`, 
+      {
+        body: {
+          username: user.username,
+          password: password
+        },
+        headers: this.getAuthHeader()
+      }
+    );
+  }
+
+  public removeSession(): void {
     this.token = '';
     this.user = null;
     window.localStorage.removeItem('mean-token');
     window.localStorage.removeItem('user');
-    this.snackBar.open('Signed out successfully', null, {duration: 2000});
-    console.log('logging out...');
+  }
+
+  public logout(): void {
+    this.removeSession();
+    this.snackBar.open('Signed out successfully', null, {duration: 1500});
     this.router.navigateByUrl('/');
   }
 }

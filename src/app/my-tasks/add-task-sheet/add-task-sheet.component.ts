@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatButton } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotifierService, RepollData } from 'src/app/services/notifier.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../task';
 import { TaskSetNameComponent } from '../task-item/task-set-name/task-set-name.component';
@@ -34,7 +35,8 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
   constructor(
     private taskService: TaskService,
     private snackBar: MatSnackBar,
-    private bottomSheetRef: MatBottomSheetRef<AddTaskSheetComponent>
+    private bottomSheetRef: MatBottomSheetRef<AddTaskSheetComponent>,
+    private notifierService: NotifierService
   ) { }
 
   ngOnInit(): void {
@@ -70,11 +72,12 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
         response => {
           console.log(response);
           // this.isSaving = false;
+          this.notifierService.notify(<RepollData>{});
           this.dismiss();
           /* Move to Add Task workflow */
           // this.NotifierService.genericNotify(this.NotifierService.taskAddedSubject, 
           //   <Task>{
-          //     id: response._id,
+          //     id: response.id,
           //     name: response.name,
           //     desc: response.desc,
           //     dueDate: response.dueDate,

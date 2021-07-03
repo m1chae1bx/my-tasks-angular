@@ -1,0 +1,27 @@
+<h1 mat-dialog-title class="warn-color">Delete Account?</h1>
+<div mat-dialog-content>
+  <p>Warning! This will permanently delete your account and all related data.</p>
+  <p>To proceed, please enter your password below.</p>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input 
+      matInput
+      required
+      type="password" 
+      [formControl]="this.password"
+    >
+    <mat-error *ngIf="password.invalid">
+      <div *ngIf="password.errors?.required">Password is required</div>
+      <div *ngIf="password.errors?.incorrect">Password is incorrect</div>
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onDelete()" [disabled]="!password.valid || isDeleting">
+    <div *ngIf="isDeleting" class="spinner-container">
+      <mat-spinner color="accent" diameter="24"></mat-spinner>
+    </div>
+    <span [ngClass]="{'hidden': isDeleting}">Delete</span>
+  </button>
+  <button mat-button (click)="onCancel()" cdkFocusInitial>Cancel</button>
+</div>

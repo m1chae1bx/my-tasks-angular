@@ -66,9 +66,9 @@ body {
     justify-content: flex-end;
 }
 
-.margin-0-auto {
-    margin: 0 auto;
-}
+// .margin-0-auto {
+//     margin: 0 auto;
+// }
 
 .margin-auto {
     margin: auto;
@@ -78,60 +78,64 @@ body {
     text-align: center;
 }
 
-.text-end {
-    text-align: end;
-}
+// .text-end {
+//     text-align: end;
+// }
 
 /* Appearance and Layouting */
 
-.display-none {
-    display: none !important;
-}
+// .display-none {
+//     display: none !important;
+// }
 
-@media only screen and (min-width: 769px) {
-    .display-none-vlap {
-        display: none !important;
-    }
+// @media only screen and (min-width: 769px) {
+//     .display-none-vlap {
+//         display: none !important;
+//     }
 
-    .display-block-vlap {
-        display: block !important;
-    }
-}
+//     .display-block-vlap {
+//         display: block !important;
+//     }
+// }
 
 .display-block {
     display: block !important;
 }
 
-.display-inline {
-    display: inline !important;
-}
+// .display-inline {
+//     display: inline !important;
+// }
 
 .hidden {
     visibility: hidden; // takes up space
 }
 
-.overflow-hidden {
-    overflow: hidden;
-}
+// .overflow-hidden {
+//     overflow: hidden;
+// }
 
 .overflow-y-hidden {
     overflow-x: auto;
     overflow-y: hidden;
 }
 
-.overflow-x-hidden {
-    overflow-x: hidden;
-    overflow-y: auto;
-}
+// .overflow-x-hidden {
+//     overflow-x: hidden;
+//     overflow-y: auto;
+// }
 
-.auto-width {
-    width: auto;
+// .auto-width {
+//     width: auto;
+// }
+
+.max-width-500 {
+    max-width: 500px;
 }
 
 @media only screen and (max-width: 500px) {
-    .full-width-500 {
-        width: 100% !important;
-    }
+    // .full-width-500 {
+    //     width: 100% !important;
+    // }
 
     .full-height-500 {
         height: 100% !important;
@@ -178,17 +182,17 @@ body {
     bottom: 0;
 }
 
-.float-left {
-    float: left;
-}
+// .float-left {
+//     float: left;
+// }
 
-.float-right {
-    float: right;
-}
+// .float-right {
+//     float: right;
+// }
 
-.valign-middle {
-    vertical-align: middle !important;
-}
+// .valign-middle {
+//     vertical-align: middle !important;
+// }
 
 /* Spacing */
 

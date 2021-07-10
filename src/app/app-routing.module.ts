@@ -24,6 +24,11 @@ const routes: Routes = [
     canActivate: [AuthGuard], 
     // data: { animation: 'EditAccount' } // @todo For router animation
   },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule), 
+    canActivate: [AuthGuard],
+  },
   { path: '', component: StartComponent },
   // { path: '**', component: PageNotFoundComponent }, @TODO
 ];

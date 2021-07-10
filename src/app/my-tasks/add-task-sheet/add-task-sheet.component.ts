@@ -67,7 +67,8 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
     };
 
     this.isSaving = true;
-    this.taskService.create(data)
+    this.taskService
+      .create(data)
       .subscribe(
         response => {
           console.log(response);

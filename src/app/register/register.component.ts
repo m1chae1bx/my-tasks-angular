@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
       response => {
         console.log(response);
         this.snackBar.open('Signed up successfully', null, {duration: 2000});
-        this.router.navigate(['/my-tasks']);
+        this.router.navigate(['/welcome']);
       },
       error => {
         this.isSaving = false;

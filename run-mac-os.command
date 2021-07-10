@@ -5,5 +5,5 @@
 # Serve Front-end (Angular)
 cd "$(dirname "$0")"
 echo $PWD
-echo "Executing... ng serve --port 8081"
-ng serve --port 8081
+echo "Executing... ng serve --port 4200"
+ng serve --port 4200

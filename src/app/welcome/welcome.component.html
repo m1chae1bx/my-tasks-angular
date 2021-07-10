@@ -1,0 +1,39 @@
+<app-toolbar
+  title="👋 Welcome to My Tasks"
+></app-toolbar>
+<div class="full-width max-width-500 margin-top-medium margin-auto" @fade>
+  <mat-card class="mat-elevation-z0 border-not-rounded-500 padding-x-large">
+    <h2 class="primary-color">Hello {{user.nickname}},</h2>
+    <p>We are so excited to have you here! Fret no more because we are here to help you be the most productive you.</p>
+    <p class="margin-top-large">To get started, let's create your <b>default list</b>.</p>
+    <form 
+      id="createListForm"
+      class="flex flex-column" 
+      [formGroup]="createListForm"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>List Name</mat-label>
+        <input
+          matInput
+          required
+          maxlength="200"
+          [formControl]="listNameFormCtrl"
+        >
+       
+      </mat-form-field>
+      <button 
+        mat-flat-button 
+        type="submit" 
+        color="accent" 
+        class="special-btn margin-top-small"
+        [disabled]="!listNameFormCtrl.valid || isSaving"
+      >
+        <div *ngIf="isSaving" class="spinner-container">
+          <mat-spinner color="accent" diameter="24"></mat-spinner>
+        </div>
+        <span [ngClass]="{'hidden': isSaving}">Let's Go</span>
+        <mat-icon class="margin-left-x-small" [ngClass]="{'hidden': isSaving}">arrow_forward</mat-icon>
+      </button>
+    </form>
+  </mat-card>
+</div>

@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import { Filters } from '../filters';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { NotifierService, RepollData } from '../../services/notifier.service'
+import { FiltersService } from 'src/app/services/filters.service';
 
 @Component({
   selector: 'app-task-filters',
@@ -11,44 +9,49 @@ import { NotifierService, RepollData } from '../../services/notifier.service'
 })
 export class TaskFiltersComponent implements OnInit {
 
-  filters: Filters;
-
   @ViewChild('dueDateChip') dueDateChip: ElementRef;
   @ViewChild('showCompletedChip') showCompletedChip: ElementRef;
   @ViewChild('listChip') listChip: ElementRef;
 
   constructor(
-    private NotifierService: NotifierService
+    private notifierService: NotifierService,
+    public filtersService: FiltersService
   ) { }
 
   ngOnInit(): void {
-    this.filters = {
-      dueDate: 'default',
-      dueDateDisplay: 'Due Date',
-      showCompleted: false
-    }
-    this.NotifierService.notify({ filters: this.filters});
   }
-
 
   toggleCompleted() {
-    this.filters.showCompleted = !this.filters.showCompleted;
-    this.NotifierService.notify(<RepollData>{});
-  }
-
-  onFocus(event: FocusEvent): void {
-    //event.preventDefault();
-    this.listChip.nativeElement.blur();
-    this.dueDateChip.nativeElement.blur();  
-    this.showCompletedChip.nativeElement.blur();
+    this.filtersService.filters.showCompleted = !this.filtersService.filters.showCompleted;
+    this.notifierService.notify(<RepollData>{});
   }
 
   changeDueDate(code: string, displayText: string): void {
-    if (this.filters.dueDate != code) {
-      this.filters.dueDate = code;
-      this.filters.dueDateDisplay = displayText;
-      //this.bottomSheetRef.dismiss();
-      this.NotifierService.notify(<RepollData>{});
+    if (this.filtersService.filters.dueDate.code != code) {
+      this.filtersService.filters.dueDate.code = code;
+      this.filtersService.filters.dueDate.displayText = displayText;
+      this.notifierService.notify(<RepollData>{});
     }
+  }
+
+  resetDueDateFilter() {
+    // @todo move this logic to filters service
+    this.changeDueDate('default', 'All');
+  }
+
+  resetShowCompletedFilter() {
+    this.toggleCompleted();
+  }
+
+  selectListFilter() {
+    this.notifierService.listFilterClicked.emit();
+  }
+
+  selectDueDateFilter() {
+    this.notifierService.dueDateFilterClicked.emit();
+  }
+
+  selectShowCompletedFilter() {
+    this.notifierService.showCompletedFilterClicked.emit();
   }
 }

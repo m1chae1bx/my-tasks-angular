@@ -15,10 +15,6 @@ export class TaskService {
     private auth: AuthService
   ) { }
 
-  // getAll(): Observable<any> {
-  //   return this.http.get(baseUrl);
-  // }
-
   get(id: String): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`, { headers: this.auth.getAuthHeader()});
   }

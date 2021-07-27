@@ -34,6 +34,10 @@ body {
     flex: 1 1 auto;
 }
 
+.flex-0 {
+    flex: 0;
+}
+
 .flex-column {
     flex-direction: column;
 }
@@ -78,9 +82,9 @@ body {
     text-align: center;
 }
 
-// .text-end {
-//     text-align: end;
-// }
+.text-end {
+    text-align: end;
+}
 
 /* Appearance and Layouting */
 
@@ -700,8 +704,8 @@ body {
 }
 
 .action-typo {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 
 .mat-chip.mat-standard-chip {

@@ -1,6 +1,8 @@
+import { List } from "./list";
+
 export interface Filters {
-  dueDate: string;
-  dueDateDisplay: string;
+  list: { id: string, name: string };
+  dueDate: { code: string, displayText: string }; 
   showCompleted: boolean;
 }
   

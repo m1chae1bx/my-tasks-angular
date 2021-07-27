@@ -1,10 +1,11 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/services/session.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-delete-account-dialog',
@@ -18,9 +19,10 @@ export class DeleteAccountDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteAccountDialogComponent>,
-    private auth: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit(): void {
@@ -28,9 +30,9 @@ export class DeleteAccountDialogComponent implements OnInit {
 
   onDelete(): void {
     this.isDeleting = true;
-    this.auth.deleteAccount(this.password.value).subscribe(
+    this.userService.delete(this.password.value, this.sessionService.getUser()).subscribe(
       () => {
-        this.auth.removeSession();
+        this.sessionService.removeSession();
         this.dialogRef.close();
         this.snackBar.open('Account was deleted successfully', null, {duration: 1500 });
         this.router.navigate(['/']);

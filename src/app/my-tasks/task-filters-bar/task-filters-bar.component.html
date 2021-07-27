@@ -1,0 +1,77 @@
+<div class="padding-large font-large flex items-center">
+  <mat-icon color="primary" class="margin-right-small">filter_list</mat-icon>
+  <span class="bold primary-color">Filters</span>
+  <!-- <span class="flex-auto text-end"><button mat-button color="accent">Apply</button></span> -->
+</div>
+<mat-divider></mat-divider>
+<mat-accordion displayMode="flat">
+  <mat-expansion-panel #listPanel class="mat-elevation-z0" (afterExpand)="showFilters()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        List
+        <em class="margin-left-small primary-color">{{filterService.filters.list.name}}</em>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <mat-nav-list class="padding-none">
+      <a mat-list-item class="action-typo">
+        <div class="flex items-center">
+          <mat-icon class="margin-right-large" inline="true">add</mat-icon>
+          <em><span>New List</span></em>
+        </div>
+      </a>
+      <ng-container *ngFor="let list of listService.lists">
+        <a mat-list-item class="action-typo" 
+          [ngClass]="{'accent-color': filterService.filters.list.id === list.id}"
+          (click)="updateListFilter(list.id, list.name)"
+        >
+          <div class="flex items-center">
+            <mat-icon class="margin-right-large" inline="true">list</mat-icon>
+            <span>{{list.name | titlecase}}</span>
+          </div>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-divider></mat-divider>
+  <mat-expansion-panel #dueDatePanel class="mat-elevation-z0" (afterExpand)="showFilters()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Due Date
+        <em class="margin-left-small primary-color">{{this.filterService.filters.dueDate.displayText}}</em>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <mat-nav-list class="padding-none">
+      <ng-container *ngFor="let option of dueDateOptions">
+        <a mat-list-item class="action-typo accent-color"
+          [ngClass]="{'accent-color': filterService.filters.dueDate.code === option.code}"
+          (click)="updateDueDateFilter(option.code, option.displayText)"
+        >
+          <div class="flex items-center">
+            <mat-icon class="margin-right-large" inline="true">calendar_today</mat-icon>
+            <span>{{option.displayText}}</span>
+          </div>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-expansion-panel>
+  <mat-divider></mat-divider>
+  <mat-expansion-panel #showCompletedPanel class="mat-elevation-z0" (afterExpand)="showFilters()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Completed
+        <em class="margin-left-small primary-color">{{this.filterService.filters.showCompleted ? 'Show' : 'Hide'}}</em>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <div class="flex items-center padding-large">
+      <mat-icon class="margin-right-large flex-0" inline="true">check_box</mat-icon>
+      <span class="">Show Completed</span>
+      <span class="flex-auto text-end">
+        <mat-slide-toggle [checked]="filterService.filters.showCompleted" (toggleChange)="toggleShowCompleted()"></mat-slide-toggle>
+      </span>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-divider></mat-divider>

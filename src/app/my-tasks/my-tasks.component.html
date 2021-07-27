@@ -3,8 +3,12 @@
     <!-- <mat-drawer class="drawer-sidenav display-block-vlap display-none" mode="side" position="start" opened="true"> 
         <app-navbar class="navbar"></app-navbar>
     </mat-drawer> -->
+
+    <mat-drawer #drawerLeft class="drawer-sidenav" mode="over" position="start" (closedStart)="closeFilterPanels()">
+        <app-task-filters-bar></app-task-filters-bar>
+    </mat-drawer>
     <mat-drawer #drawer class="drawer-sidenav" mode="over" position="end">
-        <app-navbar class="navbar" (done)="toggleSidenav()"></app-navbar>
+        <app-navbar class="navbar" (done)="toggleSidenav(Sidenav.RIGHT)"></app-navbar>
     </mat-drawer>
     <mat-drawer-content (scroll)="onScroll($event)"> 
         <div class="tasks">
@@ -20,7 +24,7 @@
                     'fixed': toolbarFixed
                 }"
             >
-                <app-main-toolbar class="full-width flex flex-column" (menuClicked)="toggleSidenav()"></app-main-toolbar>
+                <app-main-toolbar class="full-width flex flex-column" (menuClicked)="toggleSidenav(Sidenav.RIGHT)"></app-main-toolbar>
                 <app-sub-toolbar></app-sub-toolbar>
                 <mat-divider></mat-divider>
             </div>

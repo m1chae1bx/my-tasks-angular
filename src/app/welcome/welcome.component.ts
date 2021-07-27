@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { fade } from 'src/app/utilities/animations';
-import { AuthService, User } from '../services/auth.service';
 import { ListService } from '../services/list.service';
+import { SessionService } from '../services/session.service';
+import { User } from '../services/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -21,17 +23,17 @@ export class WelcomeComponent implements OnInit {
   isSaving: boolean;
 
   constructor(
-    private auth: AuthService,
     private listService: ListService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit(): void {
     this.createListForm = new FormGroup({
       'listName': this.listNameFormCtrl
     });
-    this.user = this.auth.getUser();
+    this.user = this.sessionService.getUser();
   }
 
   onSubmit(): void {
@@ -39,6 +41,9 @@ export class WelcomeComponent implements OnInit {
     this.isSaving = true;
     this.listService
       .create(data)
+      .pipe(
+        switchMap(() => this.sessionService.reloadUser())
+      )
       .subscribe(
         response => {
           // @todo: prevent user from going back to welcome page by manuualy entering url

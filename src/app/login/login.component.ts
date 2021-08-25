@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService, LoginPayload } from 'src/app/services/auth.service';
 import { fade } from 'src/app/utilities/animations';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +19,16 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private auth: AuthService,
+    private sessionService: SessionService
   ) { 
-    if (this.auth.isLoggedIn()) {
-      this.snackBar.open('Redirecting to My Tasks...', null, {duration: 2000});
-      this.router.navigate(['/my-tasks']);
-    }
+    this.sessionService.isLoggedIn().subscribe(
+      response => {
+        if (response) {
+          this.snackBar.open('Redirecting to My Tasks...', null, {duration: 2000});
+          this.router.navigate(['/my-tasks']);
+        }
+      }
+    );
   }
 
   loginFormGroup: FormGroup;
@@ -51,7 +57,7 @@ export class LoginComponent implements OnInit {
       username: this.username.value,
       password: this.password.value
     };
-    this.auth.login(payload).subscribe(
+    this.sessionService.login(payload).subscribe(
       response => {
         console.log(response);
         this.snackBar.open('Signed in successfully', null, {duration: 1500});

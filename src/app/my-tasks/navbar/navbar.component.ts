@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeleteAccountDialogComponent } from 'src/app/manage-account/delete-account-dialog/delete-account-dialog.component';
-import { AuthService, User } from 'src/app/services/auth.service';
+import { SessionService } from 'src/app/services/session.service';
+import { User } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,18 +17,17 @@ export class NavbarComponent implements OnInit {
   @Output() done = new EventEmitter();
 
   constructor(
-    private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit(): void {
-    this.user = this.auth.getUser();
+    this.user = this.sessionService.getUser();
   }
 
   logout(): void {
-    this.auth.logout();
+    this.sessionService.logout();
   }
 
   edit(): void {

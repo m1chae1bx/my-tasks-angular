@@ -12,7 +12,7 @@
             class="task-item"
             [task]=task
             [index]="i"
-            [@slideOut]="tasks[i].completed && !filters.showCompleted ? 'completed' : ''"
+            [@slideOut]="tasks[i].completed && !filtersService.filters.showCompleted ? 'completed' : ''"
             (completed)="onTaskComplete($event)"
             (updated)="onTaskUpdate($event)"
         ></app-task-item>

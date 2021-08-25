@@ -38,6 +38,7 @@ import { SubToolbarComponent } from './sub-toolbar/sub-toolbar.component';
 import { AddTaskSheetComponent } from './add-task-sheet/add-task-sheet.component';
 import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.component';
 import { MyTasksRoutingModule } from './my-tasks-routing.module';
+import { TaskFiltersBarComponent } from './task-filters-bar/task-filters-bar.component';
 @NgModule({
   declarations: [
     MyTasksComponent,
@@ -56,6 +57,7 @@ import { MyTasksRoutingModule } from './my-tasks-routing.module';
     SubToolbarComponent,
     AddTaskSheetComponent,
     EditTaskSheetComponent,
+    TaskFiltersBarComponent,
   ],
   imports: [
     CommonModule,

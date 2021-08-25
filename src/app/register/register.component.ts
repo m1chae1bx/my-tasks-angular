@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService, RegisterPayload } from 'src/app/services/auth.service';
 import { fade } from 'src/app/utilities/animations';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-register',
@@ -27,12 +28,17 @@ export class RegisterComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sessionService: SessionService
   ) { 
-    if (this.auth.isLoggedIn()) {
-      this.snackBar.open('Redirecting to My Tasks...', null, {duration: 2000});
-      this.router.navigate(['/my-tasks']);
-    }
+    this.sessionService.isLoggedIn().subscribe(
+      response => {
+        if (response) {
+          this.snackBar.open('Redirecting to My Tasks...', null, {duration: 2000});
+          this.router.navigate(['/my-tasks']);
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -63,11 +69,11 @@ export class RegisterComponent implements OnInit {
       fullName: this.fullName.value,
       nickname: this.nickname.value,
     };
-    this.auth.register(payload).subscribe(
+    this.sessionService.register(payload).subscribe(
       response => {
-        console.log(response);
+        console.log('registration successful', response);
         this.snackBar.open('Signed up successfully', null, {duration: 2000});
-        this.router.navigate(['/my-tasks']);
+        this.router.navigate(['/welcome']);
       },
       error => {
         this.isSaving = false;

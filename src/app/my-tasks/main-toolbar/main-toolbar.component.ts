@@ -31,7 +31,7 @@ export class MainToolbarComponent implements OnInit {
     this.isSearching = false;
     this.isTitleVisible = true;
     this.notifierService.taskListObs.subscribe(data => {
-      if (data.name) {
+      if (data?.name) {
         this.isSearching = true;
       }
     });

@@ -1,10 +1,10 @@
-  import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { FiltersService } from 'src/app/services/filters.service';
 import { Language } from 'src/app/utilities/language';
 import { NotifierService } from '../../services/notifier.service'
 import { TaskService } from '../../services/task.service';
-import { Filters } from '../filters';
 import { Task } from '../task';
 
 @Component({
@@ -30,33 +30,24 @@ export class TaskListComponent implements OnInit, OnDestroy {
   tasks: Task[];
   private repollSubscription: Subscription;
   nameSearch: String;
-  filters: Filters;
   processCount = Language.processCount;
 
   constructor(
     private taskService: TaskService,
-    private NotifierService: NotifierService,
+    private notifierService: NotifierService,
+    public filtersService: FiltersService
   ) { }
 
   ngOnInit(): void {
-    this.filters = {
-      dueDate: 'default',
-      dueDateDisplay: 'Any Date',
-      showCompleted: false
-    }
     this.nameSearch = null;    
-    this.repollSubscription = this.NotifierService.taskListObs.subscribe(data => {
-      console.log('repoll', data);
+    this.repollSubscription = this.notifierService.taskListObs.subscribe(data => {
       if (data?.name || data?.name === '') {
         this.nameSearch = data.name; 
       }
-      if (data?.filters) {
-        this.filters = data.filters;
-      }
-      
       this.tasks = null;
       this.getTasks();
     });
+    this.getTasks();
   }
 
   ngOnDestroy() {
@@ -67,8 +58,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.taskService.find(
       null,
       this.nameSearch, 
-      this.filters.showCompleted ? null : false,
-      this.filters.dueDate === 'default' ? null : this.filters.dueDate
+      this.filtersService.filters.showCompleted ? null : false,
+      this.filtersService.filters.dueDate.code === 'default' ? null : this.filtersService.filters.dueDate.code
     )
       .subscribe(
         data => {
@@ -91,7 +82,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   onTaskComplete(index: number): void {
-    if (!this.filters.showCompleted && index > -1) {
+    if (!this.filtersService.filters.showCompleted && index > -1) {
       this.tasks.splice(index, 1);
     }
   }
@@ -101,8 +92,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.taskService.find(
       event.id,
       this.nameSearch, 
-      this.filters.showCompleted ? null : false,
-      this.filters.dueDate === 'default' ? null : this.filters.dueDate
+      this.filtersService.filters.showCompleted ? null : false,
+      this.filtersService.filters.dueDate.code === 'default' ? null : this.filtersService.filters.dueDate.code
     )
       .subscribe(
         data => {

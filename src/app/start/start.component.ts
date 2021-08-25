@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-start',
@@ -10,15 +11,20 @@ import { AuthService } from '../services/auth.service';
 export class StartComponent implements OnInit {
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private sessionService: SessionService
   ) {
     console.log('Verifying session...');
     
-    if (this.auth.isLoggedIn()) {
-      this.router.navigate(['/my-tasks']);
-    } else {
-      this.router.navigate(['/login'])
-    }
+    this.sessionService.isLoggedIn().subscribe(
+      response => {
+        if (response) {
+          this.router.navigate(['/my-tasks']);
+        } else {
+          this.router.navigate(['/login'])
+        }
+      }
+    );
   }
 
   ngOnInit(): void {

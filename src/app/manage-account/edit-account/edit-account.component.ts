@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService, EditAccountPayload, User } from 'src/app/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
+import { UpdateUserPayload, User, UserService } from 'src/app/services/user.service';
 import { fade } from 'src/app/utilities/animations';
 
 @Component({
@@ -20,13 +21,12 @@ export class EditAccountComponent implements OnInit {
   email = new FormControl({value: '', disabled: true});
   username = new FormControl({value: '', disabled: true});
   isSaving: boolean;
-  user: User;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
-    private auth: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sessionService: SessionService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -40,20 +40,20 @@ export class EditAccountComponent implements OnInit {
       'email': this.email,
       'username': this.username,
     });
-    this.user = this.auth.getUser();
-    this.fullName.setValue(this.user.fullName);
-    this.nickname.setValue(this.user.nickname);
-    this.email.setValue(this.user.email);
-    this.username.setValue(this.user.username);
+    const user = this.sessionService.getUser();
+    this.fullName.setValue(user.fullName);
+    this.nickname.setValue(user.nickname);
+    this.email.setValue(user.email);
+    this.username.setValue(user.username);
   }
 
   onSubmit(): void {
     this.isSaving = true;
-    const payload: EditAccountPayload = {
+    const payload: UpdateUserPayload = {
       fullName: this.fullName.value,
       nickname: this.nickname.value
     };
-    this.auth.editAccount(payload).subscribe(
+    this.userService.update(payload, this.sessionService.getUser()).subscribe(
       response => {
         this.isSaving = false;
         console.log('yey', response); // @todo

@@ -5,13 +5,12 @@
       mat-icon-button 
       aria-label="back-btn" 
       color="primary"
-      class="margin-right-x-small"
       (click)="back()"
     >
       <mat-icon>arrow_back</mat-icon>
     </button>
     <div class="flex-auto flex justify-space-between">
-      <span *ngIf="title" class="main font-large bold primary-color">
+      <span *ngIf="title" class="main font-large bold primary-color margin-left-x-small">
         {{title}}
       </span>
       <ng-content></ng-content>

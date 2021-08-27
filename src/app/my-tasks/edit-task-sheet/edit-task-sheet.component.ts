@@ -24,7 +24,7 @@ export class EditTaskSheetComponent implements OnInit, OnDestroy {
   nameFormControl = new FormControl(this.task.name);
   descFormControl = new FormControl(this.task.desc);
   dueDateFormControl = new FormControl(this.task.dueDate);
-  completedFormControl = new FormControl(this.task.completed);
+  completedFormControl = new FormControl(this.task.isCompleted);
 
   @ViewChild('submitBtn') submitBtn: MatButton;
 
@@ -41,7 +41,7 @@ export class EditTaskSheetComponent implements OnInit, OnDestroy {
       'name': this.nameFormControl,
       'desc': this.descFormControl,
       'dueDate': this.dueDateFormControl,
-      'completed': this.completedFormControl
+      'isCompleted': this.completedFormControl
     });
     this.uneditedTask = {... this.task};
     this.notifierService.taskEditNameSubject.next(false);
@@ -65,12 +65,12 @@ export class EditTaskSheetComponent implements OnInit, OnDestroy {
   }
 
   toggleCompleted(): void {
-    this.notifierService.genericNotify(this.notifierService.taskIsDoneSubject, this.completedFormControl.value != this.uneditedTask.completed);
+    this.notifierService.genericNotify(this.notifierService.taskIsDoneSubject, this.completedFormControl.value != this.uneditedTask.isCompleted);
   }
 
   remove(): void {
     this.isDeleting = true;
-    this.taskService.delete(this.task.id)
+    this.taskService.delete(this.task.id, this.task.listId)
       .subscribe(
         response => {
           this.isDeleting = false;
@@ -101,13 +101,13 @@ export class EditTaskSheetComponent implements OnInit, OnDestroy {
     this.task.name = this.nameFormControl.value;
     this.task.desc = this.descFormControl.value;
     this.task.dueDate = this.dueDateFormControl.value;
-    this.task.completed = this.completedFormControl.value;
+    this.task.isCompleted = this.completedFormControl.value;
 
     this.taskService.update(this.task.id, this.task)
       .subscribe(
         response => {
           this.dismiss();// @todo what if this is moved to output emitter
-          if (this.task.completed) {
+          if (this.task.isCompleted) {
             this.notifierService.genericNotify(this.notifierService.taskUpdatedSubject, this.task);
             this.snackBar.open('Task completed', null, { duration: 1500 });
           } else {

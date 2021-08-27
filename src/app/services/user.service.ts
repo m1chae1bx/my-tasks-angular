@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { switchMap } from 'rxjs/operators';
 
-const baseUrl = 'http://localhost:8080/api/user'
+const baseUrl = 'http://localhost:8080/api/users'
 
 export interface User {
   id: string,
@@ -18,10 +18,7 @@ export interface User {
 }
 
 export interface UserPreferences {
-  defaultList: {
-    id: string,
-    name: string
-  }
+  defaultListId: string
 }
 
 export interface UpdateUserPayload {
@@ -51,7 +48,7 @@ export class UserService {
   public update(payload: UpdateUserPayload, user: User): Observable<any> {
     const url = `${baseUrl}/${user.id}`;
     const options = { headers: this.auth.getAuthHeader()};
-    return this.http.put(
+    return this.http.patch(
       url, 
       payload, 
       options

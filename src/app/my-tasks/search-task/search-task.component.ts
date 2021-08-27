@@ -17,7 +17,8 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
     name: '',
     desc: '',
     dueDate: null,
-    completed: false
+    isCompleted: false,
+    listId: ''
   };
   filtered: boolean;
   focused: boolean;
@@ -69,7 +70,8 @@ export class SearchTaskComponent implements OnInit, OnDestroy {
       name: '',
       desc: '',
       dueDate: null,
-      completed: false
+      isCompleted: false,
+      listId: ''
     };
     this.filtered = false;
     this.addDisabled = true;

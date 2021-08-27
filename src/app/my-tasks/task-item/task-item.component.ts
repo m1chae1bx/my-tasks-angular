@@ -92,7 +92,7 @@ export class TaskItemComponent implements OnInit, AfterViewChecked {
       .subscribe(
         response => {
           
-          if (this.task.completed) {
+          if (this.task.isCompleted) {
             this.snackBar.open('Task completed', null, { duration: 2500 });
             this.completed.emit(this.index);
           } else { // If task was changed from completed to not completed, only possible if show completed is on

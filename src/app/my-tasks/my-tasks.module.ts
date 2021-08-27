@@ -39,6 +39,9 @@ import { AddTaskSheetComponent } from './add-task-sheet/add-task-sheet.component
 import { EditTaskSheetComponent } from './edit-task-sheet/edit-task-sheet.component';
 import { MyTasksRoutingModule } from './my-tasks-routing.module';
 import { TaskFiltersBarComponent } from './task-filters-bar/task-filters-bar.component';
+import { FiltersService } from '../services/filters.service';
+import { TaskService } from '../services/task.service';
+import { ListService } from '../services/list.service';
 @NgModule({
   declarations: [
     MyTasksComponent,
@@ -86,6 +89,11 @@ import { TaskFiltersBarComponent } from './task-filters-bar/task-filters-bar.com
   ],
   exports: [
     MyTasksComponent
+  ],
+  providers: [
+    TaskService,
+    ListService,
+    FiltersService
   ]
 })
 export class MyTasksModule { }

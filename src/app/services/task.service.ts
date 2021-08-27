@@ -2,33 +2,34 @@ import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { FiltersService } from './filters.service';
+import { Task } from '../my-tasks/task';
 
-const baseUrl = 'http://localhost:8080/api/tasks'
+const baseUrl = 'http://localhost:8080/api/lists'
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TaskService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private filtersService: FiltersService
   ) { }
 
-  get(id: String): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`, { headers: this.auth.getAuthHeader()});
-  }
+  // get(id: String): Observable<any> {
+  //   return this.http.get(`${baseUrl}/${id}`, { headers: this.auth.getAuthHeader()});
+  // }
 
-  create(data): Observable<any> {
-    return this.http.post(baseUrl, data, { headers: this.auth.getAuthHeader()});
+  create(data: Partial<Task>): Observable<any> {
+    return this.http.post(`${baseUrl}/${data.listId}/tasks`, data, { headers: this.auth.getAuthHeader()});
   }
 
   update(id: String, data): Observable<any> { // @todo fix typing for data
-    return this.http.put(`${baseUrl}/${id}`, data, { headers: this.auth.getAuthHeader()});
+    return this.http.put(`${baseUrl}/${data.listId}/tasks/${id}`, data, { headers: this.auth.getAuthHeader()});
   }
 
-  delete(id: String): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`, { headers: this.auth.getAuthHeader()});
+  delete(id: String, listId: string): Observable<any> {
+    return this.http.delete(`${baseUrl}/${listId}/tasks/${id}`, { headers: this.auth.getAuthHeader()});
   }
 
   // deleteAll(): Observable<any> {
@@ -39,9 +40,10 @@ export class TaskService {
     id: string,
     name: String,
     completed: Boolean,
-    dueDate: String
+    dueDate: String,
+    listId: string
   ): Observable<any> {
-    var request = `${baseUrl}`;
+    var request = `${baseUrl}/${listId}/tasks`;
     var prefix = '?';
     if (id) {
       request = request + prefix + `id=${id}`;
@@ -51,8 +53,8 @@ export class TaskService {
       request = request + prefix + `name=${name}`;
       prefix = '&';
     };
-    if (completed != null) {
-      request = request + prefix + `completed=${completed}`;
+    if (completed) {
+      request = request + prefix + `includeCompleted=${completed}`;
       prefix = '&';
     }
     if (dueDate) {

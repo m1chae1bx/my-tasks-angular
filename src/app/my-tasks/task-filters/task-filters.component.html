@@ -6,30 +6,30 @@
             selected="true"
         > 
             <mat-icon class="chip-icon" aria-hidden="true">list</mat-icon>
-            {{filtersService.filters.list.name | titlecase}}
+            {{filters?.list.name | titlecase}}
         </mat-chip>
         <mat-chip 
             #dueDateChip
             color="accent"
             (click)="selectDueDateFilter()"
-            [selected]="filtersService.filters.dueDate.code !== 'default'"
+            [selected]="filters?.dueDate.code !== 'default'"
             (removed)="resetDueDateFilter()"
         >
             <mat-icon class="chip-icon" aria-hidden="true">calendar_today</mat-icon>
-            {{filtersService.filters.dueDate.displayText}}
-            <mat-icon matChipRemove *ngIf="filtersService.filters.dueDate.code !== 'default'">cancel</mat-icon>
+            {{filters?.dueDate.displayText}}
+            <mat-icon matChipRemove *ngIf="filters?.dueDate.code !== 'default'">cancel</mat-icon>
         </mat-chip>
         <mat-chip
             #showCompletedChip
             color="accent"
             (click)="selectShowCompletedFilter()"
-            [selected]="filtersService.filters.showCompleted"
-            [removable]="filtersService.filters.showCompleted"
+            [selected]="filters?.showCompleted"
+            [removable]="filters?.showCompleted"
             (removed)="resetShowCompletedFilter()"
         >
             <mat-icon class="chip-icon" aria-hidden="true">check_box</mat-icon>
-            <ng-container *ngIf="filtersService.filters.showCompleted; else hide">Show</ng-container><ng-template #hide>Hide</ng-template> Completed
-            <mat-icon matChipRemove *ngIf="filtersService.filters.showCompleted">cancel</mat-icon>
+            <ng-container *ngIf="filters?.showCompleted; else hide">Show</ng-container><ng-template #hide>Hide</ng-template> Completed
+            <mat-icon matChipRemove *ngIf="filters?.showCompleted">cancel</mat-icon>
         </mat-chip>
     </div>
 </mat-chip-list>

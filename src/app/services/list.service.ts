@@ -5,12 +5,11 @@ import { AuthService } from './auth.service';
 import { List } from '../my-tasks/list'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { finalize } from 'rxjs/operators';
+import { SessionService } from './session.service';
 
-const baseUrl = 'http://localhost:8080/api/lists'
+const baseUrl = 'http://localhost:8080/api/users';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ListService {
 
   lists: List[] = [];
@@ -19,16 +18,19 @@ export class ListService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sessionService: SessionService
   ) { }
 
   create(data: List): Observable<any> {
-    return this.http.post(baseUrl, data, { headers: this.auth.getAuthHeader()});
+    const userId = this.sessionService.getUser().id;
+    return this.http.post(`${baseUrl}/${userId}/lists`, data, { headers: this.auth.getAuthHeader()});
   }  
 
   getLists(): void {
+    const userId = this.sessionService.getUser().id;
     this.isLoading = true;
-    this.http.get<List[]>(baseUrl, { headers: this.auth.getAuthHeader()})
+    this.http.get<List[]>(`${baseUrl}/${userId}/lists`, { headers: this.auth.getAuthHeader()})
       .pipe(
         finalize(() => this.isLoading = false)
       )
@@ -43,5 +45,9 @@ export class ListService {
       );
   }
 
+  getList(id: string): Observable<List> {
+    const userId = this.sessionService.getUser().id;
+    return this.http.get<List>(`${baseUrl}/${userId}/lists/${id}`, { headers: this.auth.getAuthHeader() });
+  }
 
 }

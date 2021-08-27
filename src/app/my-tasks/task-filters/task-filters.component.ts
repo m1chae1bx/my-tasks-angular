@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { NotifierService, RepollData } from '../../services/notifier.service'
 import { FiltersService } from 'src/app/services/filters.service';
+import { Filters } from '../filters';
 
 @Component({
   selector: 'app-task-filters',
@@ -13,34 +14,40 @@ export class TaskFiltersComponent implements OnInit {
   @ViewChild('showCompletedChip') showCompletedChip: ElementRef;
   @ViewChild('listChip') listChip: ElementRef;
 
+  filters: Readonly<Filters>;
+
   constructor(
     private notifierService: NotifierService,
     public filtersService: FiltersService
   ) { }
 
   ngOnInit(): void {
+    this.filtersService.filters$.subscribe(filters => {
+      this.filters = filters;
+    });
   }
 
-  toggleCompleted() {
-    this.filtersService.filters.showCompleted = !this.filtersService.filters.showCompleted;
-    this.notifierService.notify(<RepollData>{});
-  }
+  // toggleCompleted() {
+  //   this.filtersService.filters.showCompleted = !this.filtersService.filters.showCompleted;
+  //   this.notifierService.notify(<RepollData>{});
+  // }
 
-  changeDueDate(code: string, displayText: string): void {
-    if (this.filtersService.filters.dueDate.code != code) {
-      this.filtersService.filters.dueDate.code = code;
-      this.filtersService.filters.dueDate.displayText = displayText;
-      this.notifierService.notify(<RepollData>{});
-    }
-  }
+  // changeDueDate(code: string, displayText: string): void {
+  //   if (this.filtersService.filters.dueDate.code != code) {
+  //     this.filtersService.filters.dueDate.code = code;
+  //     this.filtersService.filters.dueDate.displayText = displayText;
+  //     this.notifierService.notify(<RepollData>{});
+  //   }
+  // }
 
   resetDueDateFilter() {
-    // @todo move this logic to filters service
-    this.changeDueDate('default', 'All');
+    this.filtersService.setDueDateFilter('default', 'All');
+    // this.changeDueDate('default', 'All');
   }
 
   resetShowCompletedFilter() {
-    this.toggleCompleted();
+    this.filtersService.toggleShowCompleted();
+    // this.toggleCompleted();
   }
 
   selectListFilter() {

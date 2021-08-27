@@ -3,10 +3,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { FiltersService } from 'src/app/services/filters.service';
 import { ListService } from 'src/app/services/list.service';
 import { NotifierService } from 'src/app/services/notifier.service';
+import { Filters } from '../filters';
 
 @Component({
   selector: 'app-task-filters-bar',
@@ -29,6 +31,7 @@ export class TaskFiltersBarComponent implements OnInit, OnDestroy {
   dueDateFilterClickedSubs: Subscription;
   showCompletedFilterClickedSubs: Subscription;
   filterSidebarClosingSubs: Subscription;
+  filters: Readonly<Filters>;
 
   @ViewChild('listPanel') listPanel: MatExpansionPanel;
   @ViewChild('dueDatePanel') dueDatePanel: MatExpansionPanel;
@@ -43,6 +46,9 @@ export class TaskFiltersBarComponent implements OnInit, OnDestroy {
 
   /* Angular Lifecycle */
   ngOnInit(): void {
+    this.filterService.filters$.subscribe(filters => {
+      this.filters = filters;
+    });
     this.listService.getLists();
     this.listFilterClickedSubs = this.notifierService.listFilterClicked.subscribe(() => {
       this.listPanel.open();

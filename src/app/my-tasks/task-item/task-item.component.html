@@ -6,7 +6,7 @@
     <div class="task-item-card-contents relative">
       <div class="checkbox-and-info">
         <mat-checkbox
-          [(ngModel)]="task.completed"
+          [(ngModel)]="task.isCompleted"
           (change)="toggleCompleted()"
           >
         </mat-checkbox>
@@ -19,7 +19,7 @@
           <div class="relative">
             <div 
               class="task-name primary-color break-word overflow-y-hidden"
-              [ngClass]="{'completed': task.completed}"
+              [ngClass]="{'completed': task.isCompleted}"
             >
               <span class="task-name-value" #taskNameValue>{{ task.name }}</span>
             </div>
@@ -47,7 +47,7 @@
             <ng-template #displayDate>
               {{ isCurrentYear ? (task.dueDate | date:'MMM d') : (task.dueDate | date) }} 
             </ng-template>
-            <span *ngIf="isOverdue && !task.completed" class="overdue"> - Overdue</span>
+            <span *ngIf="isOverdue && !task.isCompleted" class="overdue"> - Overdue</span>
           </div>
         </div>
       </div>

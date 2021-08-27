@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   public register(user: RegisterPayload): Observable<any> {
-    return this.http.post(`${baseUrl}/auth/register`, user).pipe(
+    return this.http.post(`${baseUrl}/users`, user).pipe(
       switchMap((data: TokenResponse) => {
         this.saveToken(data.token);
         return of(data);

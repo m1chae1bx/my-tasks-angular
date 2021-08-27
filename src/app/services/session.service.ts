@@ -9,7 +9,7 @@ import { User, UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SessionService {
+export class  SessionService {
 
   private user: User;
   public id = Math.random();
@@ -31,6 +31,7 @@ export class SessionService {
     if (!token) return null;
     var payload = token.split('.')[1];
     payload = window.atob(payload);
+    console.log(JSON.parse(payload));
     return JSON.parse(payload);
   }
 

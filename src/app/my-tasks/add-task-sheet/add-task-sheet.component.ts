@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatButton } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FiltersService } from 'src/app/services/filters.service';
 import { NotifierService, RepollData } from 'src/app/services/notifier.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../task';
@@ -22,7 +23,8 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
     name: '',
     desc: '',
     dueDate: null,
-    completed: false
+    isCompleted: false,
+    listId: ''
   };
   newTaskFormGroup: FormGroup;
   nameFormControl = new FormControl('');
@@ -36,7 +38,8 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
     private taskService: TaskService,
     private snackBar: MatSnackBar,
     private bottomSheetRef: MatBottomSheetRef<AddTaskSheetComponent>,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private filtersService: FiltersService,
   ) { }
 
   ngOnInit(): void {
@@ -60,10 +63,12 @@ export class AddTaskSheetComponent implements OnInit, AfterViewInit {
   }
 
   addTask(): void {
-    const data = {
+    const listId = this.filtersService.filters.list.id;
+    const data: Partial<Task> = {
       name: this.nameFormControl.value,
       dueDate: this.dueDateFormControl.value,
-      desc: this.descFormControl.value
+      desc: this.descFormControl.value,
+      listId: listId
     };
 
     this.isSaving = true;
